@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #fff;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.position-relative {
+  position: relative !important;
+}
+.slide-home {
+  padding: 50px 0;
+}
+.slide-album {
+  background-color: #ead9d9;
+}
+.box_header .title {
+  font-size: 19px;
+  color: #ff2d55;
+  letter-spacing: 0;
+  line-height: unset;
+}
+.box_header .link_more {
+  font-size: 12px;
+  color: #878787;
+  letter-spacing: 0;
+}
+.card1 .card-body {
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-top: 10px;
+}
+.card1 {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin-bottom: 20px;
+  background-color: transparent;
+}
+.card1 .card-header {
+  padding: 0;
+  background-color: transparent;
+  background-position: center;
+  background-size: cover;
+  border-radius: 3px;
+  position: relative;
+  -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%),
+    0 2px 10px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+.card1 .card-body .card-title {
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 19px;
+  margin-bottom: 5px;
+  font-family: "SFProDisplay-Medium";
+  text-transform: capitalize;
+}
+.card1 .card-body .card-title a {
+  color: #1b1b1b;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  text-decoration: none;
+}
+.card1 .card-body .card-text {
+  font-size: 12px;
+  color: #878787;
+  letter-spacing: 0;
+  font-family: "SFProDisplay-Regular";
+  text-transform: capitalize;
+}
+.card1 .card-body .card-text a {
+  color: #878787;
+  text-decoration: none;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.row10px div[class*="col"] {
+  padding: 0 10px;
+}
+.list_music .media {
+  padding: 11px 0;
+  border-top: 1px solid #dedede;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.media .media-left {
+  padding: 0;
+}
+.list_music .media .media-left {
+  position: relative;
+  padding: 0;
+}
+.list_music .media .media-left a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  z-index: 101;
+}
+.list_music .media .media-left a {
+  z-index: 5;
+}
+.list_music .media .media-left img {
+  width: 55px;
+  height: 55px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%),
+    0 2px 10px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+.title_home_tablet {
+  white-space: nowrap;
+  max-width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list_music .media .media-body .media-title {
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.list_music .media .media-body .media-title a {
+  color: #1b1b1b;
+  text-transform: capitalize;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  text-decoration: none;
+}
+.list_music .media .media-body .media-title a {
+  text-transform: none;
+}
+.title_home_tablet {
+  white-space: nowrap;
+  max-width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list_music .media .media-body .author a {
+  font-size: 12px;
+  color: #878787;
+  letter-spacing: 0;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  text-decoration: none;
+}
+.media {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+.list_music .media .media-right .time_stt {
+  font-size: 11px;
+  color: #878787;
+  letter-spacing: 0;
+}
+.list_music .media .media-right .time_stt {
+  font-size: 11px;
+  color: #878787;
+  letter-spacing: 0;
+}
+.cs-right {
+  display: grid;
+  text-align: right;
+}
+.media-body {
+  -ms-flex: 1;
+  flex: 1;
+}
