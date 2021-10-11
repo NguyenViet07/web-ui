@@ -1,12 +1,6 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Home from "./View/Home";
-function App() {
-  return (
-    <>
-      <Home />
-    </>
-  );
-}
+import Router from './router/Router'
+import React from "react"
 
-export default App;
+const App = props => <Router />
+
+export default App
