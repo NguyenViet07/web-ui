@@ -32,11 +32,11 @@ const Header = ({ layoutRouter }) => {
       </div>
       <nav className="bottom navbar navbar-expand-lg navbar-light bg-light ghw-bottom-header p-0">
         <div className="container">
-          <Nav defaultActiveKey="/home" as="ul">
+          <Nav>
             {layoutRouter.map((el) => {
               return (
-                <Nav.Item as="li">
-                  <Nav.Link href={el.path}>{el.title}</Nav.Link>
+                <Nav.Item style={{marginRight: '10px'}}>
+                  <NavLink to={el.path}>{el.title}</NavLink>
                 </Nav.Item>
               );
             })}

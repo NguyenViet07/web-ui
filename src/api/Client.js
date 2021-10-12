@@ -10,6 +10,6 @@ import {responseInterceptor} from "./responseHostInterceptor/responseHostInterce
 // In real application this const will be stored in ENV's`
 export const Client = createClient({
     // requestInterceptors: [requestHostInterceptor(window.env.BASE_API_URL)],
-    requestInterceptors: [requestHostInterceptor('http://localhost:9100/api/v1')],
+    requestInterceptors: [requestHostInterceptor('http://localhost:9000/api/v1')],
     responseInterceptors: [responseInterceptor]
 })
