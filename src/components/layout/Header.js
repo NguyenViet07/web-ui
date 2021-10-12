@@ -12,7 +12,7 @@ const Header = ({layoutRouter}) => {
             {layoutRouter.map((el) => {
                 return (
                     <Nav.Item as="li">
-                        <Nav.Link href={el.path}>{el.title}</Nav.Link >
+                        <NavLink to={el.path}>{el.title}</NavLink >
                     </Nav.Item>
                 );
             })}

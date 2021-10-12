@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import LayoutDefault from "../layouts/LayoutDefault";
 import { Routes } from "./routes";
+import Header from "../components/layout/Header";
 
 const LayoutRoutesAndPaths = () => {
     const LayoutRoutes = [];
@@ -10,7 +11,7 @@ const LayoutRoutesAndPaths = () => {
             LayoutRoutes.push(route);
         });
     }
-    return { LayoutRoutes };
+    return LayoutRoutes ;
 };
 
 // ** Init Error Component
@@ -22,10 +23,13 @@ const FinalRoute = (props) => {
 };
 
 const Router = () => {
-    const { LayoutRoutes } = LayoutRoutesAndPaths();
+    const LayoutRoutes  = LayoutRoutesAndPaths();
     return (
-        <LayoutDefault layoutRouter={LayoutRoutes}>
+        <LayoutDefault>
             <BrowserRouter>
+                <Header navPosition="left" className="reveal-from-bottom"
+                        layoutRouter={LayoutRoutes}
+                />
                 <Switch>
                     {LayoutRoutes.map((route) => {
                         return (
@@ -49,7 +53,6 @@ const Router = () => {
                     })}
                 </Switch>
             </BrowserRouter>
-
         </LayoutDefault>
     );
 };
