@@ -27,9 +27,7 @@ const Router = () => {
     return (
         <LayoutDefault>
             <BrowserRouter>
-                <Header navPosition="left" className="reveal-from-bottom"
-                        layoutRouter={LayoutRoutes}
-                />
+                <Header layoutRouter={LayoutRoutes}/>
                 <Switch>
                     {LayoutRoutes.map((route) => {
                         return (
