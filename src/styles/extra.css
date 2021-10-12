@@ -40,7 +40,7 @@ h6 {
   padding-top: 10px;
 }
 .card1 {
-  border: none;
+  border: 0 !important;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0;
@@ -185,4 +185,52 @@ h6 {
 .media-body {
   -ms-flex: 1;
   flex: 1;
+}
+#header .top {
+  background-color: #2c2c2c;
+  padding: 10px 0;
+  color: #fff;
+}
+
+.wapper-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 18px;
+  text-align: right;
+  width: 60px;
+  height: 20px;
+  margin-bottom: -6px;
+  display: inline-block;
+}
+#header .top .list-inline .list-inline-item a {
+  color: #fff;
+}
+.list-inline-item {
+  display: inline-block;
+}
+.list-inline-item:not(:last-child) {
+  margin-right: 0.5rem;
+}
+#header .nav-item .nav-link {
+  color: #333;
+  font-size: 14px;
+  min-height: 50px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-right: 15px;
+  padding-left: 15px;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.logo img {
+  height: 30px;
 }
