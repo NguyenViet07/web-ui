@@ -16,6 +16,10 @@ const Routes = [
     component: lazy(() => import("../../views/Test")),
   },
   {
+    path: "/admin",
+    component: lazy(() => import("../../views/admin")),
+  },
+  {
     path: "/login",
     title: "login",
     component: lazy(() => import("../../views/Login")),
@@ -24,7 +28,7 @@ const Routes = [
     path: "/create",
     title: "create",
     component: lazy(() => import("../../views/CreateUser")),
-  }
+  },
 ];
 
 export { DefaultRoute, Routes };
