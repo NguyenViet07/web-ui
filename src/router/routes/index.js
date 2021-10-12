@@ -19,6 +19,16 @@ const Routes = [
     path: "/admin",
     component: lazy(() => import("../../views/admin")),
   },
+  {
+    path: "/login",
+    title: "login",
+    component: lazy(() => import("../../views/Login")),
+  },
+  {
+    path: "/create",
+    title: "create",
+    component: lazy(() => import("../../views/CreateUser")),
+  },
 ];
 
 export { DefaultRoute, Routes };
