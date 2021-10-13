@@ -9,18 +9,20 @@ import {useHistory} from "react-router-dom"
 const Header = ({ layoutRouter }) => {
 
 
-  const [userData, setUserData] = useState(null)
+  // const [userData, setUserData] = useState(null)
   const [userNameView, setUserNameView] = useState(null)
+  const [role, setRole] = useState(null)
 
   const {mutate: logout} = useMutation(logoutAction)
 
   const history = useHistory()
 
   useEffect(() => {
-    const userData1 = JSON.parse(localStorage.getItem('userData'))
-    setUserData(userData1)
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    // setUserData(userData1)
 
-    setUserNameView(userData1?.user?.userName)
+    setUserNameView(userData?.user?.userName)
+    setRole(userData?.role)
 
   }, [])
 
@@ -73,6 +75,11 @@ const Header = ({ layoutRouter }) => {
                 </Nav.Item>
               );
             })}
+            { (role === 'ADMIN') &&
+              <Nav.Item style={{marginRight: '10px'}}>
+                <NavLink to={'/admin'}>Quản lý admin</NavLink>
+              </Nav.Item>
+            }
           </Nav>
         </div>
       </nav>
