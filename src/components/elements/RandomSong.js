@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-const SidebarHome = ({ data }) => {
+const RandomSong = ({ data }) => {
   return (
     <>
       <div className="mt-4 box_header d-flex justify-content-between align-items-end">
         <a className="view_all" href="/nhac-hot.html">
-          <h2 className="title m-0">Bảng xếp hạng</h2>
+          <h2 className="title m-0">Bài hát khác</h2>
         </a>
         <a className="link_more" href="/nhac-hot.html" title="">
           Nghe tất cả
@@ -44,4 +44,4 @@ const SidebarHome = ({ data }) => {
     </>
   );
 };
-export default SidebarHome;
+export default RandomSong;

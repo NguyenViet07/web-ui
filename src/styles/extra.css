@@ -234,3 +234,88 @@ h6 {
 .logo img {
   height: 30px;
 }
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav > .nav-item {
+  padding: 0 10px;
+}
+.nav > .nav-item > a {
+  padding: 5px 10px;
+  font-size: 16px;
+  padding: 5px 20px;
+  border-radius: 2px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  font-weight: 400;
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.music_recommendation {
+  overflow-y: auto;
+  max-height: 246px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.d-table {
+  width: 100%;
+  display: table !important;
+}
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0 !important;
+  background-color: #f7f7f7;
+  display: table-row;
+  cursor: pointer;
+}
+
+.d-table-cell {
+  display: table-cell !important;
+}
+.detail_lyric_1 .card-footer .d-table-cell {
+  padding: 0.9rem 1.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.detail_lyric_1 .card-footer .d-table-cell:first-child {
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+}
+.detail_lyric_1 .card-footer .d-table-cell:last-child {
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-footer.active span {
+  color: #ff2d55;
+}
+.title2 {
+  font-size: 14px;
+  color: #9b9b9b;
+  font-weight: bold;
+}
+.title2 .author a {
+  line-height: 16px;
+  color: #ff2d55;
+  text-decoration: none;
+}
+.card-body .card-title {
+  font-size: 18px;
+  color: #000000;
+  margin-bottom: 9px;
+}
+.card-body .list-unstyled li span {
+  color: #878787;
+}
+.card-body li a {
+  color: #212552;
+  text-decoration: none;
+}
+.pl-0 {
+  padding-left: 0 !important;
+}
