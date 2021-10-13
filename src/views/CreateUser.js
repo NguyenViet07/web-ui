@@ -10,7 +10,7 @@ import {creatUser} from "../api/actions/users";
 const defaultValueSearch = {
     username: null,
     password: null,
-    role: null
+    roleId: null
 }
 
 const CreateUser = () => {
@@ -40,15 +40,15 @@ const CreateUser = () => {
                             <Form.Label>Tên đăng nhập</Form.Label>
                             <Controller
                                 control={control}
-                                name="userName"
+                                name="username"
                                 rules={{ required: true }}
                                 render={( {field} ) => {
                                     return <Input {...field} />
                                 }}
-                                className={classnames({'is-invalid': errors[`userName`]})}
+                                className={classnames({'is-invalid': errors[`username`]})}
                             />
                             <ValidateMessage
-                                message={errors && errors.userName ? errors.userName.message : ''}/>
+                                message={errors && errors.username ? errors.username.message : ''}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Mật khẩu</Form.Label>
@@ -68,15 +68,15 @@ const CreateUser = () => {
                             <Form.Label>Quyền</Form.Label>
                             <Controller
                                 control={control}
-                                name="role"
+                                name="roleId"
                                 rules={{ required: true }}
                                 render={( {field} ) => {
-                                    return <Input {...field} />
+                                    return <Input type={'number'} {...field} />
                                 }}
                                 className={classnames({'is-invalid': errors[`role`]})}
                             />
                             <ValidateMessage
-                                message={errors && errors.role ? errors.role.message : ''}/>
+                                message={errors && errors.roleId ? errors.roleId.message : ''}/>
                         </Form.Group>
                     </Card.Text>
                     <Button variant="primary" type="submit" onClick={handleSubmit(onSubmit)}>

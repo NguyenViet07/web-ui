@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 // import sections
 
 import SLideHome from "../components/homes/SlideHome";
@@ -9,10 +9,8 @@ import SongNew from "../components/homes/SongNew";
 import SidebarHome from "../components/homes/Sidebar";
 
 const Home = () => {
-  console.log("xx", process.env.REACT_APP_BASE_API_URL);
   return (
     <>
-      {/* <Hero className="illustration-section-01" /> */}
       <SLideHome />
       <Container>
         <Row>
