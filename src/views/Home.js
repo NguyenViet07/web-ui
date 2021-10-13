@@ -9,6 +9,7 @@ import SongNew from "../components/homes/SongNew";
 import SidebarHome from "../components/homes/Sidebar";
 
 const Home = () => {
+  console.log("xx", process.env.REACT_APP_BASE_API_URL);
   return (
     <>
       {/* <Hero className="illustration-section-01" /> */}
