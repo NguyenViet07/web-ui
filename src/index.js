@@ -5,9 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "../src/styles/extra.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {ClientContextProvider} from "react-fetching-library";
+import { ToastContainer } from 'react-toastify'
+import { Client } from './api/Client'
+// ** React Toastify
+import 'react-toastify/dist/ReactToastify.css';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <ClientContextProvider client={Client}>
+          <App />
+          <ToastContainer newestOnTop />
+      </ClientContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

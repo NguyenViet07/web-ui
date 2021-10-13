@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import {Form, Button, Card} from 'react-bootstrap';
 import ValidateMessage from "../components/validate-message";
 import {Controller, useForm} from "react-hook-form";
-import InputController from "../components/input-controller/input-controller";
 import {Input} from "reactstrap";
 import * as classnames from "classnames";
 import {useMutation} from "react-fetching-library";
 import {loginAction} from "../api/actions/login";
+import {useHistory} from "react-router-dom"
+import {toast} from "react-toastify";
+import {ValidateFeedback} from "../components/validate-feedback";
 
 const defaultValueSearch = {
     username: null,
@@ -15,18 +17,28 @@ const defaultValueSearch = {
 
 const Login = () => {
 
-    const {loading, mutate: _loginAction} = useMutation(loginAction)
+    const {mutate: _loginAction} = useMutation(loginAction)
+
+    const history = useHistory()
 
 
-    const {control, handleSubmit, getValues, register, formState: {errors, isSubmitting}, setValue, reset, clearErrors} = useForm({
+    const {control, handleSubmit, formState: {errors}} = useForm({
         reValidateMode: "onChange",
         defaultValues: defaultValueSearch
     })
 
     const onSubmit = async (data) => {
-        console.log('data', data)
         const response = await _loginAction(data)
-        console.log('response', response)
+        if (response.status === 200 && response.payload?.errorCode === '200') {
+            localStorage.setItem("token", response.payload.data.token)
+            localStorage.setItem('userData', JSON.stringify({
+                user: response.payload.data.userInfo,
+                role: response.payload.data.roleName
+            }))
+            history.push(`/`)
+        } else {
+            toast.error(response.payload?.message)
+        }
     };
 
     return (
@@ -45,10 +57,8 @@ const Login = () => {
                                 render={( {field} ) => {
                                     return <Input {...field} />
                                 }}
-                                className={classnames({'is-invalid': errors[`username`]})}
                             />
-                            <ValidateMessage
-                                message={errors && errors.username ? errors.username.message : ''}/>
+                            <ValidateFeedback label="Tên đăng nhập" error={errors.username}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Mật khẩu</Form.Label>

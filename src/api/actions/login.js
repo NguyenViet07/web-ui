@@ -4,3 +4,8 @@ export const loginAction = formValues => ({
     endpoint: '/auth/login',
     body: formValues
 })
+
+export const logoutAction = () => ({
+    method: 'GET',
+    endpoint: `/auth/logout`
+})
