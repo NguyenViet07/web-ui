@@ -3,17 +3,20 @@ import {Form, Button, Card} from 'react-bootstrap';
 import ValidateMessage from "../components/validate-message";
 import {Controller, useForm} from "react-hook-form";
 import {Input} from "reactstrap";
-import * as classnames from "classnames";
 import {creatUser} from "../api/actions/users";
 import {useMutation} from "react-fetching-library";
 import {useHistory} from "react-router-dom";
 import {toast, ToastContainer} from "react-toastify";
+import * as yup from "yup";
+import {yupResolver} from "@hookform/resolvers/yup";
+import InputController from "../components/input-controller/input-controller";
 
 
 const defaultValueSearch = {
     username: null,
     password: null,
-    roleId: null
+    isSinger: false,
+
 }
 
 const CreateUser = () => {
@@ -22,25 +25,30 @@ const CreateUser = () => {
 
     const history = useHistory()
 
+    const signInSchema = yup.object().shape({
+        username: yup.string().required('Vui lòng nhập tên đăng nhập').nullable(),
+        password: yup.string().required('Vui lòng nhập mật khẩu').nullable()
+    })
+
     const {control, handleSubmit, formState: {errors}} = useForm({
         reValidateMode: "onChange",
-        defaultValues: defaultValueSearch
+        defaultValues: defaultValueSearch,
+        resolver: yupResolver(signInSchema)
     })
 
     const onSubmit = async (data) => {
-        const response = await _creatUser(data)
-        if (response.payload?.errorCode === '200') {
-            history.push(`/`)
-        } else {
-            console.log('vào đây')
-            // alert(response.payload?.message)
-            toast.error(response.payload?.message)
-        }
+        console.log('data', data)
+        // const response = await _creatUser(data)
+        // if (response.payload?.errorCode === '200') {
+        //     history.push(`/`)
+        // } else {
+        //     toast.error(response.payload?.message)
+        // }
     };
 
     return (
         <>
-            <Card border="danger" style={{width: '30%', margin: 'auto', marginTop: '20px'}}>
+            <Card border="danger" style={{width: '50%', margin: 'auto', marginTop: '20px'}}>
                 <Card.Img variant="top" className="w-100" src="/imgs/photo.jpg"/>
                 <Card.Body>
                     <Card.Title>Đăng ký</Card.Title>
@@ -48,45 +56,46 @@ const CreateUser = () => {
                         <Card.Text>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Tên đăng nhập</Form.Label>
-                                <Controller
+                                <InputController
                                     control={control}
                                     name="username"
-                                    rules={{ required: true }}
-                                    render={( {field} ) => {
-                                        return <Input {...field} />
-                                    }}
-                                    className={classnames({'is-invalid': errors[`username`]})}
+                                    type="text"
                                 />
                                 <ValidateMessage
                                     message={errors && errors.username ? errors.username.message : ''}/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Mật khẩu</Form.Label>
-                                <Controller
+                                <InputController
                                     control={control}
                                     name="password"
-                                    rules={{ required: true }}
-                                    render={( {field} ) => {
-                                        return <Input {...field} />
-                                    }}
-                                    className={classnames({'is-invalid': errors[`password`]})}
+                                    type="password"
                                 />
                                 <ValidateMessage
                                     message={errors && errors.password ? errors.password.message : ''}/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Quyền</Form.Label>
-                                <Controller
+                                <Form.Label>Xác nhận lại mật khẩu</Form.Label>
+                                <InputController
                                     control={control}
-                                    name="roleId"
-                                    rules={{ required: true }}
-                                    render={( {field} ) => {
-                                        return <Input type={'number'} {...field} />
-                                    }}
-                                    className={classnames({'is-invalid': errors[`role`]})}
+                                    name="passwordConfirm"
+                                    type="password"
                                 />
                                 <ValidateMessage
-                                    message={errors && errors.roleId ? errors.roleId.message : ''}/>
+                                    message={errors && errors.password ? errors.password.message : ''}/>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Ca sĩ</Form.Label>
+                                <InputController
+                                    control={control}
+                                    name="isSinger"
+                                    type="checkbox"
+                                    onChange={val => {
+                                        console.log('val', val)
+                                    }}
+                                />
+                                <ValidateMessage
+                                    message={errors && errors.isSinger ? errors.isSinger.message : ''}/>
                             </Form.Group>
                         </Card.Text>
                         <Button variant="primary" type="submit" onClick={handleSubmit(onSubmit)}>

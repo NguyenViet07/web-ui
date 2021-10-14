@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Form, Button, Card} from 'react-bootstrap';
 import ValidateMessage from "../components/validate-message";
 import {Controller, useForm} from "react-hook-form";
-import {Input} from "reactstrap";
-import * as classnames from "classnames";
+import {Input, FormGroup, Label} from "reactstrap";
 import {useMutation} from "react-fetching-library";
 import {loginAction} from "../api/actions/login";
 import {useHistory} from "react-router-dom"
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import {toast} from "react-toastify";
-import {ValidateFeedback} from "../components/validate-feedback";
 
 const defaultValueSearch = {
     username: null,
@@ -21,10 +21,15 @@ const Login = () => {
 
     const history = useHistory()
 
+    const signInSchema = yup.object().shape({
+        username: yup.string().required('Vui lòng nhập tên đăng nhập').nullable(),
+        password: yup.string().required('Vui lòng nhập mật khẩu').nullable()
+    })
 
-    const {control, handleSubmit, formState: {errors}} = useForm({
+    const {control, handleSubmit, formState: {errors}, register} = useForm({
         reValidateMode: "onChange",
-        defaultValues: defaultValueSearch
+        defaultValues: defaultValueSearch,
+        resolver: yupResolver(signInSchema)
     })
 
     const onSubmit = async (data) => {
@@ -53,35 +58,30 @@ const Login = () => {
                             <Controller
                                 control={control}
                                 name="username"
-                                rules={{ required: true }}
                                 render={( {field} ) => {
                                     return <Input {...field} />
                                 }}
                             />
-                            <ValidateFeedback label="Tên đăng nhập" error={errors.username}/>
+                            <ValidateMessage message={errors && errors.username ? errors.username.message : ''}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Mật khẩu</Form.Label>
                             <Controller
                                 control={control}
                                 name="password"
-                                type={'password'}
-                                rules={{ required: true }}
                                 render={( {field} ) => {
                                     return <Input {...field} />
                                 }}
-                                className={classnames({'is-invalid': errors[`password`]})}
                             />
-                            <ValidateMessage
-                                message={errors && errors.password ? errors.password.message : ''}/>
+                            <ValidateMessage message={errors && errors.password ? errors.password.message : ''}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Lưu đăng nhập"/>
                         </Form.Group>
+                        <Button type="submit">
+                            Đăng nhập
+                        </Button>
                     </Card.Text>
-                    <Button variant="primary" type="submit">
-                        Đăng nhập
-                    </Button>
                 </Form>
 
             </Card.Body>
