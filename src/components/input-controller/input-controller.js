@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types'
-import * as classnames from "classnames"
 import {Controller} from "react-hook-form"
 import React, {Fragment, useEffect, useRef} from "react"
-import {DebounceInput} from "react-debounce-input"
 import {Input} from "reactstrap";
-import {Form} from "react-bootstrap";
 
 /* Hiện chỉ dùng cho input text */
 /* Mục đích là do React-select đang là unController , nên khi valid sẽ ưu tiên focus error cho những input register trước,
@@ -19,12 +16,21 @@ const InputController = ({name, control, rules, classError, error, isNumber, typ
         }
     }, [])
 
+    const handleSelectChange = (onChange, value) => {
+        if (!value) {
+            onChange(null)
+            return
+        }
+    }
+
     return (
         <Controller
             control={control}
             name={name}
-            render={( {field} ) => {
-                return <Input type={type} style={{ marginLeft: '10px'}} {...field} />
+            render={( {onChange, field} ) => {
+                return <Input onChange={(value) => {
+                    handleSelectChange(onChange, value)
+                }} type={type} style={{ marginLeft: '10px'}} {...field} {...props} />
             }}
         />
     )

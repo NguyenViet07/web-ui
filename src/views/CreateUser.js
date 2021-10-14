@@ -13,10 +13,12 @@ import InputController from "../components/input-controller/input-controller";
 
 
 const defaultValueSearch = {
+    name: null,
     username: null,
     password: null,
     isSinger: false,
-
+    company: null,
+    identityCard: null,
 }
 
 const CreateUser = () => {
@@ -25,16 +27,20 @@ const CreateUser = () => {
 
     const history = useHistory()
 
+    const [checkSinger, setCheckSinger] = useState(false)
+
     const signInSchema = yup.object().shape({
         username: yup.string().required('Vui lòng nhập tên đăng nhập').nullable(),
         password: yup.string().required('Vui lòng nhập mật khẩu').nullable()
     })
 
-    const {control, handleSubmit, formState: {errors}} = useForm({
+    const {control, handleSubmit, formState: {errors}, watch} = useForm({
         reValidateMode: "onChange",
         defaultValues: defaultValueSearch,
         resolver: yupResolver(signInSchema)
     })
+
+    // const checkSinger = watch('isSinger')
 
     const onSubmit = async (data) => {
         console.log('data', data)
@@ -54,6 +60,16 @@ const CreateUser = () => {
                     <Card.Title>Đăng ký</Card.Title>
                     <Form>
                         <Card.Text>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Họ và tên đầy đủ</Form.Label>
+                                <InputController
+                                    control={control}
+                                    name="name"
+                                    type="text"
+                                />
+                                <ValidateMessage
+                                    message={errors && errors.name ? errors.name.message : ''}/>
+                            </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Tên đăng nhập</Form.Label>
                                 <InputController
@@ -91,12 +107,34 @@ const CreateUser = () => {
                                     name="isSinger"
                                     type="checkbox"
                                     onChange={val => {
-                                        console.log('val', val)
+                                        setCheckSinger(val.target.checked)
                                     }}
                                 />
-                                <ValidateMessage
-                                    message={errors && errors.isSinger ? errors.isSinger.message : ''}/>
                             </Form.Group>
+                            {
+                                checkSinger && <>
+                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                        <Form.Label>Công ty hoặc đại diên</Form.Label>
+                                        <InputController
+                                            control={control}
+                                            name="company"
+                                            type="text"
+                                        />
+                                        <ValidateMessage
+                                            message={errors && errors.company ? errors.company.message : ''}/>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                        <Form.Label>Chứng minh thư / hộ chiếu người đại diện</Form.Label>
+                                        <InputController
+                                            control={control}
+                                            name="identityCard"
+                                            type="text"
+                                        />
+                                        <ValidateMessage
+                                            message={errors && errors.identityCard ? errors.identityCard.message : ''}/>
+                                    </Form.Group>
+                                </>
+                            }
                         </Card.Text>
                         <Button variant="primary" type="submit" onClick={handleSubmit(onSubmit)}>
                             Đăng ký
