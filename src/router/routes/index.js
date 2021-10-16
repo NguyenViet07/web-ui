@@ -20,6 +20,14 @@ const Routes = [
     component: lazy(() => import("../../views/admin")),
   },
   {
+    path: "/admin/users",
+    component: lazy(() => import("../../views/admin/users")),
+  },
+  {
+    path: "/admin/playlists",
+    component: lazy(() => import("../../views/admin/playList")),
+  },
+  {
     path: "/login",
     title: "login",
     component: lazy(() => import("../../views/Login")),

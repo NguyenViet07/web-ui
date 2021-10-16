@@ -6,10 +6,8 @@ const Index = ({ data }) => {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-md-3">
             <NavBar />
-            <div>Màn hình admin</div>
-          </div>
+            <p>Content Admin</p>
         </div>
       </div>
     </>
