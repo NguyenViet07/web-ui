@@ -16,6 +16,7 @@ const defaultValueSearch = {
     name: null,
     username: null,
     password: null,
+    passwordConfirm: null,
     isSinger: false,
     company: null,
     identityCard: null,
@@ -31,7 +32,8 @@ const CreateUser = () => {
 
     const signInSchema = yup.object().shape({
         username: yup.string().required('Vui lòng nhập tên đăng nhập').nullable(),
-        password: yup.string().required('Vui lòng nhập mật khẩu').nullable()
+        password: yup.string().required('Vui lòng nhập mật khẩu').nullable(),
+        passwordConfirm: yup.string().required('Vui lòng xác nhận mật khẩu').nullable()
     })
 
     const {control, handleSubmit, formState: {errors}, watch} = useForm({
@@ -44,12 +46,17 @@ const CreateUser = () => {
 
     const onSubmit = async (data) => {
         console.log('data', data)
-        // const response = await _creatUser(data)
-        // if (response.payload?.errorCode === '200') {
-        //     history.push(`/`)
-        // } else {
-        //     toast.error(response.payload?.message)
-        // }
+        if (data.password !== data.passwordConfirm) {
+            toast.error('Xác nhận lại mật khẩu')
+            return
+        }
+
+        const response = await _creatUser(data)
+        if (response.payload?.errorCode === '200') {
+            history.push(`/`)
+        } else {
+            toast.error(response.payload?.message)
+        }
     };
 
     return (
@@ -60,7 +67,7 @@ const CreateUser = () => {
                     <Card.Title>Đăng ký</Card.Title>
                     <Form>
                         <Card.Text>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" controlId="formBasicEmail" style={{paddingTop: '5px'}}>
                                 <Form.Label>Họ và tên đầy đủ</Form.Label>
                                 <InputController
                                     control={control}
@@ -70,7 +77,7 @@ const CreateUser = () => {
                                 <ValidateMessage
                                     message={errors && errors.name ? errors.name.message : ''}/>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" controlId="formBasicEmail" style={{paddingTop: '5px'}}>
                                 <Form.Label>Tên đăng nhập</Form.Label>
                                 <InputController
                                     control={control}
@@ -80,7 +87,7 @@ const CreateUser = () => {
                                 <ValidateMessage
                                     message={errors && errors.username ? errors.username.message : ''}/>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3" controlId="formBasicPassword" style={{paddingTop: '5px'}}>
                                 <Form.Label>Mật khẩu</Form.Label>
                                 <InputController
                                     control={control}
@@ -90,7 +97,7 @@ const CreateUser = () => {
                                 <ValidateMessage
                                     message={errors && errors.password ? errors.password.message : ''}/>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3" controlId="formBasicPassword" style={{paddingTop: '5px'}}>
                                 <Form.Label>Xác nhận lại mật khẩu</Form.Label>
                                 <InputController
                                     control={control}
@@ -98,9 +105,9 @@ const CreateUser = () => {
                                     type="password"
                                 />
                                 <ValidateMessage
-                                    message={errors && errors.password ? errors.password.message : ''}/>
+                                    message={errors && errors.passwordConfirm ? errors.passwordConfirm.message : ''}/>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3" controlId="formBasicPassword" style={{paddingTop: '5px'}}>
                                 <Form.Label>Ca sĩ</Form.Label>
                                 <InputController
                                     control={control}
@@ -113,7 +120,7 @@ const CreateUser = () => {
                             </Form.Group>
                             {
                                 checkSinger && <>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Group className="mb-3" controlId="formBasicPassword" style={{paddingTop: '5px'}}>
                                         <Form.Label>Công ty hoặc đại diên</Form.Label>
                                         <InputController
                                             control={control}
@@ -123,7 +130,7 @@ const CreateUser = () => {
                                         <ValidateMessage
                                             message={errors && errors.company ? errors.company.message : ''}/>
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Group className="mb-3" controlId="formBasicPassword"  style={{paddingTop: '5px'}}>
                                         <Form.Label>Chứng minh thư / hộ chiếu người đại diện</Form.Label>
                                         <InputController
                                             control={control}
