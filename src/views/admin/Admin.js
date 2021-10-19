@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form";
 
 import React, {useEffect, useState} from "react";
 import {toast} from "react-toastify";
-import {Card, CardHeader, CardBody, CardTitle,  Row, Col, Label} from 'reactstrap'
+import {Card, CardHeader, CardBody, CardTitle, Row, Col, Label} from 'reactstrap'
 import {Form, Button} from 'reactstrap';
 import DataTable from "react-data-table-component";
 import {SEARCH_BLOCK, SEARCH_RESULT_BLOCK} from "../../constants";
@@ -12,6 +12,7 @@ import {getDefaultRowsPerPageOptions} from "../../untility/Utils";
 import {activeUser, findAllUser} from "../../api/actions/admin";
 import InputController from "../../components/input-controller/input-controller";
 import {Group} from "../../components/form-group/form-group";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const defaultValueSearch = {
     username: null
@@ -27,6 +28,7 @@ const Admin = ({}) => {
     const [resetDataTable, setResetDataTable] = useState(false)
     const [dataSearch, setDataSearch] = useState({})
     const [sizePage, setSizePage] = useState(10)
+    const [modal, setModal] = useState(false);
 
     const {control, handleSubmit, reset, getValues} = useForm({
         reValidateMode: "onChange",
@@ -37,7 +39,7 @@ const Admin = ({}) => {
         const response = await _findAllUser({})
         if (response.payload?.errorCode === '200') {
             setListUser(response.payload?.data)
-        }
+        } else setListUser([])
     }
 
     const onChangePage = async (page, totalRows) => {
@@ -72,7 +74,6 @@ const Admin = ({}) => {
         setResetDataTable(!resetDataTable)
         setDataSearch(formData)
         formData.size = sizePage
-        console.log('data', formData)
         try {
             const res = await _findAllUser(formData)
             if (res.payload.errorCode === '200') {
@@ -97,6 +98,11 @@ const Admin = ({}) => {
             toast.error(response.payload?.message)
         }
     }
+
+
+    const toggleModal = () => {
+        setModal(!modal)
+    };
 
     useEffect(() => {
         getListUser()
@@ -205,7 +211,7 @@ const Admin = ({}) => {
             width: '5%',
             cell: (row) => (<>
                 <div title={'Sửa'}>
-                    <Edit style={{cursor: 'pointer', color: '#6e6b7b'}}/>
+                    <Edit onClick={()=> toggleModal()} style={{cursor: 'pointer', color: '#6e6b7b'}}/>
                 </div>
                 <div title={'mở khóa/khóa'}>
                     <Lock onClick={
@@ -218,73 +224,91 @@ const Admin = ({}) => {
     ]
 
     return (
-        <div border="danger" style={{width: '90%', margin: 'auto', marginTop: '20px'}}>
-
-            <Card>
-                <CardHeader>
-                    <CardTitle tag='h4' id={SEARCH_BLOCK.key} title={SEARCH_BLOCK.title}>Thông tin tìm kiếm</CardTitle>
-                </CardHeader>
-                <CardBody>
-                    <Form onSubmit={handleSubmit(handleSearch)}>
-                        <Group>
-                            <Label>Tên đăng nhập</Label>
-                            <InputController
-                                control={control}
-                                name="username"
-                                type="text"
-                            />
-                        </Group>
-                        <Button type={'submit'}>
-                            Tìm kiếm
-                        </Button>
-                    </Form>
-                </CardBody>
-            </Card>
-
-            <Card>
-                <CardHeader>
-                    <CardTitle id={SEARCH_RESULT_BLOCK.key} title={SEARCH_RESULT_BLOCK.title}>Danh sách tài khoản hệ thống ({listUser.totalElements ? listUser.totalElements : 0})</CardTitle>
-                </CardHeader>
-                <CardBody>
-                    <Row>
-                        <Col>
-                            <div className="style-table">
-                                <DataTable keyField={"id"}
-                                           loading={searching}
-                                           columns={columns}
-                                           data={listUser.content}
-                                           paginationTotalRows={listUser.totalElements}
-                                           pagination
-                                           paginationServer
-                                           paginationRowsPerPageOptions={getDefaultRowsPerPageOptions()}
-                                           highlightOnHover
-                                           paginationResetDefaultPage={resetDataTable}
-                                           noHeader={true}
-                                           className="style-table table-has-edit"
-                                           progressPending={searching}
-                                           onChangePage={onChangePage}
-                                           onChangeRowsPerPage={onChangeRowPerPage}
-                                           noDataComponent={"Không có bản ghi nào"}
-                                           paginationComponentOptions={{
-                                               rowsPerPageText: 'Số bản ghi của 1 trang:',
-                                               rangeSeparatorText: '/'
-                                           }}
-                                           striped={true}
-                                           customStyles={{
-                                               headCells: {
-                                                   style: {
-                                                       textAlign: 'center',
-                                                       fontWeight: '600'
-                                                   }
-                                               }
-                                           }}
+        <>
+            <div border="danger" style={{width: '90%', margin: 'auto', marginTop: '20px'}}>
+                <Card>
+                    <CardHeader>
+                        <CardTitle tag='h4' id={SEARCH_BLOCK.key} title={SEARCH_BLOCK.title}>Thông tin tìm
+                            kiếm</CardTitle>
+                    </CardHeader>
+                    <CardBody>
+                        <Form onSubmit={handleSubmit(handleSearch)}>
+                            <Group>
+                                <Label>Tên đăng nhập</Label>
+                                <InputController
+                                    control={control}
+                                    name="username"
+                                    type="text"
                                 />
-                            </div>
-                        </Col>
-                    </Row>
-                </CardBody>
-            </Card>
-        </div>
+                            </Group>
+                            <Button type={'submit'}>
+                                Tìm kiếm
+                            </Button>
+                        </Form>
+                    </CardBody>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle id={SEARCH_RESULT_BLOCK.key} title={SEARCH_RESULT_BLOCK.title}>Danh sách tài khoản hệ
+                            thống ({listUser.totalElements ? listUser.totalElements : 0})</CardTitle>
+                    </CardHeader>
+                    <CardBody>
+                        <Row>
+                            <Col>
+                                <div className="style-table">
+                                    <DataTable keyField={"id"}
+                                               loading={searching}
+                                               columns={columns}
+                                               data={listUser.content}
+                                               paginationTotalRows={listUser.totalElements}
+                                               pagination
+                                               paginationServer
+                                               paginationRowsPerPageOptions={getDefaultRowsPerPageOptions()}
+                                               highlightOnHover
+                                               paginationResetDefaultPage={resetDataTable}
+                                               noHeader={true}
+                                               className="style-table table-has-edit"
+                                               progressPending={searching}
+                                               onChangePage={onChangePage}
+                                               onChangeRowsPerPage={onChangeRowPerPage}
+                                               noDataComponent={"Không có bản ghi nào"}
+                                               paginationComponentOptions={{
+                                                   rowsPerPageText: 'Số bản ghi của 1 trang:',
+                                                   rangeSeparatorText: '/'
+                                               }}
+                                               striped={true}
+                                               customStyles={{
+                                                   headCells: {
+                                                       style: {
+                                                           textAlign: 'center',
+                                                           fontWeight: '600'
+                                                       }
+                                                   }
+                                               }}
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                    </CardBody>
+                </Card>
+
+                <Modal isOpen={modal} toggle={() => toggleModal()} >
+                    <ModalHeader toggle={() => toggleModal()} >Modal title</ModalHeader>
+                    <ModalBody>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={() => toggleModal()}>Do Something</Button>{' '}
+                        <Button color="secondary" onClick={() => toggleModal()}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
+        </>
     );
 };
 
