@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { Nav } from "react-bootstrap";
+import { Nav, NavItem } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
 import {useMutation} from "react-fetching-library";
 import {logoutAction} from "../../api/actions/login";
 import {useHistory} from "react-router-dom"
@@ -70,15 +69,15 @@ const Header = ({ layoutRouter }) => {
           <Nav>
             {layoutRouter.map((el) => {
               return (
-                <Nav.Item style={{marginRight: '10px'}}>
+                <NavItem style={{marginRight: '10px'}}>
                   <NavLink to={el.path}>{el.title}</NavLink>
-                </Nav.Item>
+                </NavItem>
               );
             })}
             { (role === 'ADMIN') &&
-              <Nav.Item style={{marginRight: '10px'}}>
+              <NavItem style={{marginRight: '10px'}}>
                 <NavLink to={'/admin'}>Quản lý admin</NavLink>
-              </Nav.Item>
+              </NavItem>
             }
           </Nav>
         </div>

@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {Col, Row} from "react-bootstrap";
+import { Row, Col } from "reactstrap";
 
 const AlbumNew = ({data}) => {
     return (

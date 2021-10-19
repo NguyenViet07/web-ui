@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row } from "reactstrap";
 const SongNew = ({ data }) => {
   return (
     <>

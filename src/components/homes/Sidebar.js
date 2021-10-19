@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { Col, Row } from "react-bootstrap";
 const SidebarHome = ({ data }) => {
   return (
     <>
