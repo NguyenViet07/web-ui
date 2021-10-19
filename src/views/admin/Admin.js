@@ -7,9 +7,9 @@ import {Card, CardHeader, CardBody, CardTitle,  Row, Col, Label} from 'reactstra
 import {Form, Button} from 'reactstrap';
 import DataTable from "react-data-table-component";
 import {SEARCH_BLOCK, SEARCH_RESULT_BLOCK} from "../../constants";
-import {Edit} from "react-feather";
+import {Edit, Lock} from "react-feather";
 import {getDefaultRowsPerPageOptions} from "../../untility/Utils";
-import {findAllUser} from "../../api/actions/admin";
+import {activeUser, findAllUser} from "../../api/actions/admin";
 import InputController from "../../components/input-controller/input-controller";
 import {Group} from "../../components/form-group/form-group";
 
@@ -20,6 +20,7 @@ const defaultValueSearch = {
 const Admin = ({}) => {
 
     const {mutate: _findAllUser} = useMutation(findAllUser)
+    const {mutate: _activeUser} = useMutation(activeUser)
 
     const [listUser, setListUser] = useState([])
     const [searching, setSearching] = useState(false)
@@ -44,7 +45,7 @@ const Admin = ({}) => {
         searchParams.page = page
         setSearching(true)
         const res = await _findAllUser(searchParams)
-        if (res.payload.errorCode === '00') {
+        if (res.payload.errorCode === '200') {
             setListUser(res.payload?.data)
         }
         setSearching(false)
@@ -57,21 +58,24 @@ const Admin = ({}) => {
         searchParams.size = currentRowsPerPage
         setSizePage(currentRowsPerPage)
         const res = await _findAllUser(searchParams)
-        if (res.payload.errorCode === '00') {
+        if (res.payload.errorCode === '200') {
             setListUser(res.payload?.data)
         }
         setSearching(false)
     }
 
-    const handleSearch = async () => {
+    const handleSearch = async data => {
         setSearching(true)
-        const formData = getValues()
+        const formData = {
+            ...data
+        }
         setResetDataTable(!resetDataTable)
         setDataSearch(formData)
         formData.size = sizePage
+        console.log('data', formData)
         try {
             const res = await _findAllUser(formData)
-            if (res.payload.errorCode === '00') {
+            if (res.payload.errorCode === '200') {
                 setListUser(res.payload?.data)
             }
         } catch (error) {
@@ -81,20 +85,25 @@ const Admin = ({}) => {
         reset(getValues())
     }
 
+    const activeUserSinger = (user) => async () => {
+        const data = {
+            username: user.username
+        }
+        const response = await _activeUser(data)
+        if (response.payload?.errorCode === '200') {
+            toast.success('đổi trạng thái thành công')
+            handleSearch({})
+        } else {
+            toast.error(response.payload?.message)
+        }
+    }
+
     useEffect(() => {
-
         getListUser()
-
     }, [])
 
 
     const columns = [
-        // {
-        //   name: 'STT',
-        //   center: true,
-        //   width: '5%',
-        //   cell: (row, index) => (listUser ? ((listUser.page) * listUser.size) + (index + 1) : -1)
-        // },
         {
             name: 'Trạng thái',
             center: true,
@@ -153,13 +162,6 @@ const Admin = ({}) => {
             style: {
                 justifyContent: 'center'
             }
-            // cell: row => {
-            //   if (row.blockAddnew === 1) {
-            //     return (<div className="nowrap-text">{'Chặn'}</div>)
-            //   } else if (row.blockAddnew === 0 || row.blockAddnew === null) {
-            //     return (<div className="nowrap-text">{'Không chặn'}</div>)
-            //   }
-            // }
         },
         {
             name: 'Tên công ty chủ quản',
@@ -179,28 +181,6 @@ const Admin = ({}) => {
                 justifyContent: 'left'
             }
         },
-        // {
-        //   name: 'User không chặn combo',
-        //   width: '10%',
-        //   center: true,
-        //   style: {
-        //     justifyContent: 'left'
-        //   },
-        //   cell: row => {
-        //     return (<div title={row.useExcludeCombo} className="nowrap-text">{row.useExcludeCombo}</div>)
-        //   }
-        // },
-        // {
-        //   name: 'Ghi chú',
-        //   maxWidth: '11%',
-        //   center: true,
-        //   style: {
-        //     justifyContent: 'left'
-        //   },
-        //   cell: row => {
-        //     return (<div title={row.description} className="nowrap-text">{row.description}</div>)
-        //   }
-        // },
         {
             name: 'Thời gian tạo',
             center: true,
@@ -223,20 +203,26 @@ const Admin = ({}) => {
         {
             name: 'Thao tác',
             width: '5%',
-            cell: (row) => (<div title={'Sửa'}>
-                <Edit style={{cursor: 'pointer', color: '#6e6b7b'}}/>
-            </div>),
+            cell: (row) => (<>
+                <div title={'Sửa'}>
+                    <Edit style={{cursor: 'pointer', color: '#6e6b7b'}}/>
+                </div>
+                <div title={'mở khóa/khóa'}>
+                    <Lock onClick={
+                        activeUserSinger(row)
+                    } style={{cursor: 'pointer', color: '#6e6b7b'}}/>
+                </div>
+            </>),
             center: true
         }
     ]
-
 
     return (
         <div border="danger" style={{width: '90%', margin: 'auto', marginTop: '20px'}}>
 
             <Card>
                 <CardHeader>
-                    <CardTitle tag='h4' id={SEARCH_BLOCK.key} title={SEARCH_BLOCK.title}>Thông tin cấu hình</CardTitle>
+                    <CardTitle tag='h4' id={SEARCH_BLOCK.key} title={SEARCH_BLOCK.title}>Thông tin tìm kiếm</CardTitle>
                 </CardHeader>
                 <CardBody>
                     <Form onSubmit={handleSubmit(handleSearch)}>
