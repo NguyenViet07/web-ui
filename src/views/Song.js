@@ -43,7 +43,9 @@ const Song = () => {
                     <CardTitle tag="h5">{songInfo.songName}</CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">{songInfo.songName}</CardSubtitle>
                 </CardBody>
-                <img width="100%" src="/imgs/image.jpg" alt="Card image cap" />
+                <div style={{ display: 'flex', justifyContent: 'center'}}>
+                    <img width="30%" src="/imgs/image.jpg" alt="Card image cap" />
+                </div>
                 <AudioPlayer
                     autoPlay
                     src={`http://localhost:9000/api/v1/song/download?url=${url}`}
