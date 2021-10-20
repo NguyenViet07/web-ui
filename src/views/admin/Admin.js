@@ -13,6 +13,7 @@ import {activeUser, findAllUser} from "../../api/actions/admin";
 import InputController from "../../components/input-controller/input-controller";
 import {Group} from "../../components/form-group/form-group";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import ModalEdit from "./ModalEdit";
 
 const defaultValueSearch = {
     username: null
@@ -29,6 +30,7 @@ const Admin = ({}) => {
     const [dataSearch, setDataSearch] = useState({})
     const [sizePage, setSizePage] = useState(10)
     const [modal, setModal] = useState(false);
+    const [userEdit, setUserEdit] = useState(false);
 
     const {control, handleSubmit, reset, getValues} = useForm({
         reValidateMode: "onChange",
@@ -100,8 +102,10 @@ const Admin = ({}) => {
     }
 
 
-    const toggleModal = () => {
+    const toggleModal = (data) => {
         setModal(!modal)
+        console.log('aaaaaaa', data)
+        if (data) setUserEdit(data)
     };
 
     useEffect(() => {
@@ -211,7 +215,7 @@ const Admin = ({}) => {
             width: '5%',
             cell: (row) => (<>
                 <div title={'Sửa'}>
-                    <Edit onClick={()=> toggleModal()} style={{cursor: 'pointer', color: '#6e6b7b'}}/>
+                    <Edit onClick={()=> toggleModal(row)} style={{cursor: 'pointer', color: '#6e6b7b'}}/>
                 </div>
                 <div title={'mở khóa/khóa'}>
                     <Lock onClick={
@@ -296,14 +300,10 @@ const Admin = ({}) => {
                 <Modal isOpen={modal} toggle={() => toggleModal()} >
                     <ModalHeader toggle={() => toggleModal()} >Modal title</ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
+                        <ModalEdit user={userEdit}></ModalEdit>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={() => toggleModal()}>Do Something</Button>{' '}
+                        <Button color="primary" onClick={() => toggleModal()}>Do Something</Button>
                         <Button color="secondary" onClick={() => toggleModal()}>Cancel</Button>
                     </ModalFooter>
                 </Modal>

@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import ValidateMessage from "../components/validate-message";
+import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
-import {creatUser} from "../api/actions/users";
 import {useMutation} from "react-fetching-library";
 import {useHistory} from "react-router-dom";
 import {toast, ToastContainer} from "react-toastify";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-import InputController from "../components/input-controller/input-controller";
 import {Card, CardImg, Form, Button, CardBody, CardTitle, Label} from "reactstrap";
-import {Group} from "../components/form-group/form-group";
+import {creatUser} from "../../api/actions/users";
+import {Group} from "../../components/form-group/form-group";
+import InputController from "../../components/input-controller/input-controller";
+import ValidateMessage from "../../components/validate-message";
 
 
 const defaultValueSearch = {
@@ -22,7 +22,7 @@ const defaultValueSearch = {
     identityCard: null,
 }
 
-const ModalEdit = (user) => {
+const ModalEdit = ({user}) => {
 
     const {mutate: _creatUser} = useMutation(creatUser)
 
@@ -36,7 +36,7 @@ const ModalEdit = (user) => {
         passwordConfirm: yup.string().required('Vui lòng xác nhận mật khẩu').nullable()
     })
 
-    const {control, handleSubmit, formState: {errors}, watch} = useForm({
+    const {control, handleSubmit, formState: {errors}, watch, setValue} = useForm({
         reValidateMode: "onChange",
         defaultValues: defaultValueSearch,
         resolver: yupResolver(signInSchema)
@@ -53,9 +53,22 @@ const ModalEdit = (user) => {
         }
     };
 
+    useEffect(() => {
+        console.log('data', user)
+        if (user) {
+            setValue('name', user.name)
+            setValue('username', user.username)
+            if (user.isSinger === 1) {
+                setValue('isSinger', true)
+            } else {
+                setValue('isSinger', false)
+            }
+        }
+    }, [user])
+
     return (
         <>
-            <Card border="danger" style={{width: '50%', margin: 'auto', marginTop: '20px'}}>
+            <Card border="danger" style={{ margin: 'auto', marginTop: '20px'}}>
                 <CardImg variant="top" className="w-100" src="/imgs/photo.jpg"/>
                 <CardBody>
                     <CardTitle>Đăng ký</CardTitle>
@@ -76,7 +89,7 @@ const ModalEdit = (user) => {
                                 control={control}
                                 name="username"
                                 type="text"
-                                disable
+                                disabled={true}
                             />
                         </Group>
                         <Group className="mb-3" controlId="formBasicPassword" style={{paddingTop: '5px'}}>
@@ -85,9 +98,7 @@ const ModalEdit = (user) => {
                                 control={control}
                                 name="isSinger"
                                 type="checkbox"
-                                onChange={val => {
-                                    setCheckSinger(val.target.checked)
-                                }}
+                                disabled={true}
                             />
                         </Group>
                         {

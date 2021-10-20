@@ -14,11 +14,11 @@ const Home = () => {
       <SLideHome />
       <Container>
         <Row>
-          {/*<Col md={8}>*/}
-          {/*  <AlbumNew></AlbumNew>*/}
-          {/*  <img src="/imgs/qc.png" alt="" className="w-100" />*/}
-          {/*  <SongNew></SongNew>*/}
-          {/*</Col>*/}
+          <Col md={8}>
+            <AlbumNew></AlbumNew>
+            <img src="/imgs/qc.png" alt="" className="w-100" />
+            <SongNew></SongNew>
+          </Col>
           <Col md={3}>
             <SidebarHome />
           </Col>

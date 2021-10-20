@@ -16,10 +16,6 @@ const Routes = [
     component: lazy(() => import("../../views/Test")),
   },
   {
-    path: "/admin",
-    component: lazy(() => import("../../views/admin/Admin")),
-  },
-  {
     path: "/login",
     title: "login",
     component: lazy(() => import("../../views/Login")),
@@ -28,6 +24,21 @@ const Routes = [
     path: "/create",
     title: "create",
     component: lazy(() => import("../../views/CreateUser")),
+  },
+
+  {
+    path: "/song/:id",
+    component: lazy(() => import("../../views/Song")),
+  },
+
+  {
+    path: "/admin",
+    component: lazy(() => import("../../views/admin/Admin")),
+  },
+
+  {
+    path: "/profile",
+    component: lazy(() => import("../../views/profile/Index")),
   },
 ];
 

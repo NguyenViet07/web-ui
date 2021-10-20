@@ -74,10 +74,15 @@ const Header = ({ layoutRouter }) => {
                 </NavItem>
               );
             })}
-            { (role === 'ADMIN') &&
-              <NavItem style={{marginRight: '10px'}}>
-                <NavLink to={'/admin'}>Quản lý admin</NavLink>
+            {
+              userNameView && <NavItem style={{marginRight: '10px'}}>
+                <NavLink to={'/profile'}>Trang cá nhân</NavLink>
               </NavItem>
+            }
+            {(role === 'ADMIN') &&
+            <NavItem style={{marginRight: '10px'}}>
+              <NavLink to={'/admin'}>Quản lý admin</NavLink>
+            </NavItem>
             }
           </Nav>
         </div>

@@ -27,10 +27,17 @@ const InputController = ({name, control, rules, classError, error, isNumber, typ
         <Controller
             control={control}
             name={name}
-            render={( {onChange, field} ) => {
-                return <Input onChange={(value) => {
-                    handleSelectChange(onChange, value)
-                }} type={type} style={{ marginLeft: '10px'}} {...field} {...props} />
+            render={({onChange, field}) => {
+                return <Input
+                    id={name}
+                    onChange={(value) => {
+                        handleSelectChange(onChange, value)
+                    }}
+                    type={type}
+                    disabled={disabled}
+                    style={{marginLeft: '10px'}}
+                    {...field}
+                    {...props} />
             }}
         />
     )
