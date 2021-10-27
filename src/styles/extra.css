@@ -13,6 +13,9 @@ h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
+a {
+  text-decoration: none !important;
+}
 .position-relative {
   position: relative !important;
 }
@@ -101,6 +104,7 @@ h6 {
 }
 .media .media-left {
   padding: 0;
+  margin-right: 20px;
 }
 .list_music .media .media-left {
   position: relative;
@@ -212,9 +216,9 @@ h6 {
 .list-inline-item:not(:last-child) {
   margin-right: 0.5rem;
 }
-#header .nav-item .nav-link {
+#header .nav-item a {
   color: #333;
-  font-size: 14px;
+  font-size: 16px;
   min-height: 50px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -230,6 +234,7 @@ h6 {
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
+  font-weight: 600;
 }
 .logo img {
   height: 30px;
