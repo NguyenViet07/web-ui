@@ -43,6 +43,7 @@ const Index = ({}) => {
     const {mutate: _getListSongByUserId} = useMutation(getListSongByUserId)
 
     const [userInfoView, setUserInfoView] = useState(null)
+    const [logo, setLogo] = useState(null)
     const [listMySong, setListMySong] = useState([])
 
     const {control, handleSubmit, formState: {errors}, watch, setValue, register} = useForm({
@@ -94,6 +95,9 @@ const Index = ({}) => {
     useEffect(() => {
 
         const userData = JSON.parse(localStorage.getItem('userData'))
+        if (userData?.user?.avatar) {
+            setLogo(userData?.user?.avatar)
+        }
         // setUserData(userData1)
         if (userData?.user?.userName) {
             getUserByUserName(userData?.user?.userName)
@@ -110,7 +114,7 @@ const Index = ({}) => {
                     <Row>
                         <Col md={3}>
                             <Card>
-                                <CardImg variant="top" className="w-100" src="/imgs/photo.jpg"/>
+                                <CardImg variant="top" className="w-100" src={logo}/>
                                 <CardBody>
                                     <CardTitle tag="h5">{userInfoView?.username}</CardTitle>
                                     <CardSubtitle tag="h6" className="mb-2 text-muted">{userInfoView?.name}</CardSubtitle>
