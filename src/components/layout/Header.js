@@ -61,6 +61,13 @@ const Header = ({ layoutRouter }) => {
                 </li>
               </ul>
             }
+            {
+              !userNameView && <div style={{marginRight: '10px'}}>
+                <NavLink to={'/login'}>Đăng nhập </NavLink>
+                /
+                <NavLink to={'/create'}> Đăng ký</NavLink>
+              </div>
+            }
           </div>
         </div>
       </div>

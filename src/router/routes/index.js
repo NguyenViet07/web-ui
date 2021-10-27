@@ -17,12 +17,10 @@ const Routes = [
   },
   {
     path: "/login",
-    title: "login",
     component: lazy(() => import("../../views/Login")),
   },
   {
     path: "/create",
-    title: "create",
     component: lazy(() => import("../../views/CreateUser")),
   },
 
