@@ -15,6 +15,7 @@ h6 {
 }
 a {
   text-decoration: none !important;
+  color: inherit !important;
 }
 .position-relative {
   position: relative !important;
@@ -219,7 +220,7 @@ a {
 #header .nav-item a {
   color: #333;
   font-size: 16px;
-  min-height: 50px;
+  min-height: 40px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -230,14 +231,17 @@ a {
   -ms-flex-pack: center;
   justify-content: center;
   padding-right: 15px;
-  padding-left: 15px;
+  padding-left: 0px;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
-  font-weight: 600;
+  font-weight: 500;
 }
 .logo img {
   height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 16px;
 }
 ul {
   padding: 0;
@@ -246,7 +250,7 @@ ul {
 }
 
 .nav > .nav-item {
-  padding: 0 10px;
+  padding: 0;
 }
 .nav > .nav-item > a {
   padding: 5px 10px;
@@ -323,4 +327,331 @@ ul {
 }
 .pl-0 {
   padding-left: 0 !important;
+}
+
+/* new theme */
+.hiOVWZ {
+  position: fixed;
+  top: 0px;
+  left: 0rem;
+  width: 15rem;
+  height: 100vh;
+  overflow: hidden auto;
+  overscroll-behavior-y: contain;
+  border-right: 1px solid rgba(28, 30, 32, 0.05);
+  z-index: 3;
+  background-color: #fff;
+}
+.qIfwr {
+  width: 15rem;
+  height: 100%;
+}
+.hqNQxP {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  width: inherit;
+  height: 56px;
+  background-color: rgba(28, 30, 32, 0.02);
+}
+.hqNQxP .wrapper-left {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  max-width: calc(100% - 38px);
+  margin-right: 8px;
+}
+.cwzfIs {
+  display: inline-block;
+  height: fit-content;
+  width: fit-content;
+  margin-left: 16px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+.JBcAl {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(28, 30, 32, 0.88);
+}
+.cwzfIs a.avatar-user {
+  position: relative;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+.cwzfIs a.avatar-user img {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+.fwzauO {
+  display: inline-flex;
+  max-width: calc(100% - 46px);
+}
+.ePHKxx {
+  width: fit-content;
+  max-width: 11.5rem;
+  display: inline-block;
+}
+.ePHKxx a.username {
+  width: 100%;
+  max-width: 11.5rem;
+  font-size: 13px;
+  line-height: 15px;
+  font-weight: 500;
+  color: rgba(28, 30, 32, 0.88);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  cursor: pointer;
+}
+.geiIEW {
+  padding: 1.6rem 0px;
+  margin-bottom: 5rem;
+}
+.geiIEW {
+  padding: 1.6rem 0px;
+  margin-bottom: 5rem;
+}
+.dropdown-toggle::after {
+  content: none !important;
+}
+.dropdown-toggle {
+  border: 0 !important;
+  padding: 0 !important;
+  margin-right: 10px;
+}
+.dropdown-toggle:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+.dropdown-menu .dropdown-item {
+  font-size: 14px;
+}
+.ml-16px {
+  margin-left: 16px;
+}
+.ifOydT {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 9;
+  width: 320px;
+  height: 100vh;
+  background-color: rgb(250, 250, 250);
+  transition: none 0s ease 0s;
+}
+.drAQLJ {
+  width: 320px;
+  height: 100vh;
+  margin: 0px auto;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-left: 1px solid rgba(28, 30, 32, 0.05);
+}
+.ebwIPv {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: calc(100vh - 20rem);
+  flex-direction: column;
+}
+.jvTHpy {
+  margin: 0px auto;
+  height: calc(100vh - 20rem);
+}
+.gVzVPL {
+  margin-top: 16px;
+  padding: 12px 0px;
+  border-radius: 4px;
+  background-color: rgba(28, 30, 32, 0.02);
+}
+.beUHDP {
+  width: 240px;
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  box-shadow: rgb(0 0 0 / 20%) 0px 8px 16px;
+}
+.kHigLB {
+  cursor: pointer;
+}
+.GuhPz {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  padding: 0px;
+  margin: 0px auto;
+  z-index: 1;
+}
+.gVzVPL {
+  margin-top: 16px;
+  padding: 12px 0px;
+  border-radius: 4px;
+  background-color: rgba(28, 30, 32, 0.02);
+}
+
+.fZPioS {
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
+  border-radius: 0.4rem;
+  transition: all 200ms ease-in 0s;
+}
+.cNMrYa {
+  margin: 12px 16px 0px;
+}
+.cNMrYa .group-left {
+  padding-left: 8px;
+}
+.ifpCqr {
+  position: relative;
+}
+.bMVqpF {
+  display: block;
+  width: 100%;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(28, 30, 32, 0.88);
+  overflow: hidden;
+}
+.lcHdEu {
+  width: 100%;
+  font-size: 13px;
+  color: rgba(28, 30, 32, 0.5);
+  margin-top: 0.6rem;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left !important;
+}
+.gJpHzO {
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(28, 30, 32, 0.5);
+}
+.ifhmLj {
+  color: rgba(28, 30, 32, 0.5);
+  user-select: none;
+}
+.gJpHzO {
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(28, 30, 32, 0.5);
+}
+.eFEVLi {
+  width: 310px;
+  margin: auto;
+  padding-top: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: 1px;
+}
+.rhap_container {
+  border: 0 !important;
+  box-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.07) !important;
+}
+.cyXUeA {
+  width: 168px;
+  height: 36px;
+  cursor: pointer;
+  border-radius: 1.9rem;
+  background-color: rgba(28, 30, 32, 0.02);
+  margin-left: 15px;
+}
+.hQhNXy {
+  color: rgba(28, 30, 32, 0.5);
+  font-size: 13px;
+  text-align: center;
+  padding-top: 7px;
+  cursor: pointer;
+  user-select: none;
+}
+.MuiButtonBase-root .btn {
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border-radius: 0;
+  vertical-align: middle;
+  -moz-appearance: none;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.MuiIconButton-root .btn {
+  flex: 0 0 auto;
+  color: rgba(0, 0, 0, 0.54);
+  padding: 12px;
+  overflow: visible;
+  font-size: 1.5rem;
+  text-align: center;
+  border-radius: 50%;
+}
+.MuiIconButton-root .btn {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.jss30 .btn {
+  padding: 10px;
+}
+.MuiIconButton-label {
+  width: 100%;
+  display: flex;
+  align-items: inherit;
+  justify-content: inherit;
+  font-size: 16px;
+}
+.kRuzxG {
+  color: rgba(28, 30, 32, 0.5);
+}
+.MuiTouchRipple-root .btn {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.btn-group > .btn-group:not(:last-child) > .btn,
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 50% !important;
+  border-bottom-right-radius: 50% !important;
+}
+.btn-secondary:hover {
+  color: inherit !important;
+  background-color: inherit !important;
+  border-color: inherit !important;
+}
+.btn-check:active + .btn-secondary,
+.btn-check:checked + .btn-secondary,
+.btn-secondary.active,
+.btn-secondary:active,
+.show > .btn-secondary.dropdown-toggle {
+  color: inherit !important;
+  background-color: inherit !important;
+  border-color: inherit !important;
+}
+.btn-check:focus + .btn-secondary,
+.btn-secondary:focus {
+  color: inherit !important;
+  background-color: inherit !important;
+  border-color: inherit !important;
+  box-shadow: unset !important;
 }

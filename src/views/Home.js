@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import sections
-
+import RightSidebar from "../components/layout/RightSidebar";
 import SLideHome from "../components/homes/SlideHome";
 import AlbumNew from "../components/homes/AlbumNew";
 import SongNew from "../components/homes/SongNew";
@@ -11,6 +11,7 @@ import SidebarHome from "../components/homes/Sidebar";
 const Home = () => {
   return (
     <>
+      <RightSidebar />
       <SLideHome />
       <Container>
         <Row>

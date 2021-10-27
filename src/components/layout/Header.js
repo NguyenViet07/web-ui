@@ -1,92 +1,111 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import {
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 import { Nav, NavItem } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
-import {useMutation} from "react-fetching-library";
-import {logoutAction} from "../../api/actions/login";
-import {useHistory} from "react-router-dom"
+import { useMutation } from "react-fetching-library";
+import { logoutAction } from "../../api/actions/login";
+import { useHistory } from "react-router-dom";
 
 const Header = ({ layoutRouter }) => {
-
-
   // const [userData, setUserData] = useState(null)
-  const [userNameView, setUserNameView] = useState(null)
-  const [role, setRole] = useState(null)
+  const [userNameView, setUserNameView] = useState(null);
+  const [role, setRole] = useState(null);
 
-  const {mutate: logout} = useMutation(logoutAction)
+  const { mutate: logout } = useMutation(logoutAction);
 
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('userData'))
+    const userData = JSON.parse(localStorage.getItem("userData"));
     // setUserData(userData1)
 
-    setUserNameView(userData?.user?.userName)
-    setRole(userData?.role)
+    setUserNameView(userData?.user?.userName);
+    setRole(userData?.role);
+  }, []);
 
-  }, [])
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
 
   const logoutFunc = async () => {
     // xoa token trong db
 
-    await logout()
-    localStorage.removeItem('userData')
-    localStorage.removeItem('token')
-    history.push('/')
-
-  }
+    await logout();
+    localStorage.removeItem("userData");
+    localStorage.removeItem("token");
+    history.push("/");
+  };
 
   return (
     <header id="header">
-      <div className="top">
-        <div className="container">
-          <div className="d-flex align-items-center justify-content-between">
+      <div className="kyusxl-58 sc-13vopkh-1 iBiofn hiOVWZ">
+        <div className="sc-13vopkh-2 qIfwr">
+          <div className="sc-13vopkh-9 fioJms">
             <figure className="m-0">
               <a href="/" title="" className="logo">
                 <img src="/logo.jpg" alt="Logo Chiasenhac" />
               </a>
             </figure>
-            {
-              userNameView &&
-              <ul className="list-inline m-0">
-                <li className="list-inline-item">
-                  <a href="/" title={userNameView}>
-                    <span className="wapper-name">{userNameView}</span>
+          </div>
+
+          <div class="sc-13vopkh-22 hqNQxP">
+            <div class="wrapper-left">
+              <p class="sc-13vopkh-30 JBcAl mb-0 ml-16px ">
+                <span>Đăng nhập</span> | <span>Đăng ký</span>
+              </p>
+            </div>
+            <div class="wrapper-left d-none ">
+              <div class="sc-13vopkh-23 cwzfIs">
+                <a
+                  class="avatar-user "
+                  href="/user/trananhtuan1198.quan-ly.html"
+                >
+                  <img src="https://avatar-ex-swe.nixcdn.com/avatar/2021/10/27/f/1/3/6/1635320107970.jpg" />
+                </a>
+              </div>
+              <div class="sc-13vopkh-3 fwzauO">
+                <div class="sc-13vopkh-25 ePHKxx">
+                  <a
+                    class="__3dot-content username"
+                    title="Anh Tuấn"
+                    href="/user/trananhtuan1198.quan-ly.html"
+                  >
+                    Anh Tuấn
                   </a>
-                </li>
-                <li className="list-inline-item">/</li>
-                <li className="list-inline-item">
-                  <a href="/" title="Thoát" onClick={logoutFunc}>
-                    Thoát
-                  </a>
-                </li>
+                </div>
+              </div>
+            </div>
+            <div class="sc-13vopkh-0 pyaEd">
+              <ButtonDropdown isOpen={isOpen} toggle={toggle}>
+                <DropdownToggle caret>
+                  <div class="wpfkci-0 fRifvS ic_setting_normal"></div>
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem>Đổi mật khẩu</DropdownItem>
+                  <DropdownItem>Đăng xuất</DropdownItem>
+                </DropdownMenu>
+              </ButtonDropdown>
+            </div>
+          </div>
+          <div className="sc-13vopkh-11 fLQZhp">
+            <div className="sc-13vopkh-12 geiIEW">
+              <ul style={{ paddingLeft: "16px" }}>
+                <NavItem style={{ marginRight: "10px" }}>
+                  <NavLink to="/test">test</NavLink>
+                </NavItem>
+                <NavItem style={{ marginRight: "10px" }}>
+                  <NavLink to="/test">test2</NavLink>
+                </NavItem>
               </ul>
-            }
+            </div>
           </div>
         </div>
       </div>
-      <nav className="bottom navbar navbar-expand-lg navbar-light bg-light ghw-bottom-header p-0">
-        <div className="container">
-          <Nav>
-            {layoutRouter.map((el) => {
-              return (
-                <NavItem style={{marginRight: '10px'}}>
-                  <NavLink to={el.path}>{el.title}</NavLink>
-                </NavItem>
-              );
-            })}
-            {
-              userNameView && <NavItem style={{marginRight: '10px'}}>
-                <NavLink to={'/profile'}>Trang cá nhân</NavLink>
-              </NavItem>
-            }
-            {(role === 'ADMIN') &&
-            <NavItem style={{marginRight: '10px'}}>
-              <NavLink to={'/admin'}>Quản lý admin</NavLink>
-            </NavItem>
-            }
-          </Nav>
-        </div>
-      </nav>
     </header>
   );
 };
