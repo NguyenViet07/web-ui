@@ -56,7 +56,13 @@ const Header = ({ layoutRouter }) => {
           <div class="sc-13vopkh-22 hqNQxP">
             <div class="wrapper-left">
               <p class="sc-13vopkh-30 JBcAl mb-0 ml-16px ">
-                <span>Đăng nhập</span> | <span>Đăng ký</span>
+                {!userNameView && (
+                  <div style={{ marginRight: "10px" }}>
+                    <NavLink to={"/login"}>Đăng nhập </NavLink>/
+                    <NavLink to={"/create"}> Đăng ký</NavLink>
+                  </div>
+                )}
+                {/* <span>Đăng nhập</span> | <span>Đăng ký</span> */}
               </p>
             </div>
             <div class="wrapper-left d-none ">

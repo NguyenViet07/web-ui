@@ -79,7 +79,6 @@ const Index = ({}) => {
                 description: data.description,
             }
         }
-        console.log('data', dataInput)
         const formData = new FormData();
         formData.append('dataSongValue', data.dataFile[0]);
         formData.append('songName', data.songName);
