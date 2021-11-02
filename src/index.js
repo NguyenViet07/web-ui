@@ -15,7 +15,9 @@ import "react-toastify/dist/ReactToastify.css";
 ReactDOM.render(
   <React.StrictMode>
     <ClientContextProvider client={Client}>
-      <App />
+      <div className="ongtt-cs">
+        <App />
+      </div>
       <ToastContainer newestOnTop />
     </ClientContextProvider>
   </React.StrictMode>,
