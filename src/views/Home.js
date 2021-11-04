@@ -7,7 +7,8 @@ import AlbumNew from "../components/homes/Album";
 import SongNew from "../components/homes/SongNew";
 import Album from "../components/homes/Album";
 import SongItem from "../components/elements/SongItem";
-
+import ListSong from "../components/homes/ListSong";
+import CategorySong from "../components/homes/CategorySong";
 const Home = () => {
   return (
     <>
@@ -17,7 +18,8 @@ const Home = () => {
         <Album title={"Mới mẻ mỗi ngày"} data={[1, 2, 3, 4, 5, 6, 7]} />
         <Album title={"Được đề xuất"} data={[1, 2, 3, 4, 5, 6, 7]} />
         <SongNew title={"Mới phát hành"} data={[1, 2, 3, 4, 5, 6, 7]}></SongNew>
-        <SongItem />
+        <ListSong title={"Bài hát"} data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+        <CategorySong title={"Chuyên mục"} data={[1, 2, 3, 4, 5, 6, 7]} />
       </div>
     </>
   );
