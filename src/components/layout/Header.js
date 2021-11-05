@@ -24,6 +24,7 @@ const Header = ({ layoutRouter }) => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     // setUserData(userData1)
 
+    console.log('userData', layoutRouter)
     setUserNameView(userData?.user?.userName);
     setRole(userData?.role);
   }, []);
@@ -62,10 +63,9 @@ const Header = ({ layoutRouter }) => {
                     <NavLink to={"/create"}> Đăng ký</NavLink>
                   </div>
                 )}
-                {/* <span>Đăng nhập</span> | <span>Đăng ký</span> */}
               </p>
             </div>
-            <div class="wrapper-left d-none ">
+            <div class="wrapper-left">
               <div class="sc-13vopkh-23 cwzfIs">
                 <a
                   class="avatar-user "
@@ -78,25 +78,28 @@ const Header = ({ layoutRouter }) => {
                 <div class="sc-13vopkh-25 ePHKxx">
                   <a
                     class="__3dot-content username"
-                    title="Anh Tuấn"
-                    href="/user/trananhtuan1198.quan-ly.html"
+                    title={{userNameView}}
+                    href="/profile"
                   >
-                    Anh Tuấn
+                    {userNameView}
                   </a>
                 </div>
               </div>
             </div>
-            <div class="sc-13vopkh-0 pyaEd">
+            {userNameView && <div className="sc-13vopkh-0 pyaEd">
               <ButtonDropdown isOpen={isOpen} toggle={toggle}>
                 <DropdownToggle caret>
-                  <div class="wpfkci-0 fRifvS ic_setting_normal"></div>
+                  <div className="wpfkci-0 fRifvS ic_setting_normal"></div>
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem>Đổi mật khẩu</DropdownItem>
-                  <DropdownItem>Đăng xuất</DropdownItem>
+                  <DropdownItem onClick={() => {
+                    logoutFunc()
+                  }}>Đăng xuất</DropdownItem>
                 </DropdownMenu>
               </ButtonDropdown>
             </div>
+            }
           </div>
           <div className="sc-13vopkh-11 fLQZhp">
             <div className="sc-13vopkh-12 geiIEW">
