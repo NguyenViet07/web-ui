@@ -38,6 +38,10 @@ const Routes = [
     path: "/profile",
     component: lazy(() => import("../../views/profile/Index")),
   },
+  {
+    path: "/info",
+    component: lazy(() => import("../../views/info")),
+  },
 ];
 
 export { DefaultRoute, Routes };
