@@ -49,7 +49,7 @@ const Login = () => {
 
     return (
         <Card border="danger" style={{width: '30%', margin: 'auto', marginTop: '20px'}}>
-            <CardImg variant="top" className="w-100" src="/imgs/image.jpg"/>
+            {/* <CardImg variant="top" className="w-100" src="/imgs/image.jpg"/> */}
             <CardBody>
                 <CardTitle>Đăng nhập</CardTitle>
                 <Form onSubmit={handleSubmit(onSubmit)}>

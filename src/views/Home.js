@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Pagination } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import sections
 import SLideHome from "../components/homes/SlideHome";
@@ -9,6 +9,7 @@ import Album from "../components/homes/Album";
 import SongItem from "../components/elements/SongItem";
 import ListSong from "../components/homes/ListSong";
 import CategorySong from "../components/homes/CategorySong";
+import Paginations  from '../components/homes/Paginations';
 const Home = () => {
   return (
     <>
@@ -20,6 +21,8 @@ const Home = () => {
         <SongNew title={"Mới phát hành"} data={[1, 2, 3, 4, 5, 6, 7]}></SongNew>
         <ListSong title={"Bài hát"} data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
         <CategorySong title={"Chuyên mục"} data={[1, 2, 3, 4, 5, 6, 7]} />
+        <br />
+        <Paginations />
       </div>
     </>
   );
