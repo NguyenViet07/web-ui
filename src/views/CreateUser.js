@@ -120,9 +120,9 @@ const CreateUser = () => {
             <Card border="danger" style={{width: '50%', margin: 'auto', marginTop: '20px'}}>
                 <CardTitle><h1>Đăng ký</h1></CardTitle>
                 <CardBody>
-                    <div style={{ display: 'flex', justifyContent: 'center'}}>
+                    {/* <div style={{ display: 'flex', justifyContent: 'center'}}>
                         <CardImg style={{width: '300px', height: '300px', objectFit: 'cover', borderRadius: '300px'}} variant="top" src={logo}/>
-                    </div>
+                    </div> */}
                     <Form>
                         <Group className="mb-3" controlId="formBasicEmail" style={{paddingTop: '5px'}}>
                             <Label>Họ và tên đầy đủ</Label>
