@@ -69,7 +69,7 @@ const Header = ({ layoutRouter }) => {
               <div class="sc-13vopkh-23 cwzfIs">
                 <a
                   class="avatar-user "
-                  href="/user/trananhtuan1198.quan-ly.html"
+                  href="/profile"
                 >
                   <img src="https://avatar-ex-swe.nixcdn.com/avatar/2021/10/27/f/1/3/6/1635320107970.jpg" />
                 </a>
@@ -104,12 +104,23 @@ const Header = ({ layoutRouter }) => {
           <div className="sc-13vopkh-11 fLQZhp">
             <div className="sc-13vopkh-12 geiIEW">
               <ul style={{ paddingLeft: "16px" }}>
-                <NavItem style={{ marginRight: "10px" }}>
-                  <NavLink to="/test">test</NavLink>
+                {layoutRouter.map((el) => {
+                  return (
+                      <NavItem style={{marginRight: '10px'}}>
+                        <NavLink to={el.path}>{el.title}</NavLink>
+                      </NavItem>
+                  );
+                })}
+                {
+                  userNameView && <NavItem style={{marginRight: '10px'}}>
+                    <NavLink to={'/profile'}>Trang cá nhân</NavLink>
+                  </NavItem>
+                }
+                {(role === 'ADMIN') &&
+                <NavItem style={{marginRight: '10px'}}>
+                  <NavLink to={'/admin'}>Quản lý admin</NavLink>
                 </NavItem>
-                <NavItem style={{ marginRight: "10px" }}>
-                  <NavLink to="/test">test2</NavLink>
-                </NavItem>
+                }
               </ul>
             </div>
           </div>
