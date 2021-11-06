@@ -183,6 +183,9 @@ a {
   color: #878787;
   letter-spacing: 0;
 }
+.pagination{
+  justify-content: center;
+}
 .cs-right {
   display: grid;
   text-align: right;
