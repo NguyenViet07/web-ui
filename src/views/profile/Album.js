@@ -78,7 +78,7 @@ const Album = ({}) => {
                 toast.error(response.payload?.message)
             }
         }
-        reader.readAsDataURL(data.logo ? data.logo[0] : null)
+        reader.readAsDataURL(data.imgAlbum ? data.imgAlbum[0] : null)
     };
 
     const toggle = async () => {

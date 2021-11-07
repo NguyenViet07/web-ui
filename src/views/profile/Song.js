@@ -129,7 +129,7 @@ const Song = ({}) => {
                 toast.error(response.payload?.message)
             }
         }
-        reader.readAsDataURL(data?.imgSong[0])
+        reader.readAsDataURL(data.imgSong ? data.imgSong[0] : null)
 
     };
 
