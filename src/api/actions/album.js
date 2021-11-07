@@ -1,7 +1,7 @@
 
 export const createAlbum = formValues => ({
     method: 'POST',
-    endpoint: '/album/singer/create',
+    endpoint: '/album/all-user/create',
     body: formValues
 })
 
