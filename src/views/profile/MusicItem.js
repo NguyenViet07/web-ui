@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import { Container, Row, Col, CardImg } from "reactstrap";
+import React from "react";
+import { Col, CardImg } from "reactstrap";
 
-class MusicItem extends Component {
-  render() {
+const MusicItem = ({}) => {
     return (
       <>
         <>
@@ -18,7 +17,6 @@ class MusicItem extends Component {
         </>
       </>
     );
-  }
 }
 
 export default MusicItem;

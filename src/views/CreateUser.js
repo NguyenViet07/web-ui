@@ -82,23 +82,25 @@ const CreateUser = () => {
     }
 
     const onSubmit = (data) => {
-        console.log('data file', data.logo[0])
 
+        console.log('data', data)
         if (data.password !== data.passwordConfirm) {
             toast.error('Xác nhận lại mật khẩu')
             return
         }
 
-        // let logoUpload = null
-
         const reader = new FileReader()
         reader.onload = async () => {
-            const logoUpload = reader.result
+            const logoUpload = reader?.result
             const dataInput = {
-                ...data,
+                company: data.company,
+                identityCard: data.identityCard,
+                isSinger: data.isSinger ? 1 : 0,
+                name: data.name,
+                password: data.password,
+                username: data.username,
                 image: logoUpload,
             }
-
             const response = await _creatUser(dataInput)
             if (response.payload?.errorCode === '200') {
                 history.push(`/`)
@@ -106,13 +108,7 @@ const CreateUser = () => {
                 toast.error(response.payload?.message)
             }
         }
-        reader.readAsDataURL(data.logo[0])
-
-
-
-        // setValue('logo', data.logo.split(',')[1])
-
-
+        reader.readAsDataURL(data.logo ? data.logo[0] : null)
     };
 
     return (
@@ -120,9 +116,16 @@ const CreateUser = () => {
             <Card border="danger" style={{width: '50%', margin: 'auto', marginTop: '20px'}}>
                 <CardTitle><h1>Đăng ký</h1></CardTitle>
                 <CardBody>
-                    {/* <div style={{ display: 'flex', justifyContent: 'center'}}>
-                        <CardImg style={{width: '300px', height: '300px', objectFit: 'cover', borderRadius: '300px'}} variant="top" src={logo}/>
-                    </div> */}
+                    <div style={{ display: 'flex', justifyContent: 'center'}}>
+                        {
+                            logo ? <CardImg
+                                    style={{width: '300px', height: '300px', objectFit: 'cover', borderRadius: '300px'}}
+                                    variant="top" src={logo}/> :
+                                <CardImg
+                                    style={{width: '300px', height: '300px', objectFit: 'cover', borderRadius: '300px'}}
+                                    variant="top" src='/imgs/logo.png'/>
+                        }
+                    </div>
                     <Form>
                         <Group className="mb-3" controlId="formBasicEmail" style={{paddingTop: '5px'}}>
                             <Label>Họ và tên đầy đủ</Label>

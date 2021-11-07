@@ -1,70 +1,112 @@
-import React, { Component } from "react";
+import React, {Component, useEffect, useState} from "react";
 import "../../styles/info.css";
 import {
   CardBody,
   Navbar,
   Card,
-  Input,
   CardTitle,
-  Button,
   Collapse,
   NavItem,
   CardImg,
-  NavLink,
-  InputGroup,
   Nav,
-  Container,
-  Row,
-  Col,
-  List,
-  ListInlineItem,
-  Image,
+  NavLink, TabContent, TabPane
 } from "reactstrap";
-import HomeInfo from "./HomeInfo";
-// import { Link, NavLink } from "react-router-dom";
- import MusicItem from "./MusicItem";
+import classnames from "classnames";
+import Song from "./Song";
+import Album from "./Album";
+import Playlist from "./Playlist";
 
-class Info extends Component {
-  render() {
-    return (
-      <div className="content-info">
-        <Card>
-          <CardImg
-            alt="Card image cap"
-            src="https://www.dungplus.com/wp-content/uploads/2019/12/girl-xinh-600x600.jpg"
-            top
-            className="user-img"
-          />
-          <CardBody>
-            <CardTitle tag="h5">Min</CardTitle>
-          </CardBody>
-        </Card>
+const Info = ({userView}) => {
+  const [logo, setLogo] = useState(null)
+  const [name, setName] = useState(null)
 
-        <Navbar expand="md" light className="nav navbar-nav navbar-center">
-          <Collapse navbar>
-            <Nav className="me-auto" navbar>
-              <NavItem className="nav-item">
-                <NavLink href="/home-info"> TONG QUAN</NavLink>
-              </NavItem>
-              <NavItem className="nav-item">
-                <NavLink href="/song">SONG</NavLink>
-              </NavItem>
-              <NavItem className="nav-item">
-                <NavLink href="album">ALBUM</NavLink>
-              </NavItem>
-              <NavItem className="nav-item">
-                <NavLink href="playlist">PLAYLIST</NavLink>
-              </NavItem>
-              <NavItem className="nav-item">
-                <NavLink href="#">YEU THICH</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-        <br />
-      </div>
-    );
+  const [activeTab, setActiveTab] = useState('1')
+
+  const clickTag = tab => {
+    if (activeTab !== tab) setActiveTab(tab)
   }
+
+  useEffect(() => {
+    setActiveTab('1')
+    setLogo(userView?.image || null)
+    setName(userView?.name || null)
+  }, [userView])
+
+    return (
+        <>
+          <div className="content-info">
+            <Card>
+              <CardImg
+                  alt="Card image cap"
+                  src={logo}
+                  top
+                  className="user-img"
+              />
+              <CardBody>
+                <CardTitle tag="h5">{name}</CardTitle>
+              </CardBody>
+            </Card>
+
+            <Navbar expand="md" light className="nav navbar-nav navbar-center">
+              <Collapse navbar>
+                <Nav className="me-auto" navbar>
+                  <NavItem className="nav-item">
+                    <NavLink className={classnames({active: activeTab === '1'})}
+                             onClick={() => {
+                               clickTag('1')
+                             }}> TONG QUAN</NavLink>
+                  </NavItem>
+                  <NavItem className="nav-item">
+                    <NavLink className={classnames({active: activeTab === '2'})} onClick={() => {
+                      clickTag('2')
+                    }}>SONG</NavLink>
+                  </NavItem>
+                  <NavItem className="nav-item">
+                    <NavLink  className={classnames({active: activeTab === '3'})} onClick={() => {
+                      clickTag('3')
+                    }}>ALBUM</NavLink>
+                  </NavItem>
+                  <NavItem className="nav-item">
+                    <NavLink className={classnames({active: activeTab === '4'})} onClick={() => {
+                      clickTag('4')
+                    }}>PLAYLIST</NavLink>
+                  </NavItem>
+                  <NavItem className="nav-item">
+                    <NavLink className={classnames({active: activeTab === '5'})} onClick={() => {
+                      clickTag('5')
+                    }}>YEU THICH</NavLink>
+                  </NavItem>
+                </Nav>
+              </Collapse>
+            </Navbar>
+            <CardBody>
+              <TabContent activeTab={activeTab}>
+                <TabPane tabId="1">
+                  <>ABC</>
+                </TabPane>
+              </TabContent>
+
+              <TabContent activeTab={activeTab}>
+                <TabPane tabId="2">
+                  <Song/>
+                </TabPane>
+              </TabContent>
+
+              <TabContent activeTab={activeTab}>
+                <TabPane tabId="3">
+                  <CardTitle >Thông tin sản phẩm</CardTitle>
+                  <Album/>
+                </TabPane>
+              </TabContent>
+              <TabContent activeTab={activeTab}>
+                <TabPane tabId="4">
+                  <Playlist/>
+                </TabPane>
+              </TabContent>
+            </CardBody>
+          </div>
+        </>
+    );
 }
 
 export default Info;

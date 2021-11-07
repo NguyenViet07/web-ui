@@ -14,6 +14,9 @@ SwiperCore.use([Autoplay, Pagination, EffectFade]);
 // install Swiper modules
 
 const SLideHome = ({ data }) => {
+
+
+
   return (
     <>
       <div className="">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 // import sections
 import AudioPlayer from "react-h5-audio-player";
@@ -7,8 +7,12 @@ import {
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem, CardImg,
 } from "reactstrap";
+import {toast} from "react-toastify";
+import {getDataSongValue} from "../../redux/action/song";
+import {useDispatch, useSelector} from "react-redux"
+
 const RightSidebar = () => {
   const playlist = [
     {
@@ -56,8 +60,22 @@ const RightSidebar = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+  const [url, setUrl] = useState('')
+
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const dispatch = useDispatch()
+  const songValue = useSelector((state) => state.song.songValue);
+  useEffect( () => {
+
+    console.log('aaaaaaa', songValue)
+  }, [])
+
+  useEffect(() => {
+    console.log('product', songValue)
+    setUrl(`http://localhost:9000/api/v1/song/download?url=${songValue?.link}`)
+  }, [songValue])
 
   return (
     <div className="sc-7s83t7-1 ifOydT  ">
@@ -69,11 +87,18 @@ const RightSidebar = () => {
                 <div className="hkf419-0 djVTep sc-16rq4d2-8 GuhPz">
                   <div className="h5pibw-0 kHigLB">
                     <div className="h5pibw-2 beUHDP ongtt-check">
-                      <img
-                        className="antedm-1 fZPioS"
-                        src="https://avatar-ex-swe.nixcdn.com/song/2021/10/21/c/d/d/a/1634807126106_300.jpg"
-                        alt=""
-                      />
+                      {
+                        songValue?.image ? <img
+                                className="antedm-1 fZPioS"
+                                src={songValue.image}
+                                alt=""
+                            /> :
+                            <img
+                                className="antedm-1 fZPioS"
+                                src='/imgs/pika.jpg'
+                                alt=""
+                            />
+                      }
                     </div>
                   </div>
                 </div>
@@ -83,7 +108,7 @@ const RightSidebar = () => {
                   <div class="sc-16rq4d2-4 ifpCqr">
                     <div class="sc-16rq4d2-5 bMVqpF __3dot-content">
                       <a href="/bai-hat/la-qua-b-ray-ft-karik.58Dq1zUiu9uN.html">
-                        Lạ Quá
+                        {songValue?.songName}
                       </a>
                     </div>
                   </div>
@@ -102,7 +127,7 @@ const RightSidebar = () => {
                     class="sc-16rq4d2-11 ivHpzf ic heard ic_heart_normal"
                     title="Yêu thích bài hát"
                     hidden=""
-                  ></span>
+                  >{songValue?.description}</span>
                 </div>
               </div>
             </div>
@@ -135,13 +160,6 @@ const RightSidebar = () => {
                           <DropdownItem>Chia sẻ</DropdownItem>
                         </DropdownMenu>
                       </ButtonDropdown>
-                      {/* <button
-                        class="MuiButtonBase-root MuiIconButton-root jss30"
-                        tabindex="-1"
-                        type="button"
-                      >
-                        <span class="MuiTouchRipple-root"></span>
-                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -155,7 +173,7 @@ const RightSidebar = () => {
               autoPlayAfterSrcChange={true}
               showSkipControls={true}
               showJumpControls={false}
-              src={playlist[currentMusicIndex].src}
+              src={url}
               onClickPrevious={() => {
                 handleClickPrevious();
               }}

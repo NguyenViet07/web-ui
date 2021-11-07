@@ -1,15 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import Info from "./Info";
 import "../../styles/info.css";
-import MusicItem from "./MusicItem";
 
-class playlist extends Component {
-  render() {
+const Playlist = ({}) => {
+
     return (
       <>
         <Container>
-          <Info />
           <h1>Playlist</h1>
 
           <Row>
@@ -20,7 +17,6 @@ class playlist extends Component {
         </Container>
       </>
     );
-  }
 }
 
-export default playlist;
+export default Playlist;

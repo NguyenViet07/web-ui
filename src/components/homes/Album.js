@@ -12,7 +12,7 @@ import SwiperCore, { EffectFade, Pagination, Autoplay } from "swiper";
 // install Swiper modules
 SwiperCore.use([Autoplay, EffectFade]);
 
-const Album = ({ data, title }) => {
+const Album = ({ data, title, listSong }) => {
   return (
     <>
       <div className="p-4">

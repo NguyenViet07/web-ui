@@ -24,7 +24,6 @@ const Header = ({ layoutRouter }) => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     // setUserData(userData1)
 
-    console.log('userData', layoutRouter)
     setUserNameView(userData?.user?.userName);
     setRole(userData?.role);
   }, []);
@@ -105,11 +104,15 @@ const Header = ({ layoutRouter }) => {
             <div className="sc-13vopkh-12 geiIEW">
               <ul style={{ paddingLeft: "16px" }}>
                 {layoutRouter.map((el) => {
-                  return (
-                      <NavItem style={{marginRight: '10px'}}>
-                        <NavLink to={el.path}>{el.title}</NavLink>
-                      </NavItem>
-                  );
+                  {
+                    if (el.title)
+                    return (
+                        <NavItem style={{marginRight: '10px'}}>
+                          <NavLink to={el.path}>{el.title}</NavLink>
+                        </NavItem>
+                    );
+                  }
+
                 })}
                 {
                   userNameView && <NavItem style={{marginRight: '10px'}}>

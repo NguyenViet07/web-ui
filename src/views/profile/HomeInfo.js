@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import Info from "./Info";
 import "../../styles/info.css";
 import MusicItem from "./MusicItem";
 
 
-class HomeInfo extends Component {
-  render() {
+const HomeInfo = ({}) => {
     return (
       <>
         <Container>
-          <Info />
           <h1>Playlist</h1>
 
           <Row>
@@ -27,7 +25,6 @@ class HomeInfo extends Component {
         </Container>
       </>
     );
-  }
 }
 
 export default HomeInfo;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Container, Row, Col, Pagination } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import sections
@@ -10,7 +10,27 @@ import SongItem from "../components/elements/SongItem";
 import ListSong from "../components/homes/ListSong";
 import CategorySong from "../components/homes/CategorySong";
 import Paginations  from '../components/homes/Paginations';
+import {useMutation} from "react-fetching-library";
+import {createSong, getListSongCreated} from "../api/actions/song";
 const Home = () => {
+
+  const {mutate: _getListSongCreated} = useMutation(getListSongCreated)
+
+  const [listMySongCreated, setListMySongCreated] = useState([])
+
+  const getListMySongCreated = async () => {
+    const response = await _getListSongCreated()
+    if (response.payload?.errorCode === '200') {
+      setListMySongCreated(response.payload?.data?.content)
+    } else {
+      setListMySongCreated([])
+    }
+  };
+
+  useEffect(() => {
+    getListMySongCreated()
+  }, [])
+
   return (
     <>
       <div>

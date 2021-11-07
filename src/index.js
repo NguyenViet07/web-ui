@@ -12,14 +12,20 @@ import { Client } from "./api/Client";
 // ** React Toastify
 import "react-toastify/dist/ReactToastify.css";
 
+import { store } from './redux/store'
+import {Provider} from "react-redux";
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <ClientContextProvider client={Client}>
-      <div className="ongtt-cs">
-        <App />
-      </div>
-      <ToastContainer newestOnTop />
-    </ClientContextProvider>
+      <Provider store={store}>
+          <ClientContextProvider client={Client}>
+              <div className="ongtt-cs">
+                  <App />
+              </div>
+              <ToastContainer newestOnTop />
+          </ClientContextProvider>
+      </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
