@@ -94,7 +94,6 @@ const Info = ({userView}) => {
 
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="3">
-                  <CardTitle >Thông tin sản phẩm</CardTitle>
                   <Album/>
                 </TabPane>
               </TabContent>

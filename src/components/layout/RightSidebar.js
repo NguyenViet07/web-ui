@@ -12,6 +12,10 @@ import {
 import {toast} from "react-toastify";
 import {getDataSongValue} from "../../redux/action/song";
 import {useDispatch, useSelector} from "react-redux"
+import {useMutation} from "react-fetching-library";
+import {getListSongCreated, upView} from "../../api/actions/song";
+import {createLike, deleteLike} from "../../api/actions/like";
+import {ThumbsUp} from "react-feather";
 
 const RightSidebar = () => {
   const playlist = [
@@ -59,14 +63,35 @@ const RightSidebar = () => {
     setCurrentMusicIndex(index);
   };
 
+  const {mutate: _upView} = useMutation(upView)
+  const {mutate: _createLike} = useMutation(createLike)
+  const {mutate: _deleteLike} = useMutation(deleteLike)
+
+
   const [isOpen, setIsOpen] = useState(false);
   const [url, setUrl] = useState('')
-
+  const [checkLike, setCheckLike] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen);
 
   const dispatch = useDispatch()
   const songValue = useSelector((state) => state.song.songValue);
+
+
+
+  const like = async () => {
+    const response = checkLike ? await _deleteLike({songId: songValue.songId}) : await _createLike({songId: songValue.songId})
+    if (response.payload?.errorCode === '200') {
+      setCheckLike(!checkLike)
+    } else {
+      toast.error(response.payload?.message)
+    }
+  }
+
+  const upViewSong = async () => {
+    await _upView({songId: songValue.songId})
+  };
+
   useEffect( () => {
 
     console.log('aaaaaaa', songValue)
@@ -122,6 +147,13 @@ const RightSidebar = () => {
                     </span>
                   </h5>
                 </div>
+                <div>
+                  {
+                    checkLike ?
+                        <ThumbsUp onClick={() => like()} style={{cursor: 'pointer', color: '#1200ff'}}/> :
+                        <ThumbsUp onClick={() => like()} style={{cursor: 'pointer', color: '#6e6b7b'}}/>
+                  }
+                </div>
                 <div class="w3-col group-right">
                   <span
                     class="sc-16rq4d2-11 ivHpzf ic heard ic_heart_normal"
@@ -168,7 +200,7 @@ const RightSidebar = () => {
 
             <AudioPlayer
               autoPlay
-              onPlay={(e) => console.log("onPlay")}
+              onPlay={(e) => {upViewSong()}}
               onEnded={(e) => handleClickNext()}
               autoPlayAfterSrcChange={true}
               showSkipControls={true}

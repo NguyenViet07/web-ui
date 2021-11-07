@@ -110,27 +110,26 @@ const Song = ({}) => {
 
     const onSubmit = async (data) => {
 
-        console.log('dddd', data)
-
-        // const reader = new FileReader()
-        // reader.onload = async () => {
-        //     const imageUpload = reader?.result
-        //     const formData = new FormData();
-        //     formData.append('dataSongValue', data.dataFile[0]);
-        //     formData.append('songName', data.songName);
-        //     formData.append('description', data.description);
-        //     formData.append('image', imageUpload);
-        //     const response = await _createSong(formData)
-        //     if (response.payload?.errorCode === '200') {
-        //         toggle()
-        //         getListMySong()
-        //         toast.success('Tạo bài hát thành công')
-        //     } else {
-        //         toast.error(response.payload?.message)
-        //     }
-        // }
-        // reader.readAsDataURL(data?.imgSong[0])
-
+        const reader = new FileReader()
+        reader.onload = async () => {
+            const imageUpload = reader?.result
+            const formData = new FormData();
+            formData.append('dataSongValue', data.dataFile[0]);
+            formData.append('songName', data.songName);
+            formData.append('description', data.description);
+            formData.append('style', data.style);
+            formData.append('type', data.type);
+            formData.append('image', imageUpload);
+            const response = await _createSong(formData)
+            if (response.payload?.errorCode === '200') {
+                toggle()
+                getListMySong()
+                toast.success('Tạo bài hát thành công')
+            } else {
+                toast.error(response.payload?.message)
+            }
+        }
+        reader.readAsDataURL(data?.imgSong[0])
 
     };
 

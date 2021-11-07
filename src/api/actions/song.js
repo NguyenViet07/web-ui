@@ -17,9 +17,21 @@ export const findBySongId = formValues => ({
     body: formValues
 })
 
+export const upView = formValues => ({
+    method: 'POST',
+    endpoint: '/song/up-view',
+    body: formValues
+})
+
+
 export const getListSongCreated = () => ({
     method: 'GET',
     endpoint: '/song/list-created'
+})
+
+export const getListSongView = () => ({
+    method: 'GET',
+    endpoint: '/song/list-view'
 })
 
 
