@@ -71,7 +71,10 @@ const Header = ({ layoutRouter }) => {
                   class="avatar-user "
                   href="/user/trananhtuan1198.quan-ly.html"
                 >
-                  <img src="https://avatar-ex-swe.nixcdn.com/avatar/2021/10/27/f/1/3/6/1635320107970.jpg" />
+                  <img
+                    alt=""
+                    src="https://avatar-ex-swe.nixcdn.com/avatar/2021/10/27/f/1/3/6/1635320107970.jpg"
+                  />
                 </a>
               </div>
               <div class="sc-13vopkh-3 fwzauO">
@@ -102,10 +105,25 @@ const Header = ({ layoutRouter }) => {
             <div className="sc-13vopkh-12 geiIEW">
               <ul style={{ paddingLeft: "16px" }}>
                 <NavItem style={{ marginRight: "10px" }}>
-                  <NavLink to="/test">test</NavLink>
+                  <NavLink to="/">
+                    <i className="ic_home_active sc-iLCFKZ ecWqJq"></i>Trang chủ
+                  </NavLink>
                 </NavItem>
                 <NavItem style={{ marginRight: "10px" }}>
-                  <NavLink to="/test">test2</NavLink>
+                  <NavLink to="/test">
+                    <i class="ic_listen_today_2 sc-iLCFKZ eQPNCN"></i> Nghe gì
+                    hôm nay
+                  </NavLink>
+                </NavItem>
+                <NavItem style={{ marginRight: "10px" }}>
+                  <NavLink to="/test">
+                    <i class="ic_for_you sc-iLCFKZ iZRkvq"></i> Music 4U
+                  </NavLink>
+                </NavItem>
+                <NavItem style={{ marginRight: "10px" }}>
+                  <NavLink to="/test">
+                    <i class="ic_discover_fill sc-iLCFKZ epsJsi"></i> Chủ đề
+                  </NavLink>
                 </NavItem>
               </ul>
             </div>

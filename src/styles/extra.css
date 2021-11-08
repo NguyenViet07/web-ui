@@ -1188,3 +1188,39 @@ ul {
 .form-control:focus {
   box-shadow: none !important;
 }
+.ecWqJq {
+  font-size: 22px;
+  color: rgba(28, 30, 32, 0.2);
+  margin: 0 6px;
+  color: rgba(28, 30, 32, 0.5);
+  background: linear-gradient(to top right, #287be5, #29d7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.eQPNCN {
+  font-size: 22px;
+  color: rgba(28, 30, 32, 0.2);
+  margin: 0 6px;
+  color: rgba(28, 30, 32, 0.5);
+  background: linear-gradient(to top right, #1a82e5, #df22f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.iZRkvq {
+  font-size: 22px;
+  color: rgba(28, 30, 32, 0.2);
+  margin: 0 6px;
+  color: rgba(28, 30, 32, 0.5);
+  background: linear-gradient(to top right, #27b3e2, #13f8e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.epsJsi {
+  font-size: 22px;
+  color: rgba(28, 30, 32, 0.2);
+  margin: 0 6px;
+  color: rgba(28, 30, 32, 0.5);
+  background: linear-gradient(to top right, #ff9b2d, #ffe443);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
