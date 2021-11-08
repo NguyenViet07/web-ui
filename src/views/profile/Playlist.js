@@ -129,7 +129,7 @@ const Playlist = ({}) => {
           <h1>Playlist</h1>
             <Button onClick={toggle}>Tạo playlist mới</Button>
             {
-                listMyPlaylist.map(el => {
+                listMyPlaylist?.map(el => {
                         return(
                             <Row>
                                 <Col className="bg-light border add-playlist" xs="3">

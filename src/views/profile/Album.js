@@ -120,7 +120,7 @@ const Album = ({}) => {
           <h1>Album</h1>
           <Button onClick={toggle}>Tạo Album mới</Button>
           {
-              listMyAlbum.map(el => {
+              listMyAlbum?.map(el => {
                   return(
                       <Row>
                           <Col className="bg-light border add-playlist" xs="3">

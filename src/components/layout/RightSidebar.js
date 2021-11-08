@@ -80,7 +80,7 @@ const RightSidebar = () => {
 
 
   const like = async () => {
-    const response = checkLike ? await _deleteLike({songId: songValue.songId}) : await _createLike({songId: songValue.songId})
+    const response = checkLike ? await _deleteLike({songId: songValue?.songId}) : await _createLike({songId: songValue?.songId})
     if (response.payload?.errorCode === '200') {
       setCheckLike(!checkLike)
     } else {
@@ -89,7 +89,7 @@ const RightSidebar = () => {
   }
 
   const upViewSong = async () => {
-    await _upView({songId: songValue.songId})
+    await _upView({songId: songValue?.songId})
   };
 
   useEffect( () => {
@@ -154,21 +154,22 @@ const RightSidebar = () => {
                         <ThumbsUp onClick={() => like()} style={{cursor: 'pointer', color: '#6e6b7b'}}/>
                   }
                 </div>
-                <div class="w3-col group-right">
-                  <span
-                    class="sc-16rq4d2-11 ivHpzf ic heard ic_heart_normal"
-                    title="Yêu thích bài hát"
-                    hidden=""
-                  >{songValue?.description}</span>
-                </div>
+                {/*<div class="w3-col group-right">*/}
+                {/*  <span*/}
+                {/*    class="sc-16rq4d2-11 ivHpzf ic heard ic_heart_normal"*/}
+                {/*    title="Yêu thích bài hát"*/}
+                {/*    hidden=""*/}
+                {/*  >{songValue?.description}</span>*/}
+                {/*</div>*/}
+                <div><span>{songValue?.description}</span></div>
               </div>
             </div>
           </div>
           <div className="sc-7s83t7-3 eFEVLi">
             <div className="d-flex justify-content-between mb-3">
-              <div class="sc-1upgf6e-1 cyXUeA">
-                <div class="sc-1upgf6e-0 hQhNXy">Danh sách phát</div>
-              </div>
+              {/*<div class="sc-1upgf6e-1 cyXUeA">*/}
+              {/*  <div class="sc-1upgf6e-0 hQhNXy">Danh sách phát</div>*/}
+              {/*</div>*/}
               <div class="sc-7s83t7-0 cZPbyp">
                 <div class="jss25">
                   <div>
