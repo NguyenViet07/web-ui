@@ -43,6 +43,10 @@ const Routes = [
     path: "/page-list-song",
     component: lazy(() => import("../../views/PageListSong")),
   },
+  {
+    path: "/page-single-song",
+    component: lazy(() => import("../../views/PageSingleSong")),
+  },
 ];
 
 export { DefaultRoute, Routes };

@@ -1135,3 +1135,56 @@ ul {
   font-weight: 700;
   color: rgba(28, 30, 32, 0.88);
 }
+.subtitle {
+  color: rgba(28, 30, 32, 0.5);
+  font-size: 16px;
+}
+.is-50x50 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.is-50x50 img {
+  width: 100%;
+}
+.username {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.post-time {
+  color: rgba(28, 30, 32, 0.5);
+  font-weight: 400;
+  margin-left: 5px;
+  font-size: 12px;
+}
+.ct-cmt {
+  margin-top: 0;
+}
+.box_form_comment .btn_cloud_up {
+  margin-top: 20px !important;
+  border-radius: 69px !important;
+  color: #fff !important;
+  border: none;
+  min-width: 125px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #ffffff;
+  letter-spacing: 0;
+  min-height: 38px;
+  transition: all 0.2s linear;
+  background-color: #2daaed !important;
+}
+.box_form_comment .form-group .form-control {
+  border: none;
+  resize: none;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #979797;
+}
+.form-control:focus {
+  box-shadow: none !important;
+}
