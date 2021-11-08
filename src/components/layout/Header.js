@@ -10,15 +10,31 @@ import { Link, NavLink } from "react-router-dom";
 import { useMutation } from "react-fetching-library";
 import { logoutAction } from "../../api/actions/login";
 import { useHistory } from "react-router-dom";
+import {findByUserName} from "../../api/actions/users";
 
 const Header = ({ layoutRouter }) => {
   // const [userData, setUserData] = useState(null)
   const [userNameView, setUserNameView] = useState(null);
   const [role, setRole] = useState(null);
+  const [userInfoView, setUserInfoView] = useState(null)
+  const [logo, setLogo] = useState(null)
+
 
   const { mutate: logout } = useMutation(logoutAction);
+  const {mutate: _findByUserName} = useMutation(findByUserName)
+
 
   const history = useHistory();
+
+  const getUserByUserName = async (usernameInput) => {
+    const response = await _findByUserName({ username: usernameInput })
+    if (response.payload?.errorCode === '200') {
+      setUserInfoView(response.payload?.data)
+      setLogo(response.payload?.data?.image || null)
+    } else {
+      setUserInfoView(null)
+    }
+  };
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -26,6 +42,7 @@ const Header = ({ layoutRouter }) => {
 
     setUserNameView(userData?.user?.userName);
     setRole(userData?.role);
+    getUserByUserName(userData?.user?.userName)
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -70,7 +87,10 @@ const Header = ({ layoutRouter }) => {
                   class="avatar-user "
                   href="/profile"
                 >
-                  <img src="https://avatar-ex-swe.nixcdn.com/avatar/2021/10/27/f/1/3/6/1635320107970.jpg" />
+                  {
+                    logo ? <img src={logo}/> :
+                        <img src='/imgs/logo.png'/>
+                  }
                 </a>
               </div>
               <div class="sc-13vopkh-3 fwzauO">

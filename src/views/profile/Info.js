@@ -19,6 +19,7 @@ import Playlist from "./Playlist";
 const Info = ({userView}) => {
   const [logo, setLogo] = useState(null)
   const [name, setName] = useState(null)
+  const [isSinger, setIsSinger] = useState(false)
 
   const [activeTab, setActiveTab] = useState('1')
 
@@ -27,21 +28,33 @@ const Info = ({userView}) => {
   }
 
   useEffect(() => {
+    console.log('aaaaaaa', userView)
     setActiveTab('1')
     setLogo(userView?.image || null)
     setName(userView?.name || null)
+    if (userView?.isSinger === 1) {
+      setIsSinger(true)
+    } else setIsSinger(false)
   }, [userView])
 
     return (
         <>
           <div className="content-info">
             <Card>
-              <CardImg
-                  alt="Card image cap"
-                  src={logo}
-                  top
-                  className="user-img"
-              />
+              {
+                logo ? <CardImg
+                        alt="Card image cap"
+                        src={logo}
+                        top
+                        className="user-img"
+                    /> :
+                    <CardImg
+                        alt="Card image cap"
+                        src='/imgs/logo.png'
+                        top
+                        className="user-img"
+                    />
+              }
               <CardBody>
                 <CardTitle tag="h5">{name}</CardTitle>
               </CardBody>
@@ -56,16 +69,20 @@ const Info = ({userView}) => {
                                clickTag('1')
                              }}> TONG QUAN</NavLink>
                   </NavItem>
-                  <NavItem className="nav-item">
-                    <NavLink className={classnames({active: activeTab === '2'})} onClick={() => {
-                      clickTag('2')
-                    }}>SONG</NavLink>
-                  </NavItem>
-                  <NavItem className="nav-item">
-                    <NavLink  className={classnames({active: activeTab === '3'})} onClick={() => {
-                      clickTag('3')
-                    }}>ALBUM</NavLink>
-                  </NavItem>
+                  {
+                    isSinger && <>
+                      <NavItem className="nav-item">
+                        <NavLink className={classnames({active: activeTab === '2'})} onClick={() => {
+                          clickTag('2')
+                        }}>SONG</NavLink>
+                      </NavItem>
+                      <NavItem className="nav-item">
+                        <NavLink  className={classnames({active: activeTab === '3'})} onClick={() => {
+                          clickTag('3')
+                        }}>ALBUM</NavLink>
+                      </NavItem>
+                    </>
+                  }
                   <NavItem className="nav-item">
                     <NavLink className={classnames({active: activeTab === '4'})} onClick={() => {
                       clickTag('4')
@@ -85,18 +102,21 @@ const Info = ({userView}) => {
                   <>ABC</>
                 </TabPane>
               </TabContent>
+              {
+                isSinger && <>
+                  <TabContent activeTab={activeTab}>
+                    <TabPane tabId="2">
+                      <Song/>
+                    </TabPane>
+                  </TabContent>
 
-              <TabContent activeTab={activeTab}>
-                <TabPane tabId="2">
-                  <Song/>
-                </TabPane>
-              </TabContent>
-
-              <TabContent activeTab={activeTab}>
-                <TabPane tabId="3">
-                  <Album/>
-                </TabPane>
-              </TabContent>
+                  <TabContent activeTab={activeTab}>
+                    <TabPane tabId="3">
+                      <Album/>
+                    </TabPane>
+                  </TabContent>
+                </>
+              }
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="4">
                   <Playlist/>
