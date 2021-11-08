@@ -9,7 +9,7 @@ import {listStyleSong, listTypeSong} from "../../untility/mock";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import {useMutation} from "react-fetching-library";
-import {createAlbum} from "../../api/actions/album";
+import {createAlbum, getListMyAlbum} from "../../api/actions/album";
 
 const defaultValueSearch = {
     albumName: null,
@@ -19,10 +19,15 @@ const defaultValueSearch = {
 const Album = ({}) => {
 
     const {mutate: _createAlbum} = useMutation(createAlbum)
+    const {mutate: _getListMyAlbum} = useMutation(getListMyAlbum)
+
 
     const [modal, setModal] = useState(false)
 
     const [imageAlbum, setImageAlbum] = useState(null)
+
+    const [listMyAlbum, setListMyAlbum] = useState(null)
+
 
     const {control, handleSubmit, formState: {errors}, watch, setValue, register} = useForm({
         reValidateMode: "onChange",
@@ -46,7 +51,7 @@ const Album = ({}) => {
         }
         if (!isValid) {
             toast.error('Vui lòng chọn file kích thước nhỏ hơn 1Mb định dạng: png, jpg, jpeg')
-            const input = document.getElementById('logo')
+            const input = document.getElementById('imgAlbum')
             const dataTransfer = new DataTransfer()
             input.files = dataTransfer.files
             setValue('imgAlbum', null)
@@ -62,14 +67,27 @@ const Album = ({}) => {
         reader.readAsDataURL(file)
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
-        const reader = new FileReader()
-        reader.onload = async () => {
-            const logoUpload = reader?.result
+        if (data.imgAlbum?.length  > 0) {
+            const reader = new FileReader()
+            reader.onload = async () => {
+                const logoUpload = reader?.result
+                const dataInput = {
+                    albumName: data.albumName,
+                    image: logoUpload,
+                }
+                const response = await _createAlbum(dataInput)
+                if (response.payload?.errorCode === '200') {
+                    toggle()
+                } else {
+                    toast.error(response.payload?.message)
+                }
+            }
+            reader.readAsDataURL(data.imgAlbum[0])
+        } else {
             const dataInput = {
                 albumName: data.albumName,
-                image: logoUpload,
             }
             const response = await _createAlbum(dataInput)
             if (response.payload?.errorCode === '200') {
@@ -78,15 +96,22 @@ const Album = ({}) => {
                 toast.error(response.payload?.message)
             }
         }
-        reader.readAsDataURL(data.imgAlbum ? data.imgAlbum[0] : null)
+
     };
 
     const toggle = async () => {
         setModal(!modal)
     }
 
-    useEffect(() => {
+    useEffect(async () => {
 
+        const response = await _getListMyAlbum({})
+        if (response.payload?.errorCode === '200') {
+            console.log('aaa', response.payload.data)
+            setListMyAlbum(response.payload?.data)
+        } else {
+            toast.error(response.payload?.message)
+        }
     }, [])
 
     return (
@@ -94,16 +119,34 @@ const Album = ({}) => {
       <Container>
           <h1>Album</h1>
           <Button onClick={toggle}>Tạo Album mới</Button>
-
-          <Row>
-            <Col className="bg-light border add-playlist" xs="3" >
-                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '180px', margin: '0 auto'}}>
-                    <CardImg style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}} src="/imgs/image.jpg" alt="Card image cap" />
-                </div>
-                <span>Nhạc mới</span>
-            </Col>
-            <MusicItem />
-          </Row>
+          {
+              listMyAlbum.map(el => {
+                  return(
+                      <Row>
+                          <Col className="bg-light border add-playlist" xs="3">
+                              <div style={{
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  width: '100%',
+                                  height: '180px',
+                                  margin: '0 auto'
+                              }}>
+                                  {
+                                      el.image ?
+                                          <CardImg style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}}
+                                                   src={el.image} alt="Card image cap"/> :
+                                          <CardImg style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}}
+                                                   src="/imgs/image.jpg" alt="Card image cap"/>
+                                  }
+                              </div>
+                              <span>{el.albumName}</span>
+                          </Col>
+                          <MusicItem/>
+                      </Row>
+                      )
+                  }
+              )
+          }
 
       </Container>
 
@@ -126,6 +169,7 @@ const Album = ({}) => {
                               <Group className="mb-3" controlId="exampleSelect" style={{paddingTop: '5px'}}>
                                   <Label>Hình ảnh minh họa</Label>
                                   <input
+                                      id={'imgAlbum'}
                                       accept=".png, .jpg, .jpeg"
                                       {...register("imgAlbum")}
                                       type="file"

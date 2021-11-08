@@ -17,10 +17,10 @@ import {Group} from "../../components/form-group/form-group";
 import InputController from "../../components/input-controller/input-controller";
 import ValidateMessage from "../../components/validate-message";
 import {useMutation} from "react-fetching-library";
-import {createAlbum} from "../../api/actions/album";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
-import {createPlaylist} from "../../api/actions/playlist";
+import {createPlaylist, getListMyPlaylist} from "../../api/actions/playlist";
+import MusicItem from "./MusicItem";
 
 const defaultValueSearch = {
     namePlaylist: null,
@@ -30,10 +30,14 @@ const defaultValueSearch = {
 const Playlist = ({}) => {
 
     const {mutate: _createPlaylist} = useMutation(createPlaylist)
+    const {mutate: _getListMyPlaylist} = useMutation(getListMyPlaylist)
+
 
     const [modal, setModal] = useState(false)
 
     const [imagePlaylist, setImagePlaylist] = useState(null)
+    const [listMyPlaylist, setListMyPlaylist ] = useState(null)
+
 
     const {control, handleSubmit, formState: {errors}, watch, setValue, register} = useForm({
         reValidateMode: "onChange",
@@ -73,14 +77,27 @@ const Playlist = ({}) => {
         reader.readAsDataURL(file)
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
-        const reader = new FileReader()
-        reader.onload = async () => {
-            const logoUpload = reader?.result
+        if (data.imgPlaylist?.length > 0 ) {
+            const reader = new FileReader()
+            reader.onload = async () => {
+                const logoUpload = reader?.result
+                const dataInput = {
+                    namePlaylist: data.namePlaylist,
+                    image: logoUpload,
+                }
+                const response = await _createPlaylist(dataInput)
+                if (response.payload?.errorCode === '200') {
+                    toggle()
+                } else {
+                    toast.error(response.payload?.message)
+                }
+            }
+            reader.readAsDataURL(data.imgPlaylist ? data.imgPlaylist[0] : null)
+        } else {
             const dataInput = {
-                namePlaylist: data.albumName,
-                image: logoUpload,
+                namePlaylist: data.namePlaylist
             }
             const response = await _createPlaylist(dataInput)
             if (response.payload?.errorCode === '200') {
@@ -89,15 +106,21 @@ const Playlist = ({}) => {
                 toast.error(response.payload?.message)
             }
         }
-        reader.readAsDataURL(data.imgPlaylist ? data.imgPlaylist[0] : null)
+
     };
 
     const toggle = async () => {
         setModal(!modal)
     }
 
-    useEffect(() => {
-
+    useEffect(async () => {
+        const response = await _getListMyPlaylist({})
+        if (response.payload?.errorCode === '200') {
+            console.log('aaa', response.payload.data)
+            setListMyPlaylist(response.payload?.data)
+        } else {
+            toast.error(response.payload?.message)
+        }
     }, [])
 
     return (
@@ -105,11 +128,34 @@ const Playlist = ({}) => {
         <Container>
           <h1>Playlist</h1>
             <Button onClick={toggle}>Tạo playlist mới</Button>
-          <Row>
-            <Col className="bg-light border add-playlist" xs="3">
-              Add new playlist
-            </Col>
-          </Row>
+            {
+                listMyPlaylist.map(el => {
+                        return(
+                            <Row>
+                                <Col className="bg-light border add-playlist" xs="3">
+                                    <div style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        width: '100%',
+                                        height: '180px',
+                                        margin: '0 auto'
+                                    }}>
+                                        {
+                                            el.image ?
+                                                <CardImg style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}}
+                                                         src={el.image} alt="Card image cap"/> :
+                                                <CardImg style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}}
+                                                         src="/imgs/image.jpg" alt="Card image cap"/>
+                                        }
+                                    </div>
+                                    <span>{el.namePlaylist}</span>
+                                </Col>
+                                <MusicItem/>
+                            </Row>
+                        )
+                    }
+                )
+            }
         </Container>
 
           <Modal size="lg" isOpen={modal} style={{maxWidth: '1600px', width: '80%'}} centered={true}>
@@ -119,7 +165,7 @@ const Playlist = ({}) => {
                       <Row>
                           <Col md={6}>
                               <Group className="mb-3"  style={{paddingTop: '5px'}}>
-                                  <Label>Tên album</Label>
+                                  <Label>Tên Playlist</Label>
                                   <InputController
                                       control={control}
                                       name="namePlaylist"
@@ -131,8 +177,9 @@ const Playlist = ({}) => {
                               <Group className="mb-3" controlId="exampleSelect" style={{paddingTop: '5px'}}>
                                   <Label>Hình ảnh minh họa</Label>
                                   <input
+                                      id={'imgPlaylist'}
                                       accept=".png, .jpg, .jpeg"
-                                      {...register("imgAlbum")}
+                                      {...register("imgPlaylist")}
                                       type="file"
                                       onChange={({target: {files}}) => {
                                           onFileChange(files)

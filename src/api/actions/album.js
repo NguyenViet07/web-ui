@@ -5,3 +5,8 @@ export const createAlbum = formValues => ({
     body: formValues
 })
 
+export const getListMyAlbum = formValues => ({
+    method: 'POST',
+    endpoint: '/album/all-user/get-list',
+    body: formValues
+})
