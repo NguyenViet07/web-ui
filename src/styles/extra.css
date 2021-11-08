@@ -1072,3 +1072,122 @@ ul {
   height: 0;
   position: relative;
 }
+.bdIIfT {
+  line-height: 24px;
+}
+.krDxsF {
+  font-size: 14px;
+  color: rgba(28, 30, 32, 0.5);
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  line-height: 20px;
+}
+.iJtgKn {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: rgba(28, 30, 32, 0.88);
+}
+.ixRSYj {
+  margin-top: 14px;
+}
+.cHbucU {
+  font-size: 13px;
+  color: rgba(28, 30, 32, 0.5);
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  line-height: 18px;
+}
+.idAWVU {
+  margin-top: 24px;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(28, 30, 32, 0.5);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.chWPSK {
+  width: 100%;
+  height: 64px;
+  border-radius: 4px;
+  background-color: rgba(28, 30, 32, 0.02);
+  margin-top: 24px;
+  padding-right: 14px;
+}
+.kqVftK {
+  height: 18px;
+  line-height: 18px;
+  font-size: 13px;
+  color: rgba(28, 30, 32, 0.5);
+}
+.gOzSIw {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2daaed;
+  text-transform: uppercase;
+}
+.hVIUVP {
+  margin-top: 44px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(28, 30, 32, 0.88);
+}
+.subtitle {
+  color: rgba(28, 30, 32, 0.5);
+  font-size: 16px;
+}
+.is-50x50 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.is-50x50 img {
+  width: 100%;
+}
+.username {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.post-time {
+  color: rgba(28, 30, 32, 0.5);
+  font-weight: 400;
+  margin-left: 5px;
+  font-size: 12px;
+}
+.ct-cmt {
+  margin-top: 0;
+}
+.box_form_comment .btn_cloud_up {
+  margin-top: 20px !important;
+  border-radius: 69px !important;
+  color: #fff !important;
+  border: none;
+  min-width: 125px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #ffffff;
+  letter-spacing: 0;
+  min-height: 38px;
+  transition: all 0.2s linear;
+  background-color: #2daaed !important;
+}
+.box_form_comment .form-group .form-control {
+  border: none;
+  resize: none;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #979797;
+}
+.form-control:focus {
+  box-shadow: none !important;
+}
