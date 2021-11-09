@@ -10,3 +10,9 @@ export const getListMyPlaylist = formValues => ({
     endpoint: '/playlist/all-user/get-list',
     body: formValues
 })
+
+export const getInfoPlaylist = formValues => ({
+    method: 'POST',
+    endpoint: '/playlist/all-user/get-info',
+    body: formValues
+})

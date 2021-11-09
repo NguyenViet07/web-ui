@@ -10,3 +10,9 @@ export const getListMyAlbum = formValues => ({
     endpoint: '/album/all-user/get-list',
     body: formValues
 })
+
+export const getInfoAlbum = formValues => ({
+    method: 'POST',
+    endpoint: '/album/all-user/get-info',
+    body: formValues
+})

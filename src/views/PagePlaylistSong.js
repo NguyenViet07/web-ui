@@ -11,29 +11,29 @@ import {toast} from "react-toastify";
 import {useMutation} from "react-fetching-library";
 import {findBySongId} from "../api/actions/song";
 import {getInfoAlbum} from "../api/actions/album";
+import {getInfoPlaylist} from "../api/actions/playlist";
 
-const PageTestSong = () => {
+const PagePlaylistSong = () => {
 
   const id = useParams().id
 
-  const {mutate: _getInfoAlbum} = useMutation(getInfoAlbum)
+  const {mutate: _getInfoPlaylist} = useMutation(getInfoPlaylist)
 
   const [listSong, setListSong] = useState([])
-  const [album, setAlbum] = useState(null)
+  const [playlist, setPlaylist] = useState(null)
   const [userName, setUserName] = useState([])
 
   useEffect(async () => {
 
     if (id) {
       const data = {
-        albumId: id,
+        playlistId: id,
       }
-      const response = await _getInfoAlbum(data)
+      const response = await _getInfoPlaylist(data)
       if (response.payload?.errorCode === '200') {
         const res = response.payload.data
-        console.log('aaaa', res)
-        setListSong(res.songList)
-        setAlbum(res.album)
+        setListSong(res.songResponseList)
+        setPlaylist(res.playlist)
         setUserName(res.userName)
       } else {
         toast.error(response.payload?.message)
@@ -49,9 +49,9 @@ const PageTestSong = () => {
         <div className="col-md-3">
           <div className="h5pibw-2 p-4 pt-0 ">
             {
-              album?.image ? <img
+              playlist?.image ? <img
                   className="antedm-1 fZPioS"
-                  src={album.image}
+                  src={playlist.image}
                   alt=""
               /> : <img
                   className="antedm-1 fZPioS"
@@ -65,7 +65,7 @@ const PageTestSong = () => {
           <div>
             <div class="sc-jEKYNM bdIIfT">
               <span class="sc-dYTRRX krDxsF">Tên:</span>
-              <span class="sc-hxPjim iJtgKn"> {album?.albumName}</span>
+              <span class="sc-hxPjim iJtgKn"> {playlist?.namePlaylist}</span>
             </div>
             <div class="sc-bLPcC ixRSYj w3-row">
               <div class="sc-mfyeg cHbucU w3-rest">25/10/2021</div>
@@ -90,4 +90,4 @@ const PageTestSong = () => {
   );
 };
 
-export default PageTestSong;
+export default PagePlaylistSong;

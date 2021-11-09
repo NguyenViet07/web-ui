@@ -28,7 +28,6 @@ const Info = ({userView}) => {
   }
 
   useEffect(() => {
-    console.log('aaaaaaa', userView)
     setActiveTab('1')
     setLogo(userView?.image || null)
     setName(userView?.name || null)

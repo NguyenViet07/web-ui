@@ -5,6 +5,18 @@ export const createSong = formValues => ({
     body: formValues
 })
 
+export const addSongToAlbum = formValues => ({
+    method: 'POST',
+    endpoint: '/song/singer/add-album',
+    body: formValues
+})
+
+export const addSongToPlayList = formValues => ({
+    method: 'POST',
+    endpoint: '/song/singer/add-playlist',
+    body: formValues
+})
+
 export const getListSongByUserId = formValues => ({
     method: 'POST',
     endpoint: '/song/singer/get-list',

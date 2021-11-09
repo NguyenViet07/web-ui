@@ -21,6 +21,8 @@ import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import {createPlaylist, getListMyPlaylist} from "../../api/actions/playlist";
 import MusicItem from "./MusicItem";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 const defaultValueSearch = {
     namePlaylist: null,
@@ -43,6 +45,10 @@ const Playlist = ({}) => {
         reValidateMode: "onChange",
         defaultValues: defaultValueSearch
     })
+
+    const dispatch = useDispatch()
+
+    const history = useHistory()
 
     async function onFileChange(files) {
         if (files?.length === 0) {
@@ -116,7 +122,6 @@ const Playlist = ({}) => {
     useEffect(async () => {
         const response = await _getListMyPlaylist({})
         if (response.payload?.errorCode === '200') {
-            console.log('aaa', response.payload.data)
             setListMyPlaylist(response.payload?.data)
         } else {
             toast.error(response.payload?.message)
@@ -132,7 +137,9 @@ const Playlist = ({}) => {
                 listMyPlaylist?.map(el => {
                         return(
                             <Row>
-                                <Col className="bg-light border add-playlist" xs="3">
+                                <Col className="bg-light border add-playlist" xs="3" onClick={() =>{
+                                    history.push(`/page-playlist-song/${el.playlistId}`)
+                                }}>
                                     <div style={{
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -150,7 +157,6 @@ const Playlist = ({}) => {
                                     </div>
                                     <span>{el.namePlaylist}</span>
                                 </Col>
-                                <MusicItem/>
                             </Row>
                         )
                     }

@@ -10,6 +10,8 @@ import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import {useMutation} from "react-fetching-library";
 import {createAlbum, getListMyAlbum} from "../../api/actions/album";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 const defaultValueSearch = {
     albumName: null,
@@ -27,6 +29,11 @@ const Album = ({}) => {
     const [imageAlbum, setImageAlbum] = useState(null)
 
     const [listMyAlbum, setListMyAlbum] = useState(null)
+
+
+    const dispatch = useDispatch()
+
+    const history = useHistory()
 
 
     const {control, handleSubmit, formState: {errors}, watch, setValue, register} = useForm({
@@ -123,7 +130,9 @@ const Album = ({}) => {
               listMyAlbum?.map(el => {
                   return(
                       <Row>
-                          <Col className="bg-light border add-playlist" xs="3">
+                          <Col className="bg-light border add-playlist" xs="3" onClick={() =>{
+                              history.push(`/page-list-song/${el.albumId}`)
+                          }}>
                               <div style={{
                                   display: 'flex',
                                   justifyContent: 'center',
@@ -136,12 +145,11 @@ const Album = ({}) => {
                                           <CardImg style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}}
                                                    src={el.image} alt="Card image cap"/> :
                                           <CardImg style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}}
-                                                   src="/imgs/image.jpg" alt="Card image cap"/>
+                                                   src="/imgs/pika.jpg" alt="Card image cap"/>
                                   }
                               </div>
                               <span>{el.albumName}</span>
                           </Col>
-                          <MusicItem/>
                       </Row>
                       )
                   }

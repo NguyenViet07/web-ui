@@ -12,10 +12,10 @@ import {
     CardTitle,
     CardSubtitle,
     CardText,
-    Modal, ModalHeader, ModalBody, ModalFooter, Input
+    Modal, ModalHeader, ModalBody, ModalFooter, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from "reactstrap";
 import {useMutation} from "react-fetching-library";
-import {createSong, getListSongByUserId} from "../../api/actions/song";
+import {addSongToAlbum, createSong, getListSongByUserId} from "../../api/actions/song";
 import {Controller, useForm} from "react-hook-form";
 import {useHistory} from "react-router-dom";
 import {toast} from "react-toastify";
@@ -27,6 +27,10 @@ import song from "../../redux/reducer/song";
 import {listStyleSong, listTypeSong} from "../../untility/mock";
 import Select from "react-select";
 import SelectBox from "../../components/select-box/select-box";
+import {Edit, Lock, Plus} from "react-feather";
+import {getListMyAlbum} from "../../api/actions/album";
+import DataTable from "react-data-table-component";
+import {getDefaultRowsPerPageOptions} from "../../untility/Utils";
 
 
 const defaultValueSearch = {
@@ -41,13 +45,26 @@ const defaultValueSearch = {
 const Song = ({}) => {
     const {mutate: _createSong} = useMutation(createSong)
 
+    const {mutate: _addSongToAlbum} = useMutation(addSongToAlbum)
+
+
     const {mutate: _getListSongByUserId} = useMutation(getListSongByUserId)
 
+    const {mutate: _getListMyAlbum} = useMutation(getListMyAlbum)
+
+
     const [modal, setModal] = useState(false)
+
+    const [songIdAddAlbum, setSongIdAddAlbum] = useState(null)
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const [listMySong, setListMySong] = useState([])
 
     const [imageSong, setImageSong] = useState(null)
+
+    const [listMyAlbum, setListMyAlbum] = useState([])
+
 
     const {control, handleSubmit, formState: {errors}, watch, setValue, register} = useForm({
         reValidateMode: "onChange",
@@ -64,6 +81,22 @@ const Song = ({}) => {
             data: songValue
         }
         dispatch(action)
+    }
+
+    const getListMyAlbumView = async () => {
+        let res = []
+        const response = await _getListMyAlbum({})
+        if (response.payload?.errorCode === '200') {
+            const options = response.payload?.data?.map(el => ({
+                value: el.albumId,
+                label: el.albumName
+            }))
+            res = options
+            setListMyAlbum(options)
+        } else {
+            toast.error(response.payload?.message)
+        }
+        return res
     }
 
     const getListMySong = async () => {
@@ -133,8 +166,33 @@ const Song = ({}) => {
 
     };
 
+    const onSubmitAlbum = async (data) => {
+
+        const dataInput = {
+            songId : songIdAddAlbum,
+            albumId: data.albumId
+        }
+
+        const response = await _addSongToAlbum(dataInput)
+        if (response.payload?.errorCode === '200') {
+            setIsOpen(!isOpen)
+            getListMySong()
+            toast.success('Thêm bài hát thành công')
+        } else {
+            toast.error(response.payload?.message)
+        }
+
+    };
+
     const toggle = async () => {
         setModal(!modal)
+    }
+
+    const toggleSelect = async (id) => {
+        setSongIdAddAlbum(id)
+        console.log('id', id)
+        setIsOpen(!isOpen)
+        getListMyAlbumView()
     }
 
 
@@ -169,7 +227,12 @@ const Song = ({}) => {
                               }
 
                               <CardBody>
-                                  <CardTitle tag="h5"><span >{el.songName}</span></CardTitle>
+                                  <div>
+                                      <span style={{fontSize: '20px'}}>{el.songName}</span>
+                                      <Button onClick={() => {
+                                          toggleSelect(el.songId)
+                                      }}>Thêm vào album</Button>
+                                  </div>
                                   <CardSubtitle tag="h6"
                                                 className="mb-2 text-muted">{el.createDate}</CardSubtitle>
                                   <CardText>{el.description}</CardText>
@@ -180,6 +243,37 @@ const Song = ({}) => {
               }
           </Row>
         </Container>
+
+          <Modal size="lg" isOpen={isOpen} style={{maxWidth: '1600px', width: '80%'}} centered={true}>
+              <ModalHeader toggle={toggleSelect}>Thêm bài hát vào album</ModalHeader>
+              <Form onSubmit={handleSubmit(onSubmitAlbum)} encType="multipart/form-data">
+                  <ModalBody>
+                      <Row>
+                          <Col>
+                              <Group className="mb-3" controlId="formBasicEmail" style={{paddingTop: '5px'}}>
+                                  <Label>Danh sách album</Label>
+                                  <SelectBox
+                                      name="albumId"
+                                      valueOpt="value"
+                                      labelOpt="label"
+                                      control={control}
+                                      options={listMyAlbum}
+                                      placeholder={''}
+                                  />
+                              </Group>
+                          </Col>
+                      </Row>
+                  </ModalBody>
+                  <ModalFooter>
+                      <Button variant="primary" type="submit">
+                          Đăng ký
+                      </Button>
+                      <Button color="secondary" onClick={toggleSelect}>Đóng</Button>
+                  </ModalFooter>
+              </Form>
+
+          </Modal>
+
 
           <Modal size="lg" isOpen={modal} style={{maxWidth: '1600px', width: '80%'}} centered={true}>
               <ModalHeader toggle={toggle}>Tải bài hát mới</ModalHeader>

@@ -47,11 +47,15 @@ const Routes = [
     component: lazy(() => import("../../views/profile/HomeInfo")),
   },
   {
-    path: "/page-list-song",
+    path: "/page-list-song/:id",
     component: lazy(() => import("../../views/PageListSong")),
   },
   {
-    path: "/page-single-song",
+    path: "/page-playlist-song/:id",
+    component: lazy(() => import("../../views/PagePlaylistSong")),
+  },
+  {
+    path: "/page-single-song/:id",
     component: lazy(() => import("../../views/PageSingleSong")),
   },
 ];

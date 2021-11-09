@@ -1,9 +1,13 @@
 import React, {useEffect} from "react";
 import {CardImg} from "reactstrap";
 import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom"
+
 const SongViewItem = ({ data }) => {
 
   const dispatch = useDispatch()
+
+  const history = useHistory()
 
   const listerToMusic = songValue => {
     const action = {
@@ -21,6 +25,7 @@ const SongViewItem = ({ data }) => {
     <>
       <div className="sc-LvOOr dhqEfd non-focus" onClick={() => {
         listerToMusic(data)
+        history.push(`/page-single-song/${data.songId}`)
       }}>
         <div className="sc-gVCZyc dzMbQL">
           <a>

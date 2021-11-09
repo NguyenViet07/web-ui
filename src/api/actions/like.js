@@ -1,13 +1,13 @@
 
 export const createLike = formValues => ({
     method: 'POST',
-    endpoint: '/like/create-song',
+    endpoint: '/like/all-user/create-song',
     body: formValues
 })
 
 export const deleteLike = formValues => ({
     method: 'POST',
-    endpoint: '/like/delete-list',
+    endpoint: '/like/all-user/delete-list',
     body: formValues
 })
 
