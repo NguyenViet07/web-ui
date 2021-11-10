@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import AlbumItem from "../elements/AlbumItem";
@@ -8,11 +8,18 @@ import "swiper/swiper.min.css";
 
 // import Swiper core and required modules
 import SwiperCore, { EffectFade, Pagination, Autoplay } from "swiper";
+import SongViewItem from "../elements/SongViewItem";
 
 // install Swiper modules
 SwiperCore.use([Autoplay, EffectFade]);
 
 const Album = ({ data, title }) => {
+
+
+    useEffect(() => {
+        console.log('listSong', data)
+    }, [data])
+
   return (
     <>
       <div className="p-4">
@@ -26,9 +33,9 @@ const Album = ({ data, title }) => {
           }}
           className="mySwiper1"
         >
-          {data.map((d, i) => (
-            <SwiperSlide key={i}>
-              <AlbumItem />
+          {data.map(el => (
+            <SwiperSlide key={el}>
+              <SongViewItem data={el} />
             </SwiperSlide>
           ))}
         </Swiper>

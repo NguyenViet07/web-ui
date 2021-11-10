@@ -46,7 +46,6 @@ const Song = () => {
             if (response.payload?.errorCode === '200') {
                 const linkUrlSong = response.payload.data.url
                 setUrl(`http://localhost:9000/api/v1/song/download?url=${linkUrlSong}`)
-
                 const res = response.payload.data
                 setSongInfo(res)
                 if (res.like === 1) {
@@ -73,7 +72,6 @@ const Song = () => {
                 <AudioPlayer
                     autoPlay
                     src={url}
-                    // src={urlTest}
                     onPlay={(e) => console.log("onPlay")}
                     autoPlayAfterSrcChange={true}
                     showSkipControls={true}

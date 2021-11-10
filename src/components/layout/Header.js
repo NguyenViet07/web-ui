@@ -10,15 +10,29 @@ import { Link, NavLink } from "react-router-dom";
 import { useMutation } from "react-fetching-library";
 import { logoutAction } from "../../api/actions/login";
 import { useHistory } from "react-router-dom";
+import { findByUserName } from "../../api/actions/users";
 
 const Header = ({ layoutRouter }) => {
   // const [userData, setUserData] = useState(null)
   const [userNameView, setUserNameView] = useState(null);
   const [role, setRole] = useState(null);
+  const [userInfoView, setUserInfoView] = useState(null);
+  const [logo, setLogo] = useState(null);
 
   const { mutate: logout } = useMutation(logoutAction);
+  const { mutate: _findByUserName } = useMutation(findByUserName);
 
   const history = useHistory();
+
+  const getUserByUserName = async (usernameInput) => {
+    const response = await _findByUserName({ username: usernameInput });
+    if (response.payload?.errorCode === "200") {
+      setUserInfoView(response.payload?.data);
+      setLogo(response.payload?.data?.image || null);
+    } else {
+      setUserInfoView(null);
+    }
+  };
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -26,6 +40,7 @@ const Header = ({ layoutRouter }) => {
 
     setUserNameView(userData?.user?.userName);
     setRole(userData?.role);
+    getUserByUserName(userData?.user?.userName);
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -62,44 +77,45 @@ const Header = ({ layoutRouter }) => {
                     <NavLink to={"/create"}> Đăng ký</NavLink>
                   </div>
                 )}
-                {/* <span>Đăng nhập</span> | <span>Đăng ký</span> */}
               </p>
             </div>
-            <div class="wrapper-left d-none ">
+            <div class="wrapper-left">
               <div class="sc-13vopkh-23 cwzfIs">
-                <a
-                  class="avatar-user "
-                  href="/user/trananhtuan1198.quan-ly.html"
-                >
-                  <img
-                    alt=""
-                    src="https://avatar-ex-swe.nixcdn.com/avatar/2021/10/27/f/1/3/6/1635320107970.jpg"
-                  />
+                <a class="avatar-user " href="/profile">
+                  {logo ? <img src={logo} /> : <img src="/imgs/logo.png" />}
                 </a>
               </div>
               <div class="sc-13vopkh-3 fwzauO">
                 <div class="sc-13vopkh-25 ePHKxx">
                   <a
                     class="__3dot-content username"
-                    title="Anh Tuấn"
-                    href="/user/trananhtuan1198.quan-ly.html"
+                    title={{ userNameView }}
+                    href="/profile"
                   >
-                    Anh Tuấn
+                    {userNameView}
                   </a>
                 </div>
               </div>
             </div>
-            <div class="sc-13vopkh-0 pyaEd">
-              <ButtonDropdown isOpen={isOpen} toggle={toggle}>
-                <DropdownToggle caret>
-                  <div class="wpfkci-0 fRifvS ic_setting_normal"></div>
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem>Đổi mật khẩu</DropdownItem>
-                  <DropdownItem>Đăng xuất</DropdownItem>
-                </DropdownMenu>
-              </ButtonDropdown>
-            </div>
+            {userNameView && (
+              <div className="sc-13vopkh-0 pyaEd">
+                <ButtonDropdown isOpen={isOpen} toggle={toggle}>
+                  <DropdownToggle caret>
+                    <div className="wpfkci-0 fRifvS ic_setting_normal"></div>
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>Đổi mật khẩu</DropdownItem>
+                    <DropdownItem
+                      onClick={() => {
+                        logoutFunc();
+                      }}
+                    >
+                      Đăng xuất
+                    </DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown>
+              </div>
+            )}
           </div>
           <div className="sc-13vopkh-11 fLQZhp">
             <div className="sc-13vopkh-12 geiIEW">
@@ -125,6 +141,26 @@ const Header = ({ layoutRouter }) => {
                     <i class="ic_discover_fill sc-iLCFKZ epsJsi"></i> Chủ đề
                   </NavLink>
                 </NavItem>
+                {layoutRouter.map((el) => {
+                  {
+                    if (el.title)
+                      return (
+                        <NavItem style={{ marginRight: "10px" }}>
+                          <NavLink to={el.path}>{el.title}</NavLink>
+                        </NavItem>
+                      );
+                  }
+                })}
+                {userNameView && (
+                  <NavItem style={{ marginRight: "10px" }}>
+                    <NavLink to={"/profile"}>Trang cá nhân</NavLink>
+                  </NavItem>
+                )}
+                {role === "ADMIN" && (
+                  <NavItem style={{ marginRight: "10px" }}>
+                    <NavLink to={"/admin"}>Quản lý admin</NavLink>
+                  </NavItem>
+                )}
               </ul>
             </div>
           </div>

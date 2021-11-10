@@ -27,11 +27,6 @@ export const SelectBox = ({ rules, options = [], error, classError, control, nam
         }
     }
 
-    const toggle = () => {
-        console.log(selectRef.current.onMenuOpen())
-        console.log(selectRef.current.select.focus())
-    }
-
     const customFilter = ({label, value, data}, inputValue) => {
         if (inputValue) {
             return label.toLowerCase().includes(inputValue.toLowerCase())
@@ -56,7 +51,7 @@ export const SelectBox = ({ rules, options = [], error, classError, control, nam
         name={name}
         control={control}
         onFocus={focusWhenError}
-        render={({onChange, value, ...propsRender}) => (
+        render={({ field: {onChange, value, ...propsRender} }) => (
             <Select
                 id={name}
                 { ...propsRender }
