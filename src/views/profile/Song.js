@@ -23,14 +23,10 @@ import {Group} from "../../components/form-group/form-group";
 import InputController from "../../components/input-controller/input-controller";
 import ValidateMessage from "../../components/validate-message";
 import {useDispatch, useSelector} from "react-redux";
-import song from "../../redux/reducer/song";
 import {listStyleSong, listTypeSong} from "../../untility/mock";
-import Select from "react-select";
 import SelectBox from "../../components/select-box/select-box";
-import {Edit, Lock, Plus} from "react-feather";
 import {getListMyAlbum} from "../../api/actions/album";
-import DataTable from "react-data-table-component";
-import {getDefaultRowsPerPageOptions} from "../../untility/Utils";
+
 
 
 const defaultValueSearch = {

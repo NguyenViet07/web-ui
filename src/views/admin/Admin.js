@@ -230,7 +230,7 @@ const Admin = ({}) => {
     return (
         <>
             <div border="danger" style={{width: '90%', margin: 'auto', marginTop: '20px'}}>
-                <Card>
+                <Card style={{width: 'auto'}}>
                     <CardHeader>
                         <CardTitle tag='h4' id={SEARCH_BLOCK.key} title={SEARCH_BLOCK.title}>Thông tin tìm
                             kiếm</CardTitle>

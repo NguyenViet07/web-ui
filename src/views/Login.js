@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import {toast} from "react-toastify";
 import {Group} from "../components/form-group/form-group";
 import InputController from "../components/input-controller/input-controller";
+import {useDispatch} from "react-redux";
 
 const defaultValueSearch = {
     username: null,
@@ -21,6 +22,8 @@ const Login = () => {
     const {mutate: _loginAction} = useMutation(loginAction)
 
     const history = useHistory()
+
+    const dispatch = useDispatch()
 
     const signInSchema = yup.object().shape({
         username: yup.string().required('Vui lòng nhập tên đăng nhập').nullable(),
@@ -41,6 +44,11 @@ const Login = () => {
                 user: response.payload.data.userInfo,
                 role: response.payload.data.roleName
             }))
+            const action = {
+                type: 'USER_NAME',
+                data: response.payload.data.userInfo.userName
+            }
+            dispatch(action)
             history.push(`/`)
         } else {
             toast.error(response.payload?.message)

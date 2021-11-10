@@ -1,7 +1,8 @@
-import {SONG_VALUE} from "../../../untility/const/SongConstant";
+import {SONG_VALUE, USER_NAME} from "../../../untility/const/SongConstant";
 
 const initialState = {
-    songValue: null
+    songValue: null,
+    userName: null
 }
 
 const song = (state = initialState, action) => {
@@ -12,6 +13,11 @@ const song = (state = initialState, action) => {
             return {
                 ...state,
                 songValue: action.data
+            }
+        case USER_NAME:
+            return {
+                ...state,
+                userName: action.data
             }
         default:
             return state

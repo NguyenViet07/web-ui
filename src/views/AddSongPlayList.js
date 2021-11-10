@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {
-  Container,
   Row,
   Col,
-  Pagination,
-  Modal,
-  ModalHeader,
   Form,
   ModalBody,
   Label,
@@ -14,21 +10,12 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import sections
-import SLideHome from "../components/homes/SlideHome";
-import AlbumNew from "../components/homes/Album";
-import SongNew from "../components/homes/SongNew";
-import Album from "../components/homes/Album";
-import SongItem from "../components/elements/SongItem";
-import ListSong from "../components/homes/ListSong";
-import CategorySong from "../components/homes/CategorySong";
-import Paginations  from '../components/homes/Paginations';
 import {useMutation} from "react-fetching-library";
-import {addSongToAlbum, addSongToPlayList, createSong, getListSongCreated, getListSongView} from "../api/actions/song";
+import {addSongToAlbum, addSongToPlayList} from "../api/actions/song";
 import {Group} from "../components/form-group/form-group";
 import SelectBox from "../components/select-box/select-box";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
-import {getListMyAlbum} from "../api/actions/album";
 import {getListMyPlaylist} from "../api/actions/playlist";
 
 const defaultValueSearch = {

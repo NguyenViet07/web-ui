@@ -83,9 +83,8 @@ const PageSingleSong = () => {
     }
     const response = await _createComment(dataInput)
     if (response.payload?.errorCode === '200') {
-      listCmt()
       reset()
-      setValue('description', null)
+      listCmt()
     } else {
       toast.error(response.payload?.message)
     }
@@ -195,7 +194,7 @@ const PageSingleSong = () => {
                       type="text"
                       placeholder="Viết bình luận của bạn tại đây."
                       data-emojiable="true"
-                  ></InputController>
+                  />
                   <Button
                       type="submit"
                       class="btn my-2 my-sm-0 waves-effect waves-light btn-upload btn_cloud_up"

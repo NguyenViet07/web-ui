@@ -18,19 +18,19 @@ const InputController = ({name, control, rules, classError, error, isNumber, typ
 
     const handleSelectChange = (onChange, value) => {
         if (!value) {
-            onChange(null)
-            return
-        }
+            onChange('')
+        } else onChange(value)
     }
 
     return (
         <Controller
             control={control}
             name={name}
-            render={({onChange, field}) => {
+            render={({field: { onChange, value, ...field }}) => {
                 return <Input
                     id={name}
-                    onChange={(value) => {
+                    value={value || ''}
+                    onChange={({ target: { value } }) => {
                         handleSelectChange(onChange, value)
                     }}
                     type={type}

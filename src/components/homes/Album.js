@@ -16,9 +16,9 @@ SwiperCore.use([Autoplay, EffectFade]);
 const Album = ({ data, title }) => {
 
 
-    useEffect(() => {
-        console.log('listSong', data)
-    }, [data])
+    // useEffect(() => {
+    //     console.log('listSong', data)
+    // }, [data])
 
   return (
     <>
