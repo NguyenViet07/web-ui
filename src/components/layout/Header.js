@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
-    ButtonDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 import {Nav, NavItem} from "reactstrap";
 import {Link, NavLink} from "react-router-dom";
@@ -21,11 +21,11 @@ const Header = ({layoutRouter}) => {
     const [logo, setLogo] = useState(null)
 
 
-    const {mutate: logout} = useMutation(logoutAction);
-    const {mutate: _findByUserName} = useMutation(findByUserName)
+  const { mutate: logout } = useMutation(logoutAction);
+  const {mutate: _findByUserName} = useMutation(findByUserName)
 
 
-    const history = useHistory();
+  const history = useHistory();
 
     const userName = useSelector((state) => state.song.userName);
     const dispatch = useDispatch()
