@@ -80,9 +80,21 @@ const StyleSongInfo = () => {
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-9 detail_lyric_1">
-          <div className="d-flex justify-content-between mb-3 box1 music-listen-title">
-            <h1 className="title">{listTyple[style-1].label}</h1>
+
+          <div className="row mt-4">
+            <div className="col-md-4">
+              <div id="companion_cover">
+                <img
+                    src={listTyple[style - 1].image}
+                    className="w-100 card-img-top"
+                />
+              </div>
+            </div>
+            <div className="d-flex justify-content-between mb-3 box1 music-listen-title">
+              <h1 className="title">Thể loại nhạc: {listTyple[style-1].label}</h1>
+            </div>
           </div>
+
           {
             listSong.length > 0 ? <div>
               <AudioPlayer
@@ -118,11 +130,6 @@ const StyleSongInfo = () => {
                           {i + 1}. {data.name}
                         </span>
                         </div>
-                        {/*<div className="author d-table-cell">*/}
-                        {/*  <div className="author-ellepsis">*/}
-                        {/*    <span>{data.author}</span>*/}
-                        {/*  </div>*/}
-                        {/*</div>*/}
                         <div className="tool d-table-cell text-right">
                           <span>{data.view} lượt nghe</span>
                         </div>
@@ -133,54 +140,6 @@ const StyleSongInfo = () => {
             </div> : <span> Danh sách bài hát đang trống, bạn hãy quay lại sau nhé</span>
 
           }
-          <div className="row mt-4">
-            <div className="col-md-4">
-              <div id="companion_cover">
-                <img
-                    src={listTyple[style-1].image}
-                    className="w-100 card-img-top"
-                />
-
-              </div>
-            </div>
-            <div className="col-md-8">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="title2">
-                  Đóng góp:{" "}
-                  <span class="author">
-                    {/*<a target="_blank" href="/user/1052254">*/}
-                    {/*  {albumSinger ? albumSinger : 'Khyết danh'}*/}
-                    {/*</a>*/}
-                  </span>{" "}
-                </div>
-                <div></div>
-              </div>
-              <div class="card-body pl-0">
-                <h2 class="card-title"></h2>
-                <ul class="list-unstyled">
-                  <li>
-                    <span>Ca sĩ: </span>
-                    <a href="/ca-si/chi-huong-zssm7b0cq8tqnv.html">{albumSinger ? albumSinger : 'Khyết danh'}</a>
-                  </li>{" "}
-                  {/*<li>*/}
-                  {/*  <span>Sáng tác: </span>*/}
-                  {/*  <a href="/tim-kiem?q=Chí Hướng&amp;filter=sang-tac">*/}
-                  {/*    Chí Hướng*/}
-                  {/*  </a>*/}
-                  {/*</li>{" "}*/}
-                  <li>
-                    <span>Album: </span>
-                    <a href="/nghe-album/tinh-thuong-phu-the-single-xss6qbs6qkeq4k.html">
-                      {albumInfo?.albumName}
-                    </a>
-                  </li>{" "}
-                  <li>
-                    <span>Năm phát hành: </span>2021
-                  </li>{" "}
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="col-md-3">
           <RandomSong />
