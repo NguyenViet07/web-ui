@@ -61,45 +61,6 @@ const SongItem = ({ data }) => {
               <div class="sc-kwTAbF figqR ic_headphone w3-col"></div>
               <div class="sc-izAXJK fWWlAv w3-col">{songInfo?.view}</div>
             </div>
-            {/*<div class="sc-ezFbHo fgxGhh">*/}
-            {/*  <div class="jss22">*/}
-            {/*    <div>*/}
-            {/*      <div*/}
-            {/*        class="sc-hndrU iPDNHq"*/}
-            {/*        name="ic_more_vertical"*/}
-            {/*        size="18"*/}
-            {/*      >*/}
-            {/*        <div class="sc-7s83t7-0 cZPbyp">*/}
-            {/*          <div class="jss25">*/}
-            {/*            <div>*/}
-            {/*              <div*/}
-            {/*                class="sc-1h4f6p9-0 iQLiGW"*/}
-            {/*                name="ic_more_vertical"*/}
-            {/*                size="18"*/}
-            {/*              >*/}
-            {/*                <ButtonDropdown*/}
-            {/*                  className="MuiButtonBase-root MuiIconButton-root jss30"*/}
-            {/*                  isOpen={isOpen}*/}
-            {/*                  toggle={toggle}*/}
-            {/*                >*/}
-            {/*                  <DropdownToggle>*/}
-            {/*                    <span class="MuiIconButton-label">*/}
-            {/*                      <span class="sc-1h4f6p9-1 kRuzxG ic_more_vertical"></span>*/}
-            {/*                    </span>*/}
-            {/*                  </DropdownToggle>*/}
-            {/*                  <DropdownMenu>*/}
-            {/*                    <DropdownItem>Thêm vào playlist</DropdownItem>*/}
-            {/*                    <DropdownItem>Chia sẻ</DropdownItem>*/}
-            {/*                  </DropdownMenu>*/}
-            {/*                </ButtonDropdown>*/}
-            {/*              </div>*/}
-            {/*            </div>*/}
-            {/*          </div>*/}
-            {/*        </div>*/}
-            {/*      </div>*/}
-            {/*    </div>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
           </div>
           <div class="sc-dhtMFf kMNHXw w3-rest">
             <div title={songInfo?.songName} class="sc-gJFlVA jUfTUC">

@@ -13,6 +13,17 @@ import SwiperCore, { EffectFade, Pagination, Autoplay } from "swiper";
 SwiperCore.use([Autoplay, EffectFade]);
 
 const CategorySong = ({ data, title }) => {
+
+    const listTyple = [
+        {value: 1, label: 'POP', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
+        {value: 2, label: 'Rock', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
+        {value: 3, label: 'Jazz', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
+        {value: 4, label: 'POP', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
+        {value: 5, label: 'Nhạc trữ tình', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
+        {value: 6, label: 'Nhạc cách mạng', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
+        {value: 7, label: 'Khác', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'}
+    ]
+
   return (
     <>
       <div className="p-4">
@@ -26,9 +37,9 @@ const CategorySong = ({ data, title }) => {
           }}
           className="mySwiper1"
         >
-          {data.map((d, i) => (
+          {listTyple.map((d, i) => (
             <SwiperSlide key={i}>
-              <AlbumItem />
+              <AlbumItem data={d} />
             </SwiperSlide>
           ))}
         </Swiper>

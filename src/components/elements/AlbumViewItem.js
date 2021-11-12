@@ -1,26 +1,38 @@
 import React, {useEffect} from "react";
-import {useHistory} from "react-router-dom";
-const AlbumItem = ({ data }) => {
+import {CardImg} from "reactstrap";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom"
+
+const AlbumViewItem = ({ data }) => {
+
 
   const history = useHistory()
-  // useEffect(async () => {
-  //   console.log(data)
-  // }, [data])
 
+
+  useEffect(() => {
+  }, [data])
   return (
     <>
       <div className="sc-LvOOr dhqEfd non-focus" onClick={() => {
-        history.push(`/style-song/${data.value}`)}
-      }>
+        // listerToMusic(data)
+        history.push(`/album-info/${data.albumId}`)
+      }}>
         <div className="sc-gVCZyc dzMbQL">
           <a>
-            <img
-              alt=""
-              className="sc-cVvZcD fBWTee"
-              src={data.image}
-            />
+            {
+              data.image ? <img
+                      alt=""
+                      className="sc-cVvZcD fBWTee"
+                      src={data.image}
+                  /> :
+                  <img
+                      alt=""
+                      className="sc-cVvZcD fBWTee"
+                      src="/imgs/pika.jpg"
+                  />
+            }
           </a>
-          <a>
+          <a >
             <div className="sc-ksKZJi jZMSEE"></div>
           </a>
           <div className="sc-jfDjMo gsyTqS ic_play_circle"></div>
@@ -46,11 +58,11 @@ const AlbumItem = ({ data }) => {
           <a
             className="sc-kOSMCU cAgHit"
           >
-            {data.label}
+            {data.albumName}
           </a>
         </div>
       </div>
     </>
   );
 };
-export default AlbumItem;
+export default AlbumViewItem;

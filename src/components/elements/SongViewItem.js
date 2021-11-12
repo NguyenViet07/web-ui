@@ -19,7 +19,6 @@ const SongViewItem = ({ data }) => {
 
 
   useEffect(() => {
-    console.log('song', data)
   }, [data])
   return (
     <>

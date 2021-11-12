@@ -46,4 +46,26 @@ export const getListSongView = () => ({
     endpoint: '/song/list-view'
 })
 
+export const getListSongByLike = () => ({
+    method: 'GET',
+    endpoint: '/song/list-like'
+})
+
+export const getSongNewCreated = () => ({
+    method: 'GET',
+    endpoint: '/song/new-created'
+})
+
+export const getListSongByComment = () => ({
+    method: 'GET',
+    endpoint: '/song/list-comment'
+})
+
+export const getListSongByStyle = formValues => ({
+    method: 'POST',
+    endpoint: '/song/list-style',
+    body: formValues
+})
+
+
 
