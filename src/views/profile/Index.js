@@ -50,19 +50,21 @@ const Index = ({}) => {
         defaultValues: defaultValueSearch
     })
 
+    const history = useHistory()
+
     const getUserByUserName = async (usernameInput) => {
         const response = await _findByUserName({ username: usernameInput })
         if (response.payload?.errorCode === '200') {
             setUserInfoView(response.payload?.data)
         } else {
             setUserInfoView(null)
+            history.push(`/`)
         }
     };
 
 
 
     useEffect(() => {
-
         const userData = JSON.parse(localStorage.getItem('userData'))
         if (userData?.user?.avatar) {
             setLogo(userData?.user?.avatar)

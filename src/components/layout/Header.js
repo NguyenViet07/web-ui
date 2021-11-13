@@ -35,7 +35,7 @@ const Header = ({ layoutRouter }) => {
       setLogo(response.payload?.data?.image || null);
       const action = {
         type: "USER_NAME",
-        data: null,
+        data: usernameInput,
       };
       dispatch(action);
     } else {

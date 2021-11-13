@@ -59,6 +59,8 @@ const Song = ({}) => {
 
   const [modal, setModal] = useState(false);
 
+  const [modalEdit, setModalEdit] = useState(false);
+
   const [songIdAddAlbum, setSongIdAddAlbum] = useState(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -200,9 +202,12 @@ const Song = ({}) => {
     setModal(!modal);
   };
 
+  const toggleEdit = async () => {
+    setModalEdit(!modalEdit);
+  };
+
   const toggleSelect = async (id) => {
     setSongIdAddAlbum(id);
-    console.log("id", id);
     setIsOpen(!isOpen);
     getListMyAlbumView();
   };
@@ -260,7 +265,7 @@ const Song = ({}) => {
                       <span style={{ fontSize: "20px" }}>{el.songName}</span>
                     </div>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">
-                      {el.createDate}
+                      {el?.createdTime}
                     </CardSubtitle>
                     <CardText>{el.description}</CardText>
                     <Button
@@ -444,6 +449,133 @@ const Song = ({}) => {
             </Button>
             <Button variant="primary" type="submit">
               Đăng ký
+            </Button>
+          </ModalFooter>
+        </Form>
+      </Modal>
+
+      <Modal
+          size="lg"
+          isOpen={modalEdit}
+          style={{ maxWidth: "1600px", width: "80%" }}
+          centered={true}
+      >
+        <ModalHeader toggle={toggleEdit}>Tải bài hát mới</ModalHeader>
+        <Form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+          <ModalBody>
+            <Row>
+              <Col md={6}>
+                <Group className="mb-3" style={{ paddingTop: "5px" }}>
+                  <Label>Tên bài hát</Label>
+                  <InputController
+                      control={control}
+                      name="songNameEdit"
+                      type="text"
+                  />
+                  <ValidateMessage
+                      message={errors && errors.name ? errors.name.message : ""}
+                  />
+                </Group>
+                <Group
+                    className="mb-3"
+                    controlId="formBasicEmail"
+                    style={{ paddingTop: "5px" }}
+                >
+                  <Label>Mô tả</Label>
+                  <InputController
+                      control={control}
+                      name="descriptionEdit"
+                      type="text"
+                  />
+                </Group>
+                <Group
+                    className="mb-3"
+                    controlId="formBasicEmail"
+                    style={{ paddingTop: "5px" }}
+                >
+                  <Label>Thể loại nhạc</Label>
+                  <SelectBox
+                      name="typeEdit"
+                      valueOpt="value"
+                      labelOpt="label"
+                      control={control}
+                      options={listStyleSong}
+                      placeholder={""}
+                  />
+                </Group>
+                <Group
+                    className="mb-3"
+                    controlId="exampleSelect"
+                    style={{ paddingTop: "5px" }}
+                >
+                  <Label>Quốc gia</Label>
+                  <SelectBox
+                      name="typeEdit"
+                      valueOpt="value"
+                      labelOpt="label"
+                      control={control}
+                      options={listTypeSong}
+                      placeholder={""}
+                  />
+                </Group>
+                <Group
+                    className="mb-3"
+                    controlId="exampleSelect"
+                    style={{ paddingTop: "5px" }}
+                >
+                  <Label>Ảnh bài hát</Label>
+                  <input
+                      id="logo"
+                      accept=".png, .jpg, .jpeg"
+                      {...register("imgSong")}
+                      type="file"
+                      onChange={({ target: { files } }) => {
+                        onFileChange(files);
+                      }}
+                  />
+                </Group>
+                <Group
+                    className="mb-3"
+                    controlId="formBasicEmail"
+                    style={{ paddingTop: "5px" }}
+                >
+                  <Label style={{ marginRight: "10px" }}>File nhạc</Label>
+                  <input {...register("dataFile")} accept=".mp3" type="file" />
+                </Group>
+              </Col>
+              <Col md={6}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  {imageSong ? (
+                      <CardImg
+                          style={{
+                            width: "300px",
+                            height: "300px",
+                            objectFit: "cover",
+                          }}
+                          variant="top"
+                          src={imageSong}
+                      />
+                  ) : (
+                      <CardImg
+                          style={{
+                            width: "300px",
+                            height: "300px",
+                            objectFit: "cover",
+                          }}
+                          variant="top"
+                          src="/imgs/pika.jpg"
+                      />
+                  )}
+                </div>
+              </Col>
+            </Row>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={toggleEdit}>
+              Đóng
+            </Button>
+            <Button variant="primary" type="submit">
+              Sửa bài hát
             </Button>
           </ModalFooter>
         </Form>
