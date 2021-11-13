@@ -79,12 +79,8 @@ const SongNew = ({data, title}) => {
                                     class="sc-efHXLn kuWvPE sc-lmGQAZ hvQtvl"
                                     title="Chỉ Còn Là Ký Ức"
                                 >
-                                    <a
-                                        href="/bai-hat/chi-con-la-ky-uc-bang-cuong.9zmwOl1ZQUla.html"
-                                        class="sc-iBzFoy gwofgg"
-                                    >
+
                                         {songInfo?.songName}
-                                    </a>
                                 </h4>
                                 <div class="sc-bYsYVM ibKgcD w3-row">
                                     <a href="/nghe-si-bang-cuong.html">
@@ -102,7 +98,7 @@ const SongNew = ({data, title}) => {
                                 </div>
                                 <span class="sc-eksIiz jnHdeb">
                     <i class="ic_calendar_normal sc-kfHHEp dnYhLk"></i>Ngày phát
-                    hành: {songInfo?.createDate}
+                    hành: {songInfo?.createdTime}
                   </span>
                                 <div class="sc-EzviT iMCVKI"></div>
                                 <p class="sc-hJnZyO jpkIwU"></p>

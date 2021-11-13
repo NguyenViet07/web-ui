@@ -257,7 +257,7 @@ const Song = ({}) => {
                       <span style={{ fontSize: "20px" }}>{el.songName}</span>
                     </div>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">
-                      {el.createDate}
+                      {el?.createdTime}
                     </CardSubtitle>
                     <CardText>{el.description}</CardText>
                     <Button
