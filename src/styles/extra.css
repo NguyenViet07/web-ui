@@ -1445,3 +1445,14 @@ ul {
 .cs-ifp .edjoEY {
   padding-left: 20px;
 }
+
+.off {
+  background-color: #605c58 !important;
+  border-color: #605c58 !important;
+  border-radius: 0 !important;
+}
+.off:hover {
+  border-color: #605c58 !important;
+  background-color: #605c58 !important;
+  color: #000 !important;
+}

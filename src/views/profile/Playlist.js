@@ -274,10 +274,10 @@ const Playlist = ({}) => {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={toggle}>
+            <Button color="secondary" className="off" onClick={toggle}>
               Đóng
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" className="add" type="submit">
               Tạo
             </Button>
           </ModalFooter>

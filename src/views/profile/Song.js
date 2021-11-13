@@ -284,12 +284,7 @@ const Song = ({}) => {
         </Row>
       </Container>
 
-      <Modal
-        size="lg"
-        isOpen={isOpen}
-        style={{ maxWidth: "1600px", width: "80%" }}
-        centered={true}
-      >
+      <Modal size="md" isOpen={isOpen} centered={true}>
         <ModalHeader toggle={toggleSelect}>Thêm bài hát vào album</ModalHeader>
         <Form
           onSubmit={handleSubmit(onSubmitAlbum)}
@@ -317,10 +312,10 @@ const Song = ({}) => {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" className="add" type="submit">
               Đăng ký
             </Button>
-            <Button color="secondary" onClick={toggleSelect}>
+            <Button color="secondary" className="off" onClick={toggleSelect}>
               Đóng
             </Button>
           </ModalFooter>
@@ -444,10 +439,10 @@ const Song = ({}) => {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={toggle}>
+            <Button color="secondary" className="off" onClick={toggle}>
               Đóng
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" className="add" type="submit">
               Đăng ký
             </Button>
           </ModalFooter>
@@ -455,10 +450,10 @@ const Song = ({}) => {
       </Modal>
 
       <Modal
-          size="lg"
-          isOpen={modalEdit}
-          style={{ maxWidth: "1600px", width: "80%" }}
-          centered={true}
+        size="lg"
+        isOpen={modalEdit}
+        style={{ maxWidth: "1600px", width: "80%" }}
+        centered={true}
       >
         <ModalHeader toggle={toggleEdit}>Tải bài hát mới</ModalHeader>
         <Form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
@@ -468,76 +463,76 @@ const Song = ({}) => {
                 <Group className="mb-3" style={{ paddingTop: "5px" }}>
                   <Label>Tên bài hát</Label>
                   <InputController
-                      control={control}
-                      name="songNameEdit"
-                      type="text"
+                    control={control}
+                    name="songNameEdit"
+                    type="text"
                   />
                   <ValidateMessage
-                      message={errors && errors.name ? errors.name.message : ""}
+                    message={errors && errors.name ? errors.name.message : ""}
                   />
                 </Group>
                 <Group
-                    className="mb-3"
-                    controlId="formBasicEmail"
-                    style={{ paddingTop: "5px" }}
+                  className="mb-3"
+                  controlId="formBasicEmail"
+                  style={{ paddingTop: "5px" }}
                 >
                   <Label>Mô tả</Label>
                   <InputController
-                      control={control}
-                      name="descriptionEdit"
-                      type="text"
+                    control={control}
+                    name="descriptionEdit"
+                    type="text"
                   />
                 </Group>
                 <Group
-                    className="mb-3"
-                    controlId="formBasicEmail"
-                    style={{ paddingTop: "5px" }}
+                  className="mb-3"
+                  controlId="formBasicEmail"
+                  style={{ paddingTop: "5px" }}
                 >
                   <Label>Thể loại nhạc</Label>
                   <SelectBox
-                      name="typeEdit"
-                      valueOpt="value"
-                      labelOpt="label"
-                      control={control}
-                      options={listStyleSong}
-                      placeholder={""}
+                    name="typeEdit"
+                    valueOpt="value"
+                    labelOpt="label"
+                    control={control}
+                    options={listStyleSong}
+                    placeholder={""}
                   />
                 </Group>
                 <Group
-                    className="mb-3"
-                    controlId="exampleSelect"
-                    style={{ paddingTop: "5px" }}
+                  className="mb-3"
+                  controlId="exampleSelect"
+                  style={{ paddingTop: "5px" }}
                 >
                   <Label>Quốc gia</Label>
                   <SelectBox
-                      name="typeEdit"
-                      valueOpt="value"
-                      labelOpt="label"
-                      control={control}
-                      options={listTypeSong}
-                      placeholder={""}
+                    name="typeEdit"
+                    valueOpt="value"
+                    labelOpt="label"
+                    control={control}
+                    options={listTypeSong}
+                    placeholder={""}
                   />
                 </Group>
                 <Group
-                    className="mb-3"
-                    controlId="exampleSelect"
-                    style={{ paddingTop: "5px" }}
+                  className="mb-3"
+                  controlId="exampleSelect"
+                  style={{ paddingTop: "5px" }}
                 >
                   <Label>Ảnh bài hát</Label>
                   <input
-                      id="logo"
-                      accept=".png, .jpg, .jpeg"
-                      {...register("imgSong")}
-                      type="file"
-                      onChange={({ target: { files } }) => {
-                        onFileChange(files);
-                      }}
+                    id="logo"
+                    accept=".png, .jpg, .jpeg"
+                    {...register("imgSong")}
+                    type="file"
+                    onChange={({ target: { files } }) => {
+                      onFileChange(files);
+                    }}
                   />
                 </Group>
                 <Group
-                    className="mb-3"
-                    controlId="formBasicEmail"
-                    style={{ paddingTop: "5px" }}
+                  className="mb-3"
+                  controlId="formBasicEmail"
+                  style={{ paddingTop: "5px" }}
                 >
                   <Label style={{ marginRight: "10px" }}>File nhạc</Label>
                   <input {...register("dataFile")} accept=".mp3" type="file" />
@@ -546,25 +541,25 @@ const Song = ({}) => {
               <Col md={6}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   {imageSong ? (
-                      <CardImg
-                          style={{
-                            width: "300px",
-                            height: "300px",
-                            objectFit: "cover",
-                          }}
-                          variant="top"
-                          src={imageSong}
-                      />
+                    <CardImg
+                      style={{
+                        width: "300px",
+                        height: "300px",
+                        objectFit: "cover",
+                      }}
+                      variant="top"
+                      src={imageSong}
+                    />
                   ) : (
-                      <CardImg
-                          style={{
-                            width: "300px",
-                            height: "300px",
-                            objectFit: "cover",
-                          }}
-                          variant="top"
-                          src="/imgs/pika.jpg"
-                      />
+                    <CardImg
+                      style={{
+                        width: "300px",
+                        height: "300px",
+                        objectFit: "cover",
+                      }}
+                      variant="top"
+                      src="/imgs/pika.jpg"
+                    />
                   )}
                 </div>
               </Col>

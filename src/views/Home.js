@@ -68,10 +68,13 @@ const Home = () => {
         <Album title={"Mới mẻ mỗi ngày"} data={listMySongView} />
         <ListAlbum title={"Album được đề xuất cho bạn"} data={listAlbumNew} />
         <SongNew title={"Mới phát hành"} data={[1, 2, 3, 4, 5, 6, 7]}></SongNew>
-        <ListSong title={"Bài hát được quan tâm mỗi ngày"} data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+        <ListSong
+          title={"Bài hát được quan tâm mỗi ngày"}
+          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        />
         <CategorySong title={"Chuyên mục"} data={[1, 2, 3, 4, 5, 6, 7]} />
         <br />
-        <Paginations />
+        {/* <Paginations /> */}
       </div>
     </>
   );
