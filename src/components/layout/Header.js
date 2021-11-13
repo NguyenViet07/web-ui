@@ -33,6 +33,11 @@ const Header = ({ layoutRouter }) => {
     if (response.payload?.errorCode === "200") {
       setUserInfoView(response.payload?.data);
       setLogo(response.payload?.data?.image || null);
+      const action = {
+        type: "USER_NAME",
+        data: null,
+      };
+      dispatch(action);
     } else {
       setUserInfoView(null);
     }
@@ -44,7 +49,19 @@ const Header = ({ layoutRouter }) => {
 
     setUserNameView(userData?.user?.userName);
     setRole(userData?.role);
-    getUserByUserName(userData?.user?.userName);
+    if (userData?.user?.userName) {
+      getUserByUserName(userData?.user?.userName);
+    } else {
+      localStorage.removeItem("userData");
+      localStorage.removeItem("token");
+      history.push("/");
+      const action = {
+        type: "USER_NAME",
+        data: null,
+      };
+      dispatch(action);
+    }
+
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);

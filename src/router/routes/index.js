@@ -45,10 +45,10 @@ const Routes = [
     path: "/info",
     component: lazy(() => import("../../views/profile/Info")),
   },
-  {
-    path: "/home-info",
-    component: lazy(() => import("../../views/profile/HomeInfo")),
-  },
+  // {
+  //   path: "/home-info",
+  //   component: lazy(() => import("../../views/profile/HomeInfo")),
+  // },
   {
     path: "/page-list-song/:id",
     component: lazy(() => import("../../views/PageListSong")),

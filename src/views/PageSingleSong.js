@@ -49,6 +49,8 @@ const PageSingleSong = () => {
   const [checkLike, setCheckLike] = useState(false);
   const [listComment, setListComment] = useState([]);
   const [modal, setModal] = useState(false);
+  const [userNameView, setUserNameView] = useState(null);
+
 
   const { mutate: _findBySongId } = useMutation(findBySongId);
   const { mutate: _getListComment } = useMutation(getListComment);
@@ -137,6 +139,12 @@ const PageSingleSong = () => {
       } else {
         toast.error(response.payload?.message);
       }
+
+
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      // setUserData(userData1)
+
+      setUserNameView(userData?.user?.userName);
     }
 
     listCmt();
@@ -170,19 +178,22 @@ const PageSingleSong = () => {
                   onClick={() => listerToMusic(songInfo)}
                   style={{ cursor: "pointer", color: "#2daaed" }}
                 />
-                <div className="add_playlist_wrap">
-                  <Music
-                    onClick={() => {
-                      toggle();
-                    }}
-                    style={{
-                      cursor: "pointer",
-                      color: "#2daaed",
-                      margin: "0px 10px 0px 10px",
-                    }}
-                  />
-                  <span className="add_playlist">thêm vào playlist</span>
-                </div>
+                {
+                  userNameView && <div className="add_playlist_wrap">
+                    <Music
+                        onClick={() => {
+                          toggle();
+                        }}
+                        style={{
+                          cursor: "pointer",
+                          color: "#2daaed",
+                          margin: "0px 10px 0px 10px",
+                        }}
+                    />
+                    <span className="add_playlist">thêm vào playlist</span>
+                  </div>
+                }
+
 
                 <div>
                   {checkLike ? (

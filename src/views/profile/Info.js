@@ -15,6 +15,8 @@ import classnames from "classnames";
 import Song from "./Song";
 import Album from "./Album";
 import Playlist from "./Playlist";
+import SongLike from "./SongLike";
+import HomeInfo from "./HomeInfo";
 
 const Info = ({userView}) => {
   const [logo, setLogo] = useState(null)
@@ -90,7 +92,7 @@ const Info = ({userView}) => {
                   <NavItem className="nav-item">
                     <NavLink className={classnames({active: activeTab === '5'})} onClick={() => {
                       clickTag('5')
-                    }}>YEU THICH</NavLink>
+                    }}>YÊU THÍCH</NavLink>
                   </NavItem>
                 </Nav>
               </Collapse>
@@ -98,7 +100,7 @@ const Info = ({userView}) => {
             <CardBody>
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
-                  <>ABC</>
+                  <HomeInfo/>
                 </TabPane>
               </TabContent>
               {
@@ -119,6 +121,11 @@ const Info = ({userView}) => {
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="4">
                   <Playlist/>
+                </TabPane>
+              </TabContent>
+              <TabContent activeTab={activeTab}>
+                <TabPane tabId="5">
+                  <SongLike/>
                 </TabPane>
               </TabContent>
             </CardBody>

@@ -67,5 +67,10 @@ export const getListSongByStyle = formValues => ({
     body: formValues
 })
 
+export const getListMySongByLike = () => ({
+    method: 'GET',
+    endpoint: '/song/singer/list-my-like',
+})
+
 
 
