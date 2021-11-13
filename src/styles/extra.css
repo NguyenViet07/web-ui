@@ -183,7 +183,7 @@ a {
   color: #878787;
   letter-spacing: 0;
 }
-.pagination{
+.pagination {
   justify-content: center;
 }
 .cs-right {
@@ -1226,4 +1226,100 @@ ul {
   background: linear-gradient(to top right, #ff9b2d, #ffe443);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.close {
+  border: 0;
+}
+.btn {
+  border: 0;
+}
+.btn:hover {
+  border-color: #979797 !important;
+  background-color: #979797 !important;
+  color: #fff !important;
+}
+#description {
+  border: none;
+  resize: none;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  height: 90px;
+  font-size: 16px;
+  color: #979797;
+  margin-left: 0 !important;
+}
+.emoji-picker-container .btn {
+  margin-top: 20px !important;
+  border-radius: 69px !important;
+  color: #fff !important;
+  border: none;
+  min-width: 125px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #ffffff;
+  letter-spacing: 0;
+  min-height: 38px;
+  transition: all 0.2s linear;
+  background-color: #2daaed !important;
+}
+.add_playlist_wrap {
+  position: relative;
+}
+.add_playlist {
+  position: absolute;
+  bottom: -25px;
+  left: -30px;
+  font-size: 12px;
+  width: 120px;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity 0.5 ease-in-out;
+}
+.add_playlist_wrap:hover .add_playlist {
+  opacity: 1;
+}
+#header .nav-item {
+  text-align: left !important;
+}
+#header li.nav-item:hover {
+  color: black;
+  border-radius: 0 !important;
+  background: none !important;
+  border: 0 !important;
+}
+.content-info .navbar-collapse {
+  border-radius: 0 !important;
+  background: none !important;
+  background: #68636312 !important;
+  width: 100% !important;
+}
+.content-info li.nav-item:hover {
+  color: #2daaed;
+  border-radius: 0 !important;
+  background: none !important;
+  border: 0 !important;
+}
+.content-info li.nav-item .nav-link {
+  font-weight: bold;
+  cursor: pointer;
+}
+.profile-info h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+.add {
+  background-color: #2daaed !important;
+  border-color: #2daaed !important;
+  border-radius: 0 !important;
+}
+.add:hover {
+  border-color: #68636312 !important;
+  background-color: #68636312 !important;
+  color: #000 !important;
+}
+.profile-info .card {
+  padding: 30px 30px 40px 30px;
+  border: 1px solid #68636312;
 }
