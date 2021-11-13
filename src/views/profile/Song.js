@@ -26,6 +26,7 @@ import { useMutation } from "react-fetching-library";
 import {
   addSongToAlbum,
   createSong,
+  deleteSong,
   getListSongByUserId,
 } from "../../api/actions/song";
 import { Controller, useForm } from "react-hook-form";
@@ -55,6 +56,8 @@ const Song = ({}) => {
 
   const { mutate: _getListSongByUserId } = useMutation(getListSongByUserId);
 
+  const { mutate: _deleteSong } = useMutation(deleteSong);
+
   const { mutate: _getListMyAlbum } = useMutation(getListMyAlbum);
 
   const [modal, setModal] = useState(false);
@@ -68,6 +71,8 @@ const Song = ({}) => {
   const [listMySong, setListMySong] = useState([]);
 
   const [imageSong, setImageSong] = useState(null);
+
+  const [imageSongEdit, setImageSongEdit] = useState(null);
 
   const [listMyAlbum, setListMyAlbum] = useState([]);
 
@@ -198,11 +203,25 @@ const Song = ({}) => {
     }
   };
 
+  const deleteMysong = async (id) => {
+    const dataInput = {
+      songId: id,
+    };
+
+    const response = await _deleteSong(dataInput);
+    if (response.payload?.errorCode === "200") {
+      getListMySong();
+      toast.success("Xóa bài hát thành công");
+    } else {
+      toast.error(response.payload?.message);
+    }
+  };
+
   const toggle = async () => {
     setModal(!modal);
   };
 
-  const toggleEdit = async () => {
+  const toggleEdit = async (data) => {
     setModalEdit(!modalEdit);
   };
 
@@ -231,52 +250,61 @@ const Song = ({}) => {
           {listMySong.map((el) => {
             return (
               <Col md={3} className="mb-3">
-                <Card
-                  onClick={() => {
-                    listerToMusic(el);
-                  }}
-                >
-                  <button type="button" class="delete btn">
+                <Card>
+                  <button
+                    type="button"
+                    class="delete btn"
+                    title={"xóa bài hát"}
+                    onClick={() => {
+                      deleteMysong(el.songId);
+                    }}
+                  >
                     <span aria-hidden="true">×</span>
                   </button>
-                  {el.image ? (
-                    <CardImg
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                      variant="top"
-                      src={el.image}
-                    />
-                  ) : (
-                    <CardImg
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                      variant="top"
-                      src="/imgs/pika.jpg"
-                    />
-                  )}
-                  <CardBody className="">
-                    <div>
-                      <span style={{ fontSize: "20px" }}>{el.songName}</span>
-                    </div>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">
-                      {el?.createdTime}
-                    </CardSubtitle>
-                    <CardText>{el.description}</CardText>
-                    <Button
-                      className="add"
-                      onClick={() => {
-                        toggleSelect(el.songId);
-                      }}
-                    >
-                      Thêm vào album
-                    </Button>
-                  </CardBody>
+                  <div
+                    onClick={() => {
+                      listerToMusic(el);
+                    }}
+                  >
+                    {el.image ? (
+                      <CardImg
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover",
+                        }}
+                        variant="top"
+                        src={el.image}
+                      />
+                    ) : (
+                      <CardImg
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover",
+                        }}
+                        variant="top"
+                        src="/imgs/pika.jpg"
+                      />
+                    )}
+                    <CardBody className="">
+                      <div>
+                        <span style={{ fontSize: "20px" }}>{el.songName}</span>
+                      </div>
+                      <CardSubtitle tag="h6" className="mb-2 text-muted">
+                        {el?.createdTime}
+                      </CardSubtitle>
+                      <CardText>{el.description}</CardText>
+                      <Button
+                        className="add"
+                        onClick={() => {
+                          toggleSelect(el.songId);
+                        }}
+                      >
+                        Thêm vào album
+                      </Button>
+                    </CardBody>
+                  </div>
                 </Card>
               </Col>
             );
@@ -363,7 +391,7 @@ const Song = ({}) => {
                 >
                   <Label>Thể loại nhạc</Label>
                   <SelectBox
-                    name="type"
+                    name="style"
                     valueOpt="value"
                     labelOpt="label"
                     control={control}
@@ -455,7 +483,7 @@ const Song = ({}) => {
         style={{ maxWidth: "1600px", width: "80%" }}
         centered={true}
       >
-        <ModalHeader toggle={toggleEdit}>Tải bài hát mới</ModalHeader>
+        <ModalHeader toggle={toggleEdit}>Sửa bài hát</ModalHeader>
         <Form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <ModalBody>
             <Row>
@@ -529,18 +557,10 @@ const Song = ({}) => {
                     }}
                   />
                 </Group>
-                <Group
-                  className="mb-3"
-                  controlId="formBasicEmail"
-                  style={{ paddingTop: "5px" }}
-                >
-                  <Label style={{ marginRight: "10px" }}>File nhạc</Label>
-                  <input {...register("dataFile")} accept=".mp3" type="file" />
-                </Group>
               </Col>
               <Col md={6}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  {imageSong ? (
+                  {imageSongEdit ? (
                     <CardImg
                       style={{
                         width: "300px",
