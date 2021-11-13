@@ -33,34 +33,68 @@ const HomeInfo = ({}) => {
   return (
     <>
       <Container>
-        <h1>Trang tổng quan</h1>
+        <h1 className="mb-4" style={{ fontSize: "24px" }}>
+          Thông tin tài khoản
+        </h1>
 
+        <div className="row">
+          <div className="col-md-2">
+            {logo ? (
+              <img
+                class="sc-jgPznn ivASVi"
+                src={logo}
+                style={{ width: "150px", height: "150px" }}
+                alt=""
+              />
+            ) : (
+              <img
+                class="sc-jgPznn ivASVi"
+                src="/imgs/logo.png"
+                style={{ width: "150px", height: "150px" }}
+                alt=""
+              />
+            )}
+          </div>
+          <div className="col-md-10">
+            <h3 style={{ color: "#2DAAED", fontSize: "18px" }}>
+              {userInfoView?.name}
+            </h3>
+            {userInfoView?.isSinger === 1 ? (
+              <span style={{ fontSize: "14px" }}>
+                Hãy đăng bài hát của bạn cho mọi người cùng nghe!
+              </span>
+            ) : (
+              <span style={{ fontSize: "14px" }}>
+                Đăng ký để trở thành ca sĩ ngay - Nâng cấp ngay!
+              </span>
+            )}
+          </div>
+        </div>
         <Row>
-          <Col className="bg-light border add-playlist" xs="3">
-            Tên: {userInfoView?.name}
-          </Col>
-          <br />
-          <h1>Tên đăng nhập: {userInfoView?.username}</h1>
-          <br />
-          {logo ? (
-            <img class="sc-jgPznn ivASVi" src={logo} />
-          ) : (
-            <img class="sc-jgPznn ivASVi" src="/imgs/logo.png" />
-          )}
-
-          {userInfoView?.isSinger === 1 && (
-            <>
-              <h1>Là một ca sĩ </h1>
-              {userInfoView?.company ? (
-                <h1>
-                  {" "}
-                  trực thuộc quản lý của công ty: {userInfoView?.company}
-                </h1>
-              ) : (
-                <h1> tự do </h1>
-              )}
-            </>
-          )}
+          <div className="col-md-12 d-flex cs-ifp">
+            <div class="sc-fKTzBO bJDmNC ">Tên hiển thị:</div>
+            <div class="sc-cTEyPb edjoEY ">{userInfoView?.name}</div>
+          </div>
+          <div className="col-md-12 d-flex cs-ifp">
+            <div class="sc-fKTzBO bJDmNC ">Tên đăng nhập</div>
+            <div class="sc-cTEyPb edjoEY ">{userInfoView?.username}</div>
+          </div>
+          <div className="col-md-12 d-flex cs-ifp">
+            <div class="sc-fKTzBO bJDmNC ">Ngày sinh:</div>
+            <div class="sc-cTEyPb edjoEY ">11/02/1998</div>
+          </div>
+          <div className="col-md-12 d-flex cs-ifp">
+            <div class="sc-fKTzBO bJDmNC ">Email:</div>
+            <div class="sc-cTEyPb edjoEY ">trananhtuan@gmail.com</div>
+          </div>
+          <div className="col-md-12 d-flex cs-ifp">
+            <div class="sc-fKTzBO bJDmNC ">Địa chỉ:</div>
+            <div class="sc-cTEyPb edjoEY ">Chưa cập nhập</div>
+          </div>
+          <div className="col-md-12 d-flex cs-ifp">
+            <div class="sc-fKTzBO bJDmNC ">Số điện thoại:</div>
+            <div class="sc-cTEyPb edjoEY ">Chưa cập nhập</div>
+          </div>
         </Row>
       </Container>
     </>

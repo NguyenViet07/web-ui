@@ -1437,3 +1437,11 @@ ul {
 .create {
   padding-left: 40px;
 }
+.cs-ifp {
+  background-color: rgba(28, 30, 32, 0.02);
+  padding: 8px 16px;
+  margin-top: 16px !important;
+}
+.cs-ifp .edjoEY {
+  padding-left: 20px;
+}
