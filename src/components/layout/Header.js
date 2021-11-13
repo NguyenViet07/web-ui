@@ -61,7 +61,6 @@ const Header = ({ layoutRouter }) => {
       };
       dispatch(action);
     }
-
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -173,12 +172,18 @@ const Header = ({ layoutRouter }) => {
 
                 {userName && (
                   <NavItem style={{ marginRight: "10px" }}>
-                    <NavLink to={"/profile"}>Trang cá nhân</NavLink>
+                    <NavLink to={"/profile"}>
+                      <i class="ic_user_active sc-iLCFKZ iZRkvq"></i> Trang cá
+                      nhân
+                    </NavLink>
                   </NavItem>
                 )}
                 {userName === "admin" && (
                   <NavItem style={{ marginRight: "10px" }}>
-                    <NavLink to={"/admin"}>Quản lý admin</NavLink>
+                    <NavLink to={"/admin"}>
+                      <i class="ic_list_playing_normal sc-iLCFKZ iZRkvq"></i>{" "}
+                      Quản lý admin
+                    </NavLink>
                   </NavItem>
                 )}
               </ul>
