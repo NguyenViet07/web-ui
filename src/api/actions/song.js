@@ -23,6 +23,12 @@ export const getListSongByUserId = formValues => ({
     body: formValues
 })
 
+export const deleteSong = formValues => ({
+    method: 'POST',
+    endpoint: '/song/singer/delete',
+    body: formValues
+})
+
 export const findBySongId = formValues => ({
     method: 'POST',
     endpoint: '/song/info',

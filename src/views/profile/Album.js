@@ -21,7 +21,7 @@ import { listStyleSong, listTypeSong } from "../../untility/mock";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useMutation } from "react-fetching-library";
-import { createAlbum, getListMyAlbum } from "../../api/actions/album";
+import {createAlbum, deleteAlbum, getListMyAlbum} from "../../api/actions/album";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -32,6 +32,7 @@ const defaultValueSearch = {
 
 const Album = ({}) => {
   const { mutate: _createAlbum } = useMutation(createAlbum);
+  const { mutate: _deleteAlbum } = useMutation(deleteAlbum);
   const { mutate: _getListMyAlbum } = useMutation(getListMyAlbum);
 
   const [modal, setModal] = useState(false);
@@ -106,6 +107,7 @@ const Album = ({}) => {
         };
         const response = await _createAlbum(dataInput);
         if (response.payload?.errorCode === "200") {
+          getListMyAlbumss();
           toggle();
         } else {
           toast.error(response.payload?.message);
@@ -118,10 +120,36 @@ const Album = ({}) => {
       };
       const response = await _createAlbum(dataInput);
       if (response.payload?.errorCode === "200") {
+        getListMyAlbumss();
         toggle();
       } else {
         toast.error(response.payload?.message);
       }
+
+    }
+  };
+
+  const deleteMyAlbum = async (id) => {
+    const dataInput = {
+      albumId: id,
+    };
+
+    const response = await _deleteAlbum(dataInput);
+    if (response.payload?.errorCode === "200") {
+      getListMyAlbumss();
+      toast.success("Xóa album thành công");
+    } else {
+      toast.error(response.payload?.message);
+    }
+  };
+
+  const getListMyAlbumss = async () => {
+    const response = await _getListMyAlbum({});
+    if (response.payload?.errorCode === "200") {
+      console.log("aaa", response.payload.data);
+      setListMyAlbum(response.payload?.data);
+    } else {
+      toast.error(response.payload?.message);
     }
   };
 
@@ -130,13 +158,7 @@ const Album = ({}) => {
   };
 
   useEffect(async () => {
-    const response = await _getListMyAlbum({});
-    if (response.payload?.errorCode === "200") {
-      console.log("aaa", response.payload.data);
-      setListMyAlbum(response.payload?.data);
-    } else {
-      toast.error(response.payload?.message);
-    }
+    getListMyAlbumss()
   }, []);
 
   return (
@@ -154,9 +176,6 @@ const Album = ({}) => {
               <Col
                 className=" mb-3"
                 xs="3"
-                onClick={() => {
-                  history.push(`/page-list-song/${el.albumId}`);
-                }}
               >
                 <div
                   className="border add-playlist d-flex p-3"
@@ -167,33 +186,40 @@ const Album = ({}) => {
                     position: "relative",
                   }}
                 >
-                  <button type="button" class="delete btn">
+                  <button type="button" class="delete btn" onClick={() => {
+                    deleteMyAlbum(el.albumId)
+                  }}>
                     <span aria-hidden="true">×</span>
                   </button>
-                  {el.image ? (
-                    <CardImg
-                      className="col-4"
-                      style={{
-                        maxWidth: "70px",
-                        height: "70px",
-                        objectFit: "cover",
-                      }}
-                      src={el.image}
-                      alt="Card image cap"
-                    />
-                  ) : (
-                    <CardImg
-                      className="col-4"
-                      style={{
-                        maxWidth: "70px",
-                        height: "70px",
-                        objectFit: "cover",
-                      }}
-                      src="/imgs/pika.jpg"
-                      alt="Card image cap"
-                    />
-                  )}
-                  <h5 className="col-8 ml-3 title">{el.albumName}</h5>
+                  <div onClick={() => {
+                    history.push(`/page-list-song/${el.albumId}`);
+                  }}>
+                    {el.image ? (
+                        <CardImg
+                            className="col-4"
+                            style={{
+                              maxWidth: "70px",
+                              height: "70px",
+                              objectFit: "cover",
+                            }}
+                            src={el.image}
+                            alt="Card image cap"
+                        />
+                    ) : (
+                        <CardImg
+                            className="col-4"
+                            style={{
+                              maxWidth: "70px",
+                              height: "70px",
+                              objectFit: "cover",
+                            }}
+                            src="/imgs/pika.jpg"
+                            alt="Card image cap"
+                        />
+                    )}
+                    <h5 className="col-8 ml-3 title">{el.albumName}</h5>
+                  </div>
+
                 </div>
               </Col>
             );

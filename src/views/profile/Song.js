@@ -25,7 +25,7 @@ import {
 import { useMutation } from "react-fetching-library";
 import {
   addSongToAlbum,
-  createSong,
+  createSong, deleteSong,
   getListSongByUserId,
 } from "../../api/actions/song";
 import { Controller, useForm } from "react-hook-form";
@@ -54,6 +54,8 @@ const Song = ({}) => {
   const { mutate: _addSongToAlbum } = useMutation(addSongToAlbum);
 
   const { mutate: _getListSongByUserId } = useMutation(getListSongByUserId);
+
+  const { mutate: _deleteSong } = useMutation(deleteSong);
 
   const { mutate: _getListMyAlbum } = useMutation(getListMyAlbum);
 
@@ -200,6 +202,20 @@ const Song = ({}) => {
     }
   };
 
+  const deleteMysong = async (id) => {
+    const dataInput = {
+      songId: id,
+    };
+
+    const response = await _deleteSong(dataInput);
+    if (response.payload?.errorCode === "200") {
+      getListMySong();
+      toast.success("Xóa bài hát thành công");
+    } else {
+      toast.error(response.payload?.message);
+    }
+  };
+
   const toggle = async () => {
     setModal(!modal);
   };
@@ -234,51 +250,54 @@ const Song = ({}) => {
             return (
               <Col md={3} className="mb-3">
                 <Card
-                  onClick={() => {
-                    listerToMusic(el);
-                  }}
                 >
-                  <button type="button" class="delete btn">
+                  <button type="button" class="delete btn" title={'xóa bài hát'} onClick={() => {
+                    deleteMysong(el.songId)
+                  }}>
                     <span aria-hidden="true">×</span>
                   </button>
-                  {el.image ? (
-                    <CardImg
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                      variant="top"
-                      src={el.image}
-                    />
-                  ) : (
-                    <CardImg
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                      variant="top"
-                      src="/imgs/pika.jpg"
-                    />
-                  )}
-                  <CardBody className="">
-                    <div>
-                      <span style={{ fontSize: "20px" }}>{el.songName}</span>
-                    </div>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">
-                      {el?.createdTime}
-                    </CardSubtitle>
-                    <CardText>{el.description}</CardText>
-                    <Button
-                      className="add"
-                      onClick={() => {
-                        toggleSelect(el.songId);
-                      }}
-                    >
-                      Thêm vào album
-                    </Button>
-                  </CardBody>
+                  <div onClick={() => {
+                    listerToMusic(el);
+                  }}>
+                    {el.image ? (
+                        <CardImg
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              objectFit: "cover",
+                            }}
+                            variant="top"
+                            src={el.image}
+                        />
+                    ) : (
+                        <CardImg
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              objectFit: "cover",
+                            }}
+                            variant="top"
+                            src="/imgs/pika.jpg"
+                        />
+                    )}
+                    <CardBody className="">
+                      <div>
+                        <span style={{ fontSize: "20px" }}>{el.songName}</span>
+                      </div>
+                      <CardSubtitle tag="h6" className="mb-2 text-muted">
+                        {el?.createdTime}
+                      </CardSubtitle>
+                      <CardText>{el.description}</CardText>
+                      <Button
+                          className="add"
+                          onClick={() => {
+                            toggleSelect(el.songId);
+                          }}
+                      >
+                        Thêm vào album
+                      </Button>
+                    </CardBody>
+                  </div>
                 </Card>
               </Col>
             );
@@ -370,7 +389,7 @@ const Song = ({}) => {
                 >
                   <Label>Thể loại nhạc</Label>
                   <SelectBox
-                    name="type"
+                    name="style"
                     valueOpt="value"
                     labelOpt="label"
                     control={control}
