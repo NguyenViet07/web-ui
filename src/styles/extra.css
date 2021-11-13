@@ -1364,3 +1364,84 @@ ul {
   top: 0;
   background-color: #68636312 !important;
 }
+.container-login {
+  width: 400px;
+  background-color: #ffffff;
+  box-shadow: 3px 3px 5px 5px #bdbdbd;
+  position: relative;
+  margin: 50px auto;
+}
+.login h1 {
+  position: relative;
+  text-align: center;
+  padding-top: 30px;
+  text-transform: uppercase;
+  color: #2b2b2b;
+}
+
+.login h3 {
+  position: relative;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-weight: 100;
+  color: #7b7d7d;
+}
+
+.login form > a {
+  display: inline-block;
+  position: relative;
+  transform: translate(280px, -60px);
+  text-decoration: none;
+  color: #bdbdbd;
+}
+
+.login input {
+  display: block;
+  position: relative;
+  width: 300px;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  transform: translate(40px, 30px);
+  border: none;
+  background: none;
+  outline: none;
+  border-bottom: 2px solid #d9d7d7;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.login .signIn {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: #3498db;
+  border: none;
+  height: 50px;
+  width: 200px;
+}
+
+.login > a {
+  display: block;
+  position: relative;
+  transform: translate(110px, 30px);
+  text-decoration: none;
+  font-size: 15px;
+  color: #bdbdbd;
+}
+.create {
+  padding-left: 40px;
+}
+.cs-ifp {
+  background-color: rgba(28, 30, 32, 0.02);
+  padding: 8px 16px;
+  margin-top: 16px !important;
+}
+.cs-ifp .edjoEY {
+  padding-left: 20px;
+}
