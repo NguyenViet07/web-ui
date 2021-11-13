@@ -69,6 +69,8 @@ const Song = ({}) => {
 
   const [imageSong, setImageSong] = useState(null);
 
+  const [imageSongEdit, setImageSongEdit] = useState(null);
+
   const [listMyAlbum, setListMyAlbum] = useState([]);
 
   const {
@@ -202,7 +204,7 @@ const Song = ({}) => {
     setModal(!modal);
   };
 
-  const toggleEdit = async () => {
+  const toggleEdit = async data => {
     setModalEdit(!modalEdit);
   };
 
@@ -457,7 +459,7 @@ const Song = ({}) => {
           style={{ maxWidth: "1600px", width: "80%" }}
           centered={true}
       >
-        <ModalHeader toggle={toggleEdit}>Tải bài hát mới</ModalHeader>
+        <ModalHeader toggle={toggleEdit}>Sửa bài hát</ModalHeader>
         <Form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <ModalBody>
             <Row>
@@ -531,18 +533,10 @@ const Song = ({}) => {
                       }}
                   />
                 </Group>
-                <Group
-                    className="mb-3"
-                    controlId="formBasicEmail"
-                    style={{ paddingTop: "5px" }}
-                >
-                  <Label style={{ marginRight: "10px" }}>File nhạc</Label>
-                  <input {...register("dataFile")} accept=".mp3" type="file" />
-                </Group>
               </Col>
               <Col md={6}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  {imageSong ? (
+                  {imageSongEdit ? (
                       <CardImg
                           style={{
                             width: "300px",
