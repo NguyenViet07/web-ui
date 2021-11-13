@@ -1323,3 +1323,44 @@ ul {
   padding: 30px 30px 40px 30px;
   border: 1px solid #68636312;
 }
+.title {
+  padding-left: 20px;
+}
+.button-wrapper {
+  position: relative;
+  width: 150px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.button-wrapper span.label {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  width: 100%;
+  background: #00bfff;
+  cursor: pointer;
+  color: #fff;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+#imgAlbum,
+#imgPlaylist {
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #68636312 !important;
+}

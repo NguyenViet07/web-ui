@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Pagination } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import sections
@@ -9,54 +9,56 @@ import Album from "../components/homes/Album";
 import SongItem from "../components/elements/SongItem";
 import ListSong from "../components/homes/ListSong";
 import CategorySong from "../components/homes/CategorySong";
-import Paginations  from '../components/homes/Paginations';
-import {useMutation} from "react-fetching-library";
-import {createSong, getListSongCreated, getListSongView} from "../api/actions/song";
-import {getListAlbum} from "../api/actions/album";
+import Paginations from "../components/homes/Paginations";
+import { useMutation } from "react-fetching-library";
+import {
+  createSong,
+  getListSongCreated,
+  getListSongView,
+} from "../api/actions/song";
+import { getListAlbum } from "../api/actions/album";
 import ListAlbum from "../components/homes/ListAlbum";
 const Home = () => {
+  const { mutate: _getListSongCreated } = useMutation(getListSongCreated);
+  const { mutate: _getListSongView } = useMutation(getListSongView);
+  const { mutate: _getListAlbum } = useMutation(getListAlbum);
 
-  const {mutate: _getListSongCreated} = useMutation(getListSongCreated)
-  const {mutate: _getListSongView} = useMutation(getListSongView)
-  const {mutate: _getListAlbum} = useMutation(getListAlbum)
-
-  const [listMySongCreated, setListMySongCreated] = useState([])
-  const [listMySongView, setListMySongView] = useState([])
-  const [listAlbumNew, setListAlbumNew] = useState([])
+  const [listMySongCreated, setListMySongCreated] = useState([]);
+  const [listMySongView, setListMySongView] = useState([]);
+  const [listAlbumNew, setListAlbumNew] = useState([]);
 
   const listSongCreated = async () => {
-    const response = await _getListSongCreated()
-    if (response.payload?.errorCode === '200') {
-      setListMySongCreated(response.payload?.data)
+    const response = await _getListSongCreated();
+    if (response.payload?.errorCode === "200") {
+      setListMySongCreated(response.payload?.data);
     } else {
-      setListMySongCreated([])
+      setListMySongCreated([]);
     }
   };
 
   const listSongView = async () => {
-    const response = await _getListSongView()
-    if (response.payload?.errorCode === '200') {
-      setListMySongView(response.payload?.data)
+    const response = await _getListSongView();
+    if (response.payload?.errorCode === "200") {
+      setListMySongView(response.payload?.data);
     } else {
-      setListMySongView([])
+      setListMySongView([]);
     }
   };
 
   const listAlbum = async () => {
-    const response = await _getListAlbum()
-    if (response.payload?.errorCode === '200') {
-      setListAlbumNew(response.payload?.data)
+    const response = await _getListAlbum();
+    if (response.payload?.errorCode === "200") {
+      setListAlbumNew(response.payload?.data);
     } else {
-      setListAlbumNew([])
+      setListAlbumNew([]);
     }
   };
 
-
   useEffect(() => {
-    listSongCreated()
-    listSongView()
-    listAlbum()
-  }, [])
+    listSongCreated();
+    listSongView();
+    listAlbum();
+  }, []);
 
   return (
     <>

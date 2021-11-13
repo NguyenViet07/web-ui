@@ -238,6 +238,9 @@ const Song = ({}) => {
                     listerToMusic(el);
                   }}
                 >
+                  <button type="button" class="delete btn">
+                    <span aria-hidden="true">×</span>
+                  </button>
                   {el.image ? (
                     <CardImg
                       style={{

@@ -141,68 +141,72 @@ const Album = ({}) => {
 
   return (
     <>
-      <Container>
-        <h1>Album</h1>
-        <Button onClick={toggle}>Tạo Album mới</Button>
-        {listMyAlbum?.map((el) => {
-          return (
-            <Row>
+      <Container className="profile-info mt-4">
+        <Col className="d-flex justify-content-between mb-5">
+          <h1>Album</h1>
+          <Button onClick={toggle} className="add">
+            Tạo Album mới
+          </Button>
+        </Col>
+        <Row>
+          {listMyAlbum?.map((el) => {
+            return (
               <Col
-                className="bg-light border add-playlist"
+                className=" mb-3"
                 xs="3"
                 onClick={() => {
                   history.push(`/page-list-song/${el.albumId}`);
                 }}
               >
                 <div
+                  className="border add-playlist d-flex p-3"
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
+                    cursor: "pointer",
                     width: "100%",
-                    height: "180px",
                     margin: "0 auto",
+                    position: "relative",
                   }}
                 >
+                  <button type="button" class="delete btn">
+                    <span aria-hidden="true">×</span>
+                  </button>
                   {el.image ? (
                     <CardImg
+                      className="col-4"
                       style={{
-                        maxWidth: "100%",
-                        maxHeight: "100%",
-                        objectFit: "contain",
+                        maxWidth: "70px",
+                        height: "70px",
+                        objectFit: "cover",
                       }}
                       src={el.image}
                       alt="Card image cap"
                     />
                   ) : (
                     <CardImg
+                      className="col-4"
                       style={{
-                        maxWidth: "100%",
-                        maxHeight: "100%",
-                        objectFit: "contain",
+                        maxWidth: "70px",
+                        height: "70px",
+                        objectFit: "cover",
                       }}
                       src="/imgs/pika.jpg"
                       alt="Card image cap"
                     />
                   )}
+                  <h5 className="col-8 ml-3 title">{el.albumName}</h5>
                 </div>
-                <span>{el.albumName}</span>
               </Col>
-            </Row>
-          );
-        })}
+            );
+          })}
+        </Row>
       </Container>
 
-      <Modal
-        size="lg"
-        isOpen={modal}
-        style={{ maxWidth: "1600px", width: "80%" }}
-        centered={true}
-      >
+      <Modal size="md" isOpen={modal} centered={true}>
         <ModalHeader toggle={toggle}>Tạo Album mới</ModalHeader>
         <Form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <ModalBody>
             <Row>
-              <Col md={6}>
+              <Col md={12}>
                 <Group className="mb-3" style={{ paddingTop: "5px" }}>
                   <Label>Tên album</Label>
                   <InputController
@@ -216,7 +220,20 @@ const Album = ({}) => {
                     }
                   />
                 </Group>
-                <Group
+                <div class="button-wrapper">
+                  <span class="label">Chọn ảnh</span>
+                  <input
+                    className="upload-box"
+                    id={"imgAlbum"}
+                    accept=".png, .jpg, .jpeg"
+                    {...register("imgAlbum")}
+                    type="file"
+                    onChange={({ target: { files } }) => {
+                      onFileChange(files);
+                    }}
+                  />
+                </div>
+                {/* <Group
                   className="mb-3"
                   controlId="exampleSelect"
                   style={{ paddingTop: "5px" }}
@@ -231,15 +248,15 @@ const Album = ({}) => {
                       onFileChange(files);
                     }}
                   />
-                </Group>
+                </Group> */}
               </Col>
-              <Col md={6}>
+              <Col md={12}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   {imageAlbum ? (
                     <CardImg
                       style={{
-                        width: "300px",
-                        height: "300px",
+                        width: "100px",
+                        height: "100px",
                         objectFit: "cover",
                       }}
                       variant="top"
@@ -248,8 +265,8 @@ const Album = ({}) => {
                   ) : (
                     <CardImg
                       style={{
-                        width: "300px",
-                        height: "300px",
+                        width: "100px",
+                        height: "100px",
                         objectFit: "cover",
                       }}
                       variant="top"
