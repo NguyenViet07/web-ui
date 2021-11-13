@@ -22,12 +22,12 @@ const StyleSongInfo = () => {
   const [albumSinger, setAlbumSinger] = useState(null)
 
   const listTyple = [
-    {value: 1, label: 'POP', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
-    {value: 2, label: 'Rock', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
-    {value: 3, label: 'Jazz', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
-    {value: 4, label: 'POP', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
-    {value: 5, label: 'Nhạc trữ tình', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
-    {value: 6, label: 'Nhạc cách mạng', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'},
+    {value: 1, label: 'POP', image: '/image/1.jpg'},
+    {value: 2, label: 'Rock', image: '/image/2.jpg'},
+    {value: 3, label: 'Jazz', image: '/image/3.jpg'},
+    {value: 4, label: 'POP', image: '/image/4.jpg'},
+    {value: 5, label: 'Nhạc trữ tình', image: '/image/5.jpg'},
+    {value: 6, label: 'Nhạc cách mạng', image: '/image/6.jpg'},
     {value: 7, label: 'Khác', image: 'https://avatar-ex-swe.nixcdn.com/playlist/2019/10/20/6/3/4/2/1571561940569_300.jpg'}
   ]
 
